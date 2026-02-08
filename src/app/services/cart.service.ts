@@ -95,4 +95,42 @@ export class CartService {
       0
     );
   }
+
+  getItemQuantity(productId: string): number {
+    const item = this.cartItemsSubject.value.find(item => item.product.id === productId);
+    return item ? item.quantity : 0;
+  }
+
+  increaseQuantity(productId: string): void {
+    const currentItems = this.cartItemsSubject.value;
+    const item = currentItems.find(item => item.product.id === productId);
+    if (item) {
+      const updatedItems = currentItems.map(cartItem =>
+        cartItem.product.id === productId
+          ? { ...cartItem, quantity: cartItem.quantity + 1 }
+          : cartItem
+      );
+      this.cartItemsSubject.next(updatedItems);
+      this.saveCartToStorage(updatedItems);
+    }
+  }
+
+  decreaseQuantity(productId: string): void {
+    const currentItems = this.cartItemsSubject.value;
+    const item = currentItems.find(item => item.product.id === productId);
+    if (item) {
+      if (item.quantity > 1) {
+        const updatedItems = currentItems.map(cartItem =>
+          cartItem.product.id === productId
+            ? { ...cartItem, quantity: cartItem.quantity - 1 }
+            : cartItem
+        );
+        this.cartItemsSubject.next(updatedItems);
+        this.saveCartToStorage(updatedItems);
+      } else {
+        // Remove item if quantity reaches 0
+        this.removeFromCart(productId);
+      }
+    }
+  }
 }

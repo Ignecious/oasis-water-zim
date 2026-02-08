@@ -60,4 +60,16 @@ export class HomeComponent implements OnInit, OnDestroy {
       life: 3000
     });
   }
+
+  increaseQuantity(productId: string): void {
+    this.cartService.increaseQuantity(productId);
+  }
+
+  decreaseQuantity(productId: string): void {
+    this.cartService.decreaseQuantity(productId);
+  }
+
+  getItemQuantity(productId: string): number {
+    return this.cartService.getItemQuantity(productId);
+  }
 }

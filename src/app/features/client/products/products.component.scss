@@ -138,6 +138,35 @@
   }
 }
 
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 0.5rem 0;
+  margin-bottom: 0.5rem;
+
+  .quantity-btn {
+    width: 40px;
+    height: 40px;
+    background-color: #00bcd4;
+    border-color: #00bcd4;
+
+    &:hover {
+      background-color: #00a5bb;
+      border-color: #00a5bb;
+    }
+  }
+
+  .quantity-display {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #001f3f;
+    min-width: 40px;
+    text-align: center;
+  }
+}
+
 .empty-state {
   text-align: center;
   padding: 4rem 2rem;
