@@ -3,6 +3,7 @@ import { Observable, combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { OrderService } from './order.service';
 import { ProductService } from './product.service';
+import { Order } from '../models/order.interface';
 
 export interface DashboardStats {
   ordersToday: number;
@@ -64,7 +65,7 @@ export class DashboardService {
     );
   }
 
-  getRecentOrders(count: number = 10): Observable<any[]> {
+  getRecentOrders(count: number = 10): Observable<Order[]> {
     return this.orderService.getAllOrders().pipe(
       map(orders => {
         // Sort by order date descending

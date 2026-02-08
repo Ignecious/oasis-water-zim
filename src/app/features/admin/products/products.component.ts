@@ -39,6 +39,7 @@ export class ProductsComponent implements OnInit {
   loading = true;
   displayDialog = false;
   isEditMode = false;
+  private nextProductId = 19; // Track next ID to avoid duplicates
   
   selectedProduct: Product = this.getEmptyProduct();
   
@@ -115,8 +116,8 @@ export class ProductsComponent implements OnInit {
         }
       });
     } else {
-      // Generate new ID
-      this.selectedProduct.id = 'p' + (this.products.length + 1);
+      // Generate new ID using incrementing counter
+      this.selectedProduct.id = 'p' + this.nextProductId++;
       this.productService.addProduct(this.selectedProduct).subscribe({
         next: () => {
           this.messageService.add({
