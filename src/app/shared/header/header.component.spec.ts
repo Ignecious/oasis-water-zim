@@ -40,9 +40,9 @@ describe('HeaderComponent', () => {
 
   it('should unsubscribe from cart items on destroy', () => {
     const destroySpy = spyOn(component['destroy$'], 'next');
-    const completespy = spyOn(component['destroy$'], 'complete');
+    const completeSpy = spyOn(component['destroy$'], 'complete');
     component.ngOnDestroy();
     expect(destroySpy).toHaveBeenCalled();
-    expect(completespy).toHaveBeenCalled();
+    expect(completeSpy).toHaveBeenCalled();
   });
 });
