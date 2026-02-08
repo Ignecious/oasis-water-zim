@@ -115,12 +115,31 @@
       background-color: #00bcd4;
       border-color: #00bcd4;
       font-weight: 600;
+      margin-bottom: 0.5rem;
 
       &:hover {
         background-color: #00a5bb;
         border-color: #00a5bb;
       }
     }
+
+    .view-details-link {
+      display: block;
+      text-align: center;
+      color: #001f3f;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0.5rem;
+      transition: color 0.3s ease;
+
+      &:hover {
+        color: #00bcd4;
+      }
+    }
+  }
+
+  ::ng-deep .p-card-footer {
+    padding: 0 1rem 1rem;
   }
 }
 
