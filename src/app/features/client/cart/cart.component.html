@@ -1,1 +1,305 @@
-<p>cart works!</p>
+<div class="cart-container">
+  <p-toast></p-toast>
+  
+  <!-- Page Title -->
+  <div class="page-header">
+    <h1>MY CART</h1>
+  </div>
+
+  <!-- Empty Cart State -->
+  <div *ngIf="!hasCartItems" class="empty-cart">
+    <i class="pi pi-shopping-cart empty-cart-icon"></i>
+    <h2>Your cart is empty</h2>
+    <p>Start adding some products to your cart!</p>
+    <button 
+      pButton 
+      label="Continue Shopping" 
+      class="btn-oasis-primary"
+      routerLink="/products">
+    </button>
+  </div>
+
+  <!-- Cart Items -->
+  <div *ngIf="hasCartItems" class="cart-content">
+    <div class="cart-items">
+      <div *ngFor="let item of cartItems" class="cart-item">
+        <div class="item-image">
+          <img [src]="item.product.image" [alt]="item.product.name">
+        </div>
+        
+        <div class="item-details">
+          <h3>{{ item.product.name }}</h3>
+          <p class="item-size">{{ item.product.size }}</p>
+          <p class="item-price">${{ item.product.price.toFixed(2) }}</p>
+        </div>
+        
+        <div class="item-controls">
+          <div class="quantity-controls">
+            <button 
+              pButton 
+              icon="pi pi-minus" 
+              class="p-button-sm p-button-outlined"
+              (click)="decreaseQuantity(item.product.id)">
+            </button>
+            <span class="quantity">{{ item.quantity }}</span>
+            <button 
+              pButton 
+              icon="pi pi-plus" 
+              class="p-button-sm p-button-outlined"
+              (click)="increaseQuantity(item.product.id)">
+            </button>
+          </div>
+          
+          <div class="line-total">
+            <span class="line-total-label">Total:</span>
+            <span class="line-total-amount">${{ getLineTotal(item).toFixed(2) }}</span>
+          </div>
+        </div>
+        
+        <button 
+          pButton 
+          icon="pi pi-trash" 
+          class="p-button-text p-button-danger remove-btn"
+          (click)="removeItem(item.product.id)"
+          title="Remove item">
+        </button>
+      </div>
+    </div>
+
+    <!-- Cart Summary -->
+    <div class="cart-summary">
+      <div class="summary-row">
+        <span class="summary-label">Subtotal:</span>
+        <span class="summary-value">${{ subtotal.toFixed(2) }}</span>
+      </div>
+      
+      <button 
+        pButton 
+        label="Checkout" 
+        class="btn-oasis-primary checkout-btn"
+        (click)="openCheckoutDialog()">
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Checkout Dialog -->
+<p-dialog 
+  header="Confirm Your Order" 
+  [(visible)]="showCheckoutDialog"
+  [modal]="true"
+  [style]="{width: '50vw', 'max-width': '600px'}"
+  [dismissableMask]="true"
+  [draggable]="false"
+  [resizable]="false">
+  
+  <form [formGroup]="checkoutForm" class="checkout-form">
+    <!-- Order Summary -->
+    <div class="order-summary-section">
+      <h3>Order Summary:</h3>
+      <ul class="order-items-list">
+        <li *ngFor="let item of cartItems">
+          {{ item.product.name }} ({{ item.product.size }}) x{{ item.quantity }} - 
+          <strong>${{ getLineTotal(item).toFixed(2) }}</strong>
+        </li>
+      </ul>
+      <div class="total-amount">
+        <strong>Total Amount: ${{ subtotal.toFixed(2) }}</strong>
+      </div>
+    </div>
+
+    <!-- Customer Information -->
+    <div class="form-section">
+      <h3>Customer Information:</h3>
+      
+      <div class="form-field">
+        <label for="name">Name *</label>
+        <input 
+          id="name"
+          type="text" 
+          pInputText 
+          formControlName="name"
+          placeholder="Enter your full name"
+          class="w-full">
+        <small class="p-error" *ngIf="checkoutForm.get('name')?.invalid && checkoutForm.get('name')?.touched">
+          Name is required (minimum 2 characters)
+        </small>
+      </div>
+
+      <div class="form-field">
+        <label for="phone">Phone *</label>
+        <input 
+          id="phone"
+          type="tel" 
+          pInputText 
+          formControlName="phone"
+          placeholder="Enter your phone number"
+          class="w-full">
+        <small class="p-error" *ngIf="checkoutForm.get('phone')?.invalid && checkoutForm.get('phone')?.touched">
+          Phone number is required (minimum 10 digits)
+        </small>
+      </div>
+
+      <div class="form-field">
+        <label for="email">Email *</label>
+        <input 
+          id="email"
+          type="email" 
+          pInputText 
+          formControlName="email"
+          placeholder="Enter your email address"
+          class="w-full">
+        <small class="p-error" *ngIf="checkoutForm.get('email')?.invalid && checkoutForm.get('email')?.touched">
+          Valid email is required
+        </small>
+      </div>
+    </div>
+
+    <!-- Collection Details -->
+    <div class="form-section">
+      <h3>Collection Details:</h3>
+      
+      <div class="form-field">
+        <label for="collectionDate">Collection Date *</label>
+        <p-calendar 
+          id="collectionDate"
+          formControlName="collectionDate"
+          [minDate]="minDate"
+          [showIcon]="true"
+          dateFormat="dd/mm/yy"
+          placeholder="Select a date"
+          [disabledDays]="[0]"
+          class="w-full">
+        </p-calendar>
+        <small class="p-error" *ngIf="checkoutForm.get('collectionDate')?.invalid && checkoutForm.get('collectionDate')?.touched">
+          Collection date is required (Mon-Sat only)
+        </small>
+      </div>
+
+      <div class="form-field">
+        <label for="collectionTime">Collection Time *</label>
+        <p-dropdown 
+          id="collectionTime"
+          formControlName="collectionTime"
+          [options]="timeSlots"
+          optionLabel="label"
+          optionValue="value"
+          placeholder="Select a time slot"
+          class="w-full">
+        </p-dropdown>
+        <small class="p-error" *ngIf="checkoutForm.get('collectionTime')?.invalid && checkoutForm.get('collectionTime')?.touched">
+          Collection time is required
+        </small>
+      </div>
+
+      <div class="form-field">
+        <label>Collection Address:</label>
+        <p class="collection-address">{{ collectionAddress }}</p>
+      </div>
+    </div>
+
+    <!-- Payment Method -->
+    <div class="form-section">
+      <h3>Payment Method: *</h3>
+      
+      <div class="payment-options">
+        <div class="payment-option">
+          <p-radioButton 
+            name="paymentMethod" 
+            value="ecocash" 
+            formControlName="paymentMethod"
+            inputId="ecocash">
+          </p-radioButton>
+          <label for="ecocash" class="ml-2">EcoCash</label>
+        </div>
+        
+        <div class="payment-option">
+          <p-radioButton 
+            name="paymentMethod" 
+            value="cash" 
+            formControlName="paymentMethod"
+            inputId="cash">
+          </p-radioButton>
+          <label for="cash" class="ml-2">Cash on Collection</label>
+        </div>
+      </div>
+      <small class="p-error" *ngIf="checkoutForm.get('paymentMethod')?.invalid && checkoutForm.get('paymentMethod')?.touched">
+        Payment method is required
+      </small>
+    </div>
+  </form>
+
+  <ng-template pTemplate="footer">
+    <button 
+      pButton 
+      label="Cancel" 
+      class="p-button-secondary"
+      (click)="closeCheckoutDialog()"
+      [disabled]="isProcessingPayment">
+    </button>
+    <button 
+      pButton 
+      label="Confirm & Pay" 
+      class="btn-oasis-primary"
+      (click)="onConfirmOrder()"
+      [disabled]="!isFormValid || isProcessingPayment"
+      [loading]="isProcessingPayment">
+    </button>
+  </ng-template>
+</p-dialog>
+
+<!-- Order Confirmation Dialog -->
+<p-dialog 
+  header="✓ Order Confirmed!" 
+  [(visible)]="showConfirmationDialog"
+  [modal]="true"
+  [style]="{width: '50vw', 'max-width': '600px'}"
+  [dismissableMask]="false"
+  [closable]="false"
+  [draggable]="false"
+  [resizable]="false">
+  
+  <div class="confirmation-content" *ngIf="orderConfirmation">
+    <p class="thank-you-message">Thank you for your order!</p>
+    
+    <div class="confirmation-section">
+      <p><strong>Order Number:</strong> {{ orderConfirmation.orderNumber }}</p>
+    </div>
+
+    <div class="confirmation-section">
+      <h4>Order Summary:</h4>
+      <ul class="order-items-list">
+        <li *ngFor="let item of orderConfirmation.items">
+          {{ item.product.name }} ({{ item.product.size }}) x{{ item.quantity }} - 
+          <strong>${{ getLineTotal(item).toFixed(2) }}</strong>
+        </li>
+      </ul>
+    </div>
+
+    <div class="confirmation-section">
+      <p><strong>Total Paid:</strong> ${{ orderConfirmation.total.toFixed(2) }}</p>
+      <p><strong>Payment Method:</strong> {{ orderConfirmation.paymentMethod }}</p>
+    </div>
+
+    <div class="confirmation-section">
+      <h4>Collection Details:</h4>
+      <p><strong>Date:</strong> {{ formatDate(orderConfirmation.collectionDate) }}</p>
+      <p><strong>Time:</strong> {{ orderConfirmation.collectionTime }}</p>
+      <p><strong>Collection Address:</strong><br>{{ collectionAddress }}</p>
+    </div>
+
+    <div class="email-confirmation">
+      <i class="pi pi-envelope"></i>
+      <p>An email has been sent to you with your order details.</p>
+    </div>
+  </div>
+
+  <ng-template pTemplate="footer">
+    <button 
+      pButton 
+      label="Continue Shopping" 
+      class="btn-oasis-primary"
+      (click)="closeConfirmationDialog()">
+    </button>
+  </ng-template>
+</p-dialog>
