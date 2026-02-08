@@ -15,35 +15,32 @@
 
     <!-- Products Grid -->
     <div class="products-grid" *ngIf="filteredProducts.length > 0">
-      <div class="product-card-wrapper" *ngFor="let product of filteredProducts">
+      <div *ngFor="let product of filteredProducts">
         <p-card class="product-card">
           <ng-template pTemplate="header">
-            <div class="product-image">
-              <img [src]="product.image" [alt]="product.name" />
-            </div>
+            <img 
+              [src]="product.image" 
+              [alt]="product.name"
+              class="product-image">
           </ng-template>
-          
           <div class="product-info">
             <h3 class="product-name">{{ product.name }}</h3>
             <p class="product-size">{{ product.size }}</p>
             <p class="product-price">${{ product.price.toFixed(2) }}</p>
           </div>
-
           <ng-template pTemplate="footer">
-            <div class="product-actions">
-              <button 
-                pButton 
-                label="Add to Cart" 
-                icon="pi pi-shopping-cart" 
-                class="p-button-cyan add-to-cart-btn"
-                (click)="addToCart(product)">
-              </button>
-              <a 
-                [routerLink]="['/products', product.id]" 
-                class="view-details-link">
-                View Details →
-              </a>
-            </div>
+            <button 
+              pButton 
+              label="Add to Cart" 
+              icon="pi pi-shopping-cart"
+              class="add-to-cart-btn"
+              (click)="addToCart(product)">
+            </button>
+            <a 
+              [routerLink]="['/products', product.id]" 
+              class="view-details-link">
+              View Details →
+            </a>
           </ng-template>
         </p-card>
       </div>

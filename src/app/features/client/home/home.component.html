@@ -43,6 +43,11 @@
               class="add-to-cart-btn"
               (click)="addToCart(product)">
             </button>
+            <a 
+              [routerLink]="['/products', product.id]" 
+              class="view-details-link">
+              View Details →
+            </a>
           </ng-template>
         </p-card>
       </div>
