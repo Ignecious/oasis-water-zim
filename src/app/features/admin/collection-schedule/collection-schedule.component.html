@@ -126,7 +126,13 @@
               </div>
               <div class="detail-item">
                 <span class="detail-label">Payment</span>
-                <span class="detail-value payment-badge" [class.payment-ecocash]="order.paymentMethod === 'ecocash'" [class.payment-cash]="order.paymentMethod === 'cash'">
+                <span 
+                  class="detail-value payment-badge" 
+                  [ngClass]="{
+                    'payment-ecocash': order.paymentMethod === 'ecocash',
+                    'payment-cash': order.paymentMethod === 'cash'
+                  }"
+                >
                   {{ getPaymentMethodLabel(order.paymentMethod) }}
                 </span>
               </div>
