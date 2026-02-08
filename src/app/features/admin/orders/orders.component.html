@@ -1,1 +1,239 @@
-<p>orders works!</p>
+<div class="orders-container">
+  <div class="orders-header">
+    <div>
+      <h1>Orders Management</h1>
+      <p>Manage customer orders and track status</p>
+    </div>
+  </div>
+
+  <div class="orders-table-container">
+    <p-table 
+      [value]="filteredOrders" 
+      [loading]="loading"
+      [paginator]="true"
+      [rows]="10"
+      [showCurrentPageReport]="true"
+      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} orders"
+      [globalFilterFields]="['orderNumber', 'customer.firstName', 'customer.lastName', 'customer.phone']"
+      #dt
+    >
+      <ng-template pTemplate="caption">
+        <div class="table-header">
+          <div class="filters">
+            <span class="p-input-icon-left search-box">
+              <i class="pi pi-search"></i>
+              <input 
+                pInputText 
+                type="text" 
+                [(ngModel)]="searchText"
+                (input)="onFilterChange()"
+                placeholder="Search orders..." 
+              />
+            </span>
+            <p-dropdown 
+              [(ngModel)]="selectedStatus"
+              [options]="statusOptions"
+              placeholder="Filter by Status"
+              (onChange)="onFilterChange()"
+              styleClass="filter-dropdown"
+            ></p-dropdown>
+            <p-dropdown 
+              [(ngModel)]="selectedPaymentMethod"
+              [options]="paymentMethodOptions"
+              placeholder="Filter by Payment"
+              (onChange)="onFilterChange()"
+              styleClass="filter-dropdown"
+            ></p-dropdown>
+          </div>
+        </div>
+      </ng-template>
+
+      <ng-template pTemplate="header">
+        <tr>
+          <th pSortableColumn="orderNumber">Order Number <p-sortIcon field="orderNumber"></p-sortIcon></th>
+          <th pSortableColumn="customer.firstName">Customer Name <p-sortIcon field="customer.firstName"></p-sortIcon></th>
+          <th>Phone</th>
+          <th pSortableColumn="total">Total <p-sortIcon field="total"></p-sortIcon></th>
+          <th pSortableColumn="collectionDetails.date">Collection Date <p-sortIcon field="collectionDetails.date"></p-sortIcon></th>
+          <th>Time</th>
+          <th>Payment Method</th>
+          <th pSortableColumn="status">Status <p-sortIcon field="status"></p-sortIcon></th>
+          <th>Actions</th>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="body" let-order>
+        <tr>
+          <td><strong>{{ order.orderNumber }}</strong></td>
+          <td>{{ getCustomerName(order) }}</td>
+          <td>{{ order.customer.phone }}</td>
+          <td><strong>${{ order.total.toFixed(2) }}</strong></td>
+          <td>{{ order.collectionDetails.date | date: 'MMM d, y' }}</td>
+          <td>{{ order.collectionDetails.timeSlot }}</td>
+          <td>{{ getPaymentMethodLabel(order.paymentMethod) }}</td>
+          <td>
+            <p-tag 
+              [value]="order.status" 
+              [severity]="getStatusSeverity(order.status)"
+              [style.text-transform]="'capitalize'"
+            ></p-tag>
+          </td>
+          <td>
+            <p-button 
+              icon="pi pi-eye" 
+              styleClass="p-button-rounded p-button-text p-button-info"
+              (onClick)="openOrderDetails(order)"
+              pTooltip="View Details"
+            ></p-button>
+          </td>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="9" class="text-center">No orders found.</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>
+
+<!-- Order Details Dialog -->
+<p-dialog 
+  [(visible)]="displayDialog" 
+  [header]="'Order Details'"
+  [modal]="true"
+  [style]="{width: '800px'}"
+  [draggable]="false"
+  [resizable]="false"
+  *ngIf="selectedOrder"
+>
+  <div class="order-details">
+    <div class="order-header">
+      <h2>{{ selectedOrder.orderNumber }}</h2>
+      <p-tag 
+        [value]="selectedOrder.status" 
+        [severity]="getStatusSeverity(selectedOrder.status)"
+        [style.text-transform]="'capitalize'"
+      ></p-tag>
+    </div>
+
+    <div class="order-section">
+      <h3>Customer Information</h3>
+      <div class="info-grid">
+        <div class="info-item">
+          <label>Name:</label>
+          <span>{{ getCustomerName(selectedOrder) }}</span>
+        </div>
+        <div class="info-item">
+          <label>Phone:</label>
+          <span>{{ selectedOrder.customer.phone }}</span>
+        </div>
+        <div class="info-item">
+          <label>Email:</label>
+          <span>{{ selectedOrder.customer.email }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="order-section">
+      <h3>Order Items</h3>
+      <table class="items-table">
+        <thead>
+          <tr>
+            <th>Product Name</th>
+            <th>Size</th>
+            <th>Quantity</th>
+            <th>Unit Price</th>
+            <th>Line Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of selectedOrder.items">
+            <td>{{ item.product.name }}</td>
+            <td>{{ item.product.size }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>${{ item.product.price.toFixed(2) }}</td>
+            <td><strong>${{ getLineTotal(item.quantity, item.product.price).toFixed(2) }}</strong></td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="4" class="text-right"><strong>Subtotal:</strong></td>
+            <td><strong>${{ selectedOrder.total.toFixed(2) }}</strong></td>
+          </tr>
+          <tr>
+            <td colspan="4" class="text-right"><strong>Total:</strong></td>
+            <td><strong>${{ selectedOrder.total.toFixed(2) }}</strong></td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+
+    <div class="order-section">
+      <h3>Collection Details</h3>
+      <div class="info-grid">
+        <div class="info-item">
+          <label>Date:</label>
+          <span>{{ formatDate(selectedOrder.collectionDetails.date) }}</span>
+        </div>
+        <div class="info-item">
+          <label>Time Slot:</label>
+          <span>{{ selectedOrder.collectionDetails.timeSlot }}</span>
+        </div>
+        <div class="info-item full-width">
+          <label>Address:</label>
+          <span>181 Selous Avenue, Harare, Zimbabwe</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="order-section">
+      <h3>Payment & Status</h3>
+      <div class="payment-section">
+        <div class="info-item">
+          <label>Payment Method:</label>
+          <span>{{ getPaymentMethodLabel(selectedOrder.paymentMethod) }}</span>
+        </div>
+        <div class="info-item" *ngIf="selectedOrder.paymentMethod === 'cash'">
+          <label>Payment Status:</label>
+          <p-checkbox 
+            [(ngModel)]="selectedOrder.paymentStatus"
+            [binary]="true"
+            [trueValue]="'paid'"
+            [falseValue]="'pending'"
+            inputId="paid"
+            label="Paid"
+          ></p-checkbox>
+        </div>
+        <div class="info-item full-width">
+          <label for="orderStatus">Order Status:</label>
+          <p-dropdown 
+            id="orderStatus"
+            [(ngModel)]="selectedOrder.status"
+            [options]="orderStatusOptions"
+            placeholder="Select Status"
+            styleClass="status-dropdown"
+          ></p-dropdown>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-template pTemplate="footer">
+    <p-button 
+      label="Close" 
+      icon="pi pi-times"
+      (onClick)="displayDialog = false"
+      styleClass="p-button-text"
+    ></p-button>
+    <p-button 
+      label="Update Order" 
+      icon="pi pi-check"
+      (onClick)="updateOrder()"
+      styleClass="p-button-cyan"
+    ></p-button>
+  </ng-template>
+</p-dialog>
+
+<p-toast></p-toast>
