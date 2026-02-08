@@ -1,1 +1,124 @@
-<p>dashboard works!</p>
+<div class="dashboard-container">
+  <div class="dashboard-header">
+    <h1>Dashboard</h1>
+    <p>Welcome to Oasis Water Admin Dashboard</p>
+  </div>
+
+  <!-- Stats Cards -->
+  <div class="stats-grid">
+    <p-card class="stat-card orders-today">
+      <div class="stat-content">
+        <div class="stat-icon">📦</div>
+        <div class="stat-details">
+          <h3 class="stat-value">{{ stats.ordersToday }}</h3>
+          <p class="stat-label">Orders Today</p>
+        </div>
+      </div>
+    </p-card>
+
+    <p-card class="stat-card revenue-week">
+      <div class="stat-content">
+        <div class="stat-icon">💰</div>
+        <div class="stat-details">
+          <h3 class="stat-value">${{ stats.revenueThisWeek.toFixed(2) }}</h3>
+          <p class="stat-label">Revenue This Week</p>
+        </div>
+      </div>
+    </p-card>
+
+    <p-card class="stat-card pending-collections">
+      <div class="stat-content">
+        <div class="stat-icon">📅</div>
+        <div class="stat-details">
+          <h3 class="stat-value">{{ stats.pendingCollections }}</h3>
+          <p class="stat-label">Pending Collections</p>
+        </div>
+      </div>
+    </p-card>
+
+    <p-card class="stat-card total-products">
+      <div class="stat-content">
+        <div class="stat-icon">📊</div>
+        <div class="stat-details">
+          <h3 class="stat-value">{{ stats.totalProducts }}</h3>
+          <p class="stat-label">Total Products</p>
+        </div>
+      </div>
+    </p-card>
+  </div>
+
+  <!-- Recent Orders Section -->
+  <div class="recent-orders-section">
+    <p-card>
+      <ng-template pTemplate="header">
+        <div class="section-header">
+          <h2>Recent Orders</h2>
+        </div>
+      </ng-template>
+
+      <p-table 
+        [value]="recentOrders" 
+        [loading]="loading"
+        styleClass="p-datatable-sm"
+        [tableStyle]="{'min-width': '50rem'}"
+      >
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Order Number</th>
+            <th>Customer Name</th>
+            <th>Total Amount</th>
+            <th>Collection Date</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-order>
+          <tr>
+            <td><strong>{{ order.orderNumber }}</strong></td>
+            <td>{{ getCustomerName(order) }}</td>
+            <td><strong>${{ order.total.toFixed(2) }}</strong></td>
+            <td>{{ formatDate(order.collectionDetails.date) }}</td>
+            <td>
+              <span 
+                class="status-badge" 
+                [class]="'status-' + order.status"
+              >
+                {{ order.status }}
+              </span>
+            </td>
+            <td>
+              <p-button 
+                label="View Details" 
+                icon="pi pi-eye" 
+                size="small"
+                [routerLink]="['/admin/orders']"
+                [text]="true"
+              ></p-button>
+            </td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+          <tr>
+            <td colspan="6" class="text-center">No orders found.</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </p-card>
+  </div>
+
+  <!-- Quick Actions -->
+  <div class="quick-actions">
+    <p-button 
+      label="View All Orders" 
+      icon="pi pi-list"
+      [routerLink]="['/admin/orders']"
+      styleClass="p-button-outlined"
+    ></p-button>
+    <p-button 
+      label="View Schedule" 
+      icon="pi pi-calendar"
+      [routerLink]="['/admin/collection-schedule']"
+      styleClass="p-button-outlined"
+    ></p-button>
+  </div>
+</div>

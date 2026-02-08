@@ -1,1 +1,224 @@
-<p>products works!</p>
+<div class="products-container">
+  <div class="products-header">
+    <div>
+      <h1>Products Management</h1>
+      <p>Manage your product catalog</p>
+    </div>
+    <p-button 
+      label="Add Product" 
+      icon="pi pi-plus"
+      (onClick)="openAddDialog()"
+      styleClass="p-button-cyan"
+    ></p-button>
+  </div>
+
+  <div class="products-table-container">
+    <p-table 
+      [value]="products" 
+      [loading]="loading"
+      [paginator]="true"
+      [rows]="10"
+      [showCurrentPageReport]="true"
+      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} products"
+      [globalFilterFields]="['name', 'size', 'category']"
+      #dt
+    >
+      <ng-template pTemplate="caption">
+        <div class="table-header">
+          <span class="p-input-icon-left">
+            <i class="pi pi-search"></i>
+            <input 
+              pInputText 
+              type="text" 
+              (input)="dt.filterGlobal($any($event.target).value, 'contains')" 
+              placeholder="Search products..." 
+            />
+          </span>
+        </div>
+      </ng-template>
+
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Image</th>
+          <th pSortableColumn="name">Product Name <p-sortIcon field="name"></p-sortIcon></th>
+          <th pSortableColumn="size">Size/Variant <p-sortIcon field="size"></p-sortIcon></th>
+          <th pSortableColumn="price">Price <p-sortIcon field="price"></p-sortIcon></th>
+          <th pSortableColumn="category">Category <p-sortIcon field="category"></p-sortIcon></th>
+          <th>Featured</th>
+          <th>Actions</th>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="body" let-product>
+        <tr>
+          <td>
+            <img 
+              [src]="product.image" 
+              [alt]="product.name"
+              class="product-image"
+              (error)="$any($event.target).src='assets/placeholder.jpg'"
+            />
+          </td>
+          <td><strong>{{ product.name }}</strong></td>
+          <td>{{ product.size }}</td>
+          <td><strong>${{ product.price.toFixed(2) }}</strong></td>
+          <td>
+            <span class="category-badge" [class]="'category-' + product.category">
+              {{ getCategoryLabel(product.category) }}
+            </span>
+          </td>
+          <td>
+            <i 
+              [class]="product.featured ? 'pi pi-star-fill' : 'pi pi-star'" 
+              [style.color]="product.featured ? '#ffc107' : '#ccc'"
+            ></i>
+          </td>
+          <td>
+            <p-button 
+              icon="pi pi-pencil" 
+              styleClass="p-button-rounded p-button-text p-button-info"
+              (onClick)="openEditDialog(product)"
+              pTooltip="Edit"
+            ></p-button>
+            <p-button 
+              icon="pi pi-trash" 
+              styleClass="p-button-rounded p-button-text p-button-danger"
+              (onClick)="deleteProduct(product)"
+              pTooltip="Delete"
+            ></p-button>
+          </td>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="7" class="text-center">No products found.</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>
+
+<!-- Add/Edit Product Dialog -->
+<p-dialog 
+  [(visible)]="displayDialog" 
+  [header]="isEditMode ? 'Edit Product' : 'Add Product'"
+  [modal]="true"
+  [style]="{width: '600px'}"
+  [draggable]="false"
+  [resizable]="false"
+>
+  <div class="product-form">
+    <div class="form-field">
+      <label for="name">Product Name *</label>
+      <input 
+        id="name"
+        type="text" 
+        pInputText 
+        [(ngModel)]="selectedProduct.name"
+        placeholder="e.g., Oasis Still Water"
+        class="w-full"
+      />
+    </div>
+
+    <div class="form-field">
+      <label for="size">Size/Variant *</label>
+      <input 
+        id="size"
+        type="text" 
+        pInputText 
+        [(ngModel)]="selectedProduct.size"
+        placeholder="e.g., 500ml, 2kg"
+        class="w-full"
+      />
+    </div>
+
+    <div class="form-field">
+      <label for="price">Price (USD) *</label>
+      <p-inputNumber 
+        id="price"
+        [(ngModel)]="selectedProduct.price"
+        mode="currency"
+        currency="USD"
+        locale="en-US"
+        [minFractionDigits]="2"
+        [min]="0.01"
+        placeholder="0.00"
+        styleClass="w-full"
+      ></p-inputNumber>
+    </div>
+
+    <div class="form-field">
+      <label for="category">Category *</label>
+      <p-dropdown 
+        id="category"
+        [(ngModel)]="selectedProduct.category"
+        [options]="categories"
+        placeholder="Select a category"
+        styleClass="w-full"
+      ></p-dropdown>
+    </div>
+
+    <div class="form-field">
+      <label for="image">Image URL *</label>
+      <input 
+        id="image"
+        type="text" 
+        pInputText 
+        [(ngModel)]="selectedProduct.image"
+        placeholder="https://example.com/image.jpg"
+        class="w-full"
+      />
+    </div>
+
+    <div class="form-field">
+      <label for="description">Description</label>
+      <textarea 
+        id="description"
+        pInputText 
+        [(ngModel)]="selectedProduct.description"
+        rows="3"
+        placeholder="Product description..."
+        class="w-full"
+      ></textarea>
+    </div>
+
+    <div class="form-field">
+      <label for="stock">Stock Quantity</label>
+      <p-inputNumber 
+        id="stock"
+        [(ngModel)]="selectedProduct.stock"
+        [min]="0"
+        placeholder="0"
+        styleClass="w-full"
+      ></p-inputNumber>
+    </div>
+
+    <div class="form-field">
+      <p-checkbox 
+        [(ngModel)]="selectedProduct.featured"
+        [binary]="true"
+        inputId="featured"
+        label="Featured (Show on home page)"
+      ></p-checkbox>
+    </div>
+  </div>
+
+  <ng-template pTemplate="footer">
+    <p-button 
+      label="Cancel" 
+      icon="pi pi-times"
+      (onClick)="displayDialog = false"
+      styleClass="p-button-text"
+    ></p-button>
+    <p-button 
+      label="Save Product" 
+      icon="pi pi-check"
+      (onClick)="saveProduct()"
+      styleClass="p-button-cyan"
+    ></p-button>
+  </ng-template>
+</p-dialog>
+
+<p-toast></p-toast>
+<p-confirmDialog></p-confirmDialog>

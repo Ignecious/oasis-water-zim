@@ -1,1 +1,33 @@
-<p>admin-layout works!</p>
+<div class="admin-layout">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <h1 class="brand">OASIS WATER</h1>
+      <p class="brand-subtitle">Admin Dashboard</p>
+    </div>
+    
+    <nav class="sidebar-nav">
+      <a 
+        *ngFor="let item of menuItems" 
+        [routerLink]="item.route"
+        routerLinkActive="active"
+        class="nav-item"
+      >
+        <span class="nav-icon">{{ item.icon }}</span>
+        <span class="nav-label">{{ item.label }}</span>
+      </a>
+    </nav>
+    
+    <div class="sidebar-footer">
+      <button class="back-button" (click)="navigateToClient()">
+        <span class="nav-icon">🚪</span>
+        <span class="nav-label">Back to Site</span>
+      </button>
+    </div>
+  </aside>
+  
+  <!-- Main Content -->
+  <main class="main-content">
+    <router-outlet></router-outlet>
+  </main>
+</div>
