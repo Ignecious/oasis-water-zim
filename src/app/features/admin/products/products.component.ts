@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { TableModule } from 'primeng/table';
+import { TableModule, TableLazyLoadEvent } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
 import { InputTextModule } from 'primeng/inputtext';
@@ -36,6 +36,7 @@ import { Product } from '../../../models/product.interface';
 })
 export class ProductsComponent implements OnInit {
   products: Product[] = [];
+  totalRecords: number = 0;
   loading = true;
   displayDialog = false;
   isEditMode = false;
@@ -57,14 +58,20 @@ export class ProductsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.loadProducts();
+    // Initial load will be triggered by lazy loading
   }
 
-  loadProducts() {
+  loadProducts(event: TableLazyLoadEvent) {
     this.loading = true;
-    this.productService.getAllProducts().subscribe({
-      next: (products) => {
-        this.products = products;
+    
+    const first = event.first || 0;
+    const rows = event.rows || 10;
+    
+    // Get paginated products from service
+    this.productService.getProducts(first, rows).subscribe({
+      next: (data) => {
+        this.products = data.products;
+        this.totalRecords = data.total;
         this.loading = false;
       },
       error: (error) => {
@@ -74,6 +81,27 @@ export class ProductsComponent implements OnInit {
           severity: 'error',
           summary: 'Error',
           detail: 'Failed to load products'
+        });
+      }
+    });
+  }
+
+  reloadProducts() {
+    // Reload all products after add/edit/delete
+    this.loading = true;
+    this.productService.getAllProducts().subscribe({
+      next: (products) => {
+        this.totalRecords = products.length;
+        // Reload the current page
+        this.loadProducts({ first: 0, rows: 10 });
+      },
+      error: (error) => {
+        console.error('Error reloading products:', error);
+        this.loading = false;
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: 'Failed to reload products'
         });
       }
     });
@@ -104,7 +132,7 @@ export class ProductsComponent implements OnInit {
             summary: 'Success',
             detail: 'Product updated successfully'
           });
-          this.loadProducts();
+          this.reloadProducts();
           this.displayDialog = false;
         },
         error: () => {
@@ -125,7 +153,7 @@ export class ProductsComponent implements OnInit {
             summary: 'Success',
             detail: 'Product added successfully'
           });
-          this.loadProducts();
+          this.reloadProducts();
           this.displayDialog = false;
         },
         error: () => {
@@ -152,7 +180,7 @@ export class ProductsComponent implements OnInit {
               summary: 'Success',
               detail: 'Product deleted successfully'
             });
-            this.loadProducts();
+            this.reloadProducts();
           },
           error: () => {
             this.messageService.add({

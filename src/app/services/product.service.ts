@@ -261,4 +261,14 @@ export class ProductService {
     const products = this.productsSubject.value.filter(p => p.featured === true);
     return of(products).pipe(delay(300));
   }
+
+  // Pagination support for admin products table
+  getProducts(first: number, rows: number): Observable<{products: Product[], total: number}> {
+    const allProducts = this.productsSubject.value;
+    const paginated = allProducts.slice(first, first + rows);
+    return of({
+      products: paginated,
+      total: allProducts.length
+    }).pipe(delay(500)); // Simulate network delay for smooth loading
+  }
 }
