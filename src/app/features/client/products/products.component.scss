@@ -78,7 +78,7 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  min-height: 480px;
+  min-height: 540px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 
   &:hover {
@@ -88,6 +88,7 @@
 
   ::ng-deep .p-card-header {
     padding: 0;
+    flex-shrink: 0;
   }
 
   ::ng-deep .p-card-body {
@@ -95,17 +96,22 @@
     flex-direction: column;
     height: 100%;
     flex: 1;
+    min-height: 0;
   }
 
   ::ng-deep .p-card-content {
     flex: 1;
     padding: 1rem 1.5rem;
+    display: flex;
+    flex-direction: column;
   }
 
   ::ng-deep .p-card-footer {
     padding: 0 1.5rem 1.5rem;
     border-top: none;
     margin-top: auto;
+    flex-shrink: 0;
+    min-height: 100px;
   }
 }
 
@@ -154,6 +160,8 @@
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
+  min-height: 80px;
+  padding-top: 0.5rem;
 
   .add-to-cart-btn {
     width: 100%;
