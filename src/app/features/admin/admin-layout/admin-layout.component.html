@@ -1,33 +1,38 @@
 <div class="admin-layout">
-  <!-- Sidebar -->
-  <aside class="sidebar">
-    <div class="sidebar-header">
-      <h1 class="brand">OASIS WATER</h1>
-      <p class="brand-subtitle">Admin Dashboard</p>
+  <!-- Admin Header -->
+  <header class="admin-header">
+    <div class="admin-header-left">
+      <h1 class="admin-logo-text">OASIS WATER</h1>
+      <span class="admin-title">Admin Portal</span>
     </div>
-    
-    <nav class="sidebar-nav">
-      <a 
-        *ngFor="let item of menuItems" 
-        [routerLink]="item.route"
-        routerLinkActive="active"
-        class="nav-item"
-      >
-        <span class="nav-icon">{{ item.icon }}</span>
-        <span class="nav-label">{{ item.label }}</span>
-      </a>
-    </nav>
-    
-    <div class="sidebar-footer">
-      <button class="back-button" (click)="navigateToClient()">
-        <span class="nav-icon">🚪</span>
-        <span class="nav-label">Back to Site</span>
+    <div class="admin-header-right">
+      <button class="logout-button" (click)="navigateToClient()">
+        <i class="pi pi-sign-out"></i>
+        <span>Back to Site</span>
       </button>
     </div>
-  </aside>
-  
-  <!-- Main Content -->
-  <main class="main-content">
-    <router-outlet></router-outlet>
-  </main>
+  </header>
+
+  <div class="admin-content-wrapper">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <nav class="sidebar-nav">
+        <a 
+          *ngFor="let item of menuItems" 
+          [routerLink]="item.route"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{exact: item.route === '/admin/dashboard'}"
+          class="nav-item"
+        >
+          <span class="nav-icon">{{ item.icon }}</span>
+          <span class="nav-label">{{ item.label }}</span>
+        </a>
+      </nav>
+    </aside>
+    
+    <!-- Main Content -->
+    <main class="main-content">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
 </div>

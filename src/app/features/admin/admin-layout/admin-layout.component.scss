@@ -1,6 +1,76 @@
 .admin-layout {
   display: flex;
+  flex-direction: column;
   height: 100vh;
+  overflow: hidden;
+}
+
+// Admin Header
+.admin-header {
+  background: #001f3f;
+  color: white;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 1001;
+}
+
+.admin-header-left {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.admin-logo-text {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0;
+  color: #00bcd4;
+  letter-spacing: 1px;
+}
+
+.admin-title {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 400;
+  padding-left: 1.5rem;
+  border-left: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.admin-header-right {
+  display: flex;
+  align-items: center;
+}
+
+.logout-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.875rem;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.5);
+  }
+
+  i {
+    font-size: 1rem;
+  }
+}
+
+// Content Wrapper
+.admin-content-wrapper {
+  display: flex;
+  flex: 1;
   overflow: hidden;
 }
 
@@ -11,37 +81,12 @@
   display: flex;
   flex-direction: column;
   box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
-  position: fixed;
-  left: 0;
-  top: 0;
-  height: 100vh;
-  z-index: 1000;
-}
-
-.sidebar-header {
-  padding: 2rem 1.5rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  background: linear-gradient(135deg, #001f3f 0%, #001829 100%);
-}
-
-.brand {
-  font-size: 1.5rem;
-  font-weight: 700;
-  margin: 0;
-  color: #00bcd4;
-  letter-spacing: 1px;
-}
-
-.brand-subtitle {
-  font-size: 0.875rem;
-  margin: 0.25rem 0 0 0;
-  color: rgba(255, 255, 255, 0.7);
-  font-weight: 300;
+  overflow-y: auto;
 }
 
 .sidebar-nav {
   flex: 1;
-  padding: 1rem 0;
+  padding: 1.5rem 0;
   overflow-y: auto;
 }
 
@@ -79,34 +124,8 @@
   font-size: 1rem;
 }
 
-.sidebar-footer {
-  padding: 1rem 1.5rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.back-button {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  padding: 0.875rem 1rem;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: rgba(255, 255, 255, 0.8);
-  border-radius: 6px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-size: 1rem;
-}
-
-.back-button:hover {
-  background: rgba(255, 255, 255, 0.1);
-  color: white;
-  border-color: rgba(255, 255, 255, 0.2);
-}
-
 .main-content {
   flex: 1;
-  margin-left: 250px;
   background: #f5f7fa;
   overflow-y: auto;
   padding: 2rem;
@@ -114,17 +133,28 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
+  .admin-header {
+    padding: 1rem;
+  }
+
+  .admin-logo-text {
+    font-size: 1.25rem;
+  }
+
+  .admin-title {
+    display: none;
+  }
+
+  .logout-button span {
+    display: none;
+  }
+
   .sidebar {
     width: 200px;
   }
 
   .main-content {
-    margin-left: 200px;
     padding: 1rem;
-  }
-
-  .brand {
-    font-size: 1.25rem;
   }
 
   .nav-label {
@@ -133,20 +163,18 @@
 }
 
 @media (max-width: 576px) {
+  .admin-header-left {
+    gap: 0.5rem;
+  }
+
+  .admin-logo-text {
+    font-size: 1rem;
+  }
+
   .sidebar {
     width: 70px;
   }
 
-  .main-content {
-    margin-left: 70px;
-  }
-
-  .sidebar-header {
-    padding: 1rem 0.5rem;
-  }
-
-  .brand,
-  .brand-subtitle,
   .nav-label {
     display: none;
   }
@@ -159,14 +187,5 @@
   .nav-icon {
     margin-right: 0;
     font-size: 1.5rem;
-  }
-
-  .back-button .nav-label {
-    display: none;
-  }
-
-  .back-button {
-    justify-content: center;
-    padding: 0.875rem;
   }
 }
