@@ -7,28 +7,13 @@ import { Product } from '../models/product.interface';
   providedIn: 'root'
 })
 export class CartService {
-  private readonly CART_STORAGE_KEY = 'oasis_cart';
-  private cartItemsSubject = new BehaviorSubject<CartItem[]>(this.loadCartFromStorage());
+  private cartItemsSubject = new BehaviorSubject<CartItem[]>([]);
   public cartItems$ = this.cartItemsSubject.asObservable();
 
-  constructor() { }
-
-  private loadCartFromStorage(): CartItem[] {
-    try {
-      const cartData = localStorage.getItem(this.CART_STORAGE_KEY);
-      return cartData ? JSON.parse(cartData) : [];
-    } catch (error) {
-      console.error('Error loading cart from storage:', error);
-      return [];
-    }
-  }
-
-  private saveCartToStorage(items: CartItem[]): void {
-    try {
-      localStorage.setItem(this.CART_STORAGE_KEY, JSON.stringify(items));
-    } catch (error) {
-      console.error('Error saving cart to storage:', error);
-    }
+  constructor() {
+    // One-time cleanup of old localStorage data
+    localStorage.removeItem('oasis_cart');
+    // Always start with empty cart - no localStorage persistence
   }
 
   getCartItems(): CartItem[] {
@@ -51,7 +36,7 @@ export class CartService {
     }
 
     this.cartItemsSubject.next(updatedItems);
-    this.saveCartToStorage(updatedItems);
+    // No localStorage - fresh cart on every page load
   }
 
   updateQuantity(productId: string, quantity: number): void {
@@ -65,7 +50,7 @@ export class CartService {
     );
 
     this.cartItemsSubject.next(updatedItems);
-    this.saveCartToStorage(updatedItems);
+    // No localStorage - fresh cart on every page load
   }
 
   removeFromCart(productId: string): void {
@@ -74,12 +59,12 @@ export class CartService {
     );
 
     this.cartItemsSubject.next(updatedItems);
-    this.saveCartToStorage(updatedItems);
+    // No localStorage - fresh cart on every page load
   }
 
   clearCart(): void {
     this.cartItemsSubject.next([]);
-    this.saveCartToStorage([]);
+    // No localStorage cleanup needed
   }
 
   getCartTotal(): number {
@@ -111,7 +96,7 @@ export class CartService {
           : cartItem
       );
       this.cartItemsSubject.next(updatedItems);
-      this.saveCartToStorage(updatedItems);
+      // No localStorage - fresh cart on every page load
     }
   }
 
@@ -126,7 +111,7 @@ export class CartService {
             : cartItem
         );
         this.cartItemsSubject.next(updatedItems);
-        this.saveCartToStorage(updatedItems);
+        // No localStorage - fresh cart on every page load
       } else {
         // Remove item if quantity reaches 0
         this.removeFromCart(productId);
