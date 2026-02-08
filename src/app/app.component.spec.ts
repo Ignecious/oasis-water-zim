@@ -14,16 +14,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have the 'oasis-water-app' title`, () => {
+  it(`should have the 'Oasis Water Zimbabwe' title`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('oasis-water-app');
+    expect(app.title).toEqual('Oasis Water Zimbabwe');
   });
 
-  it('should render title', () => {
+  it('should render header', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, oasis-water-app');
+    expect(compiled.querySelector('app-header')).toBeTruthy();
   });
 });

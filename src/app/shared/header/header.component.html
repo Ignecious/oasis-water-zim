@@ -43,22 +43,22 @@
 
       <!-- Navigation -->
       <nav class="navigation">
-        <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link">
+        <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link" aria-label="Home">
           <i class="pi pi-home"></i>
-          Home
+          <span>Home</span>
         </a>
-        <a routerLink="/products" routerLinkActive="active" class="nav-link">
+        <a routerLink="/products" routerLinkActive="active" class="nav-link" aria-label="Products">
           <i class="pi pi-th-large"></i>
-          Products
+          <span>Products</span>
         </a>
-        <a routerLink="/cart" routerLinkActive="active" class="nav-link cart-link">
+        <a routerLink="/cart" routerLinkActive="active" class="nav-link cart-link" aria-label="Shopping Cart">
           <i class="pi pi-shopping-cart"></i>
-          Cart
+          <span>Cart</span>
           <span *ngIf="cartItemCount > 0" class="p-badge p-badge-danger cart-badge">{{ cartItemCount }}</span>
         </a>
-        <a routerLink="/order-status" routerLinkActive="active" class="nav-link">
+        <a routerLink="/order-status" routerLinkActive="active" class="nav-link" aria-label="Order Status">
           <i class="pi pi-list"></i>
-          Order Status
+          <span>Order Status</span>
         </a>
       </nav>
     </div>

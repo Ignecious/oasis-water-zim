@@ -18,7 +18,11 @@ export const routes: Routes = [
     loadComponent: () => import('./features/client/checkout/checkout.component').then(m => m.CheckoutComponent)
   },
   {
-    path: 'orders/:orderNumber',
+    path: 'order-status',
+    loadComponent: () => import('./features/client/order-status/order-status.component').then(m => m.OrderStatusComponent)
+  },
+  {
+    path: 'order-status/:orderNumber',
     loadComponent: () => import('./features/client/order-status/order-status.component').then(m => m.OrderStatusComponent)
   },
   {
