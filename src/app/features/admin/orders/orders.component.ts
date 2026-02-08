@@ -125,20 +125,37 @@ export class OrdersComponent implements OnInit {
       this.selectedOrder.status
     ).subscribe({
       next: () => {
-        this.orderService.updatePaymentStatus(
-          this.selectedOrder!.orderNumber,
-          this.selectedOrder!.paymentStatus
-        ).subscribe({
-          next: () => {
-            this.messageService.add({
-              severity: 'success',
-              summary: 'Success',
-              detail: 'Order updated successfully'
-            });
-            this.loadOrders();
-            this.displayDialog = false;
-          }
-        });
+        if (this.selectedOrder?.paymentMethod === 'cash') {
+          this.orderService.updatePaymentStatus(
+            this.selectedOrder.orderNumber,
+            this.selectedOrder.paymentStatus
+          ).subscribe({
+            next: () => {
+              this.messageService.add({
+                severity: 'success',
+                summary: 'Success',
+                detail: 'Order updated successfully'
+              });
+              this.loadOrders();
+              this.displayDialog = false;
+            },
+            error: () => {
+              this.messageService.add({
+                severity: 'error',
+                summary: 'Error',
+                detail: 'Failed to update payment status'
+              });
+            }
+          });
+        } else {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Success',
+            detail: 'Order updated successfully'
+          });
+          this.loadOrders();
+          this.displayDialog = false;
+        }
       },
       error: () => {
         this.messageService.add({
