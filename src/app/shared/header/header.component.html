@@ -1,0 +1,66 @@
+<header class="header">
+  <!-- Top Bar with Contact Info -->
+  <div class="top-bar">
+    <div class="container">
+      <div class="contact-info">
+        <span class="contact-item">
+          <i class="pi pi-phone"></i>
+          <a href="tel:+263779045285">+263 779 045 285</a>
+        </span>
+        <span class="contact-item">
+          <i class="pi pi-envelope"></i>
+          <a href="mailto:sales@oasiswater.co.zw">sales&#64;oasiswater.co.zw</a>
+        </span>
+        <span class="contact-item">
+          <i class="pi pi-clock"></i>
+          Mon-Fri 8a-5:30p, Sat 8a-2:30p
+        </span>
+      </div>
+      <div class="social-links">
+        <a href="https://facebook.com" target="_blank" rel="noopener" class="social-icon" aria-label="Facebook">
+          <i class="pi pi-facebook"></i>
+        </a>
+        <a href="https://instagram.com" target="_blank" rel="noopener" class="social-icon" aria-label="Instagram">
+          <i class="pi pi-instagram"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Header -->
+  <div class="main-header">
+    <div class="container">
+      <!-- Logo -->
+      <div class="logo">
+        <a routerLink="/" class="logo-link">
+          <i class="pi pi-circle-fill logo-icon"></i>
+          <div class="logo-text">
+            <span class="brand-name">oasis</span>
+            <span class="tagline">Purely refreshing</span>
+          </div>
+        </a>
+      </div>
+
+      <!-- Navigation -->
+      <nav class="navigation">
+        <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link" aria-label="Home">
+          <i class="pi pi-home"></i>
+          <span>Home</span>
+        </a>
+        <a routerLink="/products" routerLinkActive="active" class="nav-link" aria-label="Products">
+          <i class="pi pi-th-large"></i>
+          <span>Products</span>
+        </a>
+        <a routerLink="/cart" routerLinkActive="active" class="nav-link cart-link" aria-label="Shopping Cart">
+          <i class="pi pi-shopping-cart"></i>
+          <span>Cart</span>
+          <span *ngIf="cartItemCount > 0" class="p-badge p-badge-danger cart-badge">{{ cartItemCount }}</span>
+        </a>
+        <a routerLink="/order-status" routerLinkActive="active" class="nav-link" aria-label="Order Status">
+          <i class="pi pi-list"></i>
+          <span>Order Status</span>
+        </a>
+      </nav>
+    </div>
+  </div>
+</header>

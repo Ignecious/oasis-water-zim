@@ -1,0 +1,63 @@
+<app-header></app-header>
+
+<p-toast></p-toast>
+
+<div class="products-page">
+  <div class="container">
+    <div class="page-header">
+      <h1>Our Products</h1>
+      <p class="subtitle">Discover our range of premium water, ice, and accessories</p>
+    </div>
+
+    <!-- Category Tabs -->
+    <p-tabView (onChange)="onTabChange($event)" class="category-tabs">
+      <p-tabPanel *ngFor="let category of categories" [header]="category.label">
+      </p-tabPanel>
+    </p-tabView>
+
+    <!-- Products Grid -->
+    <div class="products-grid" *ngIf="filteredProducts.length > 0">
+      <div class="product-card-wrapper" *ngFor="let product of filteredProducts">
+        <p-card class="product-card">
+          <ng-template pTemplate="header">
+            <div class="product-image">
+              <img [src]="product.image" [alt]="product.name" />
+            </div>
+          </ng-template>
+          
+          <div class="product-info">
+            <h3 class="product-name">{{ product.name }}</h3>
+            <p class="product-size">{{ product.size }}</p>
+            <p class="product-price">${{ product.price.toFixed(2) }}</p>
+          </div>
+
+          <ng-template pTemplate="footer">
+            <div class="product-actions">
+              <button 
+                pButton 
+                label="Add to Cart" 
+                icon="pi pi-shopping-cart" 
+                class="p-button-cyan add-to-cart-btn"
+                (click)="addToCart(product)">
+              </button>
+              <a 
+                [routerLink]="['/products', product.id]" 
+                class="view-details-link">
+                View Details →
+              </a>
+            </div>
+          </ng-template>
+        </p-card>
+      </div>
+    </div>
+
+    <!-- Empty State -->
+    <div class="empty-state" *ngIf="filteredProducts.length === 0">
+      <i class="pi pi-inbox empty-icon"></i>
+      <h2>No Products Found</h2>
+      <p>There are no products available in this category at the moment.</p>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

@@ -1,0 +1,90 @@
+<p-toast></p-toast>
+
+<!-- Hero Section -->
+<section class="hero-section">
+  <div class="hero-content">
+    <h1 class="hero-title">
+      Welcome to <span class="brand-text">Oasis Water</span>
+    </h1>
+    <p class="hero-subtitle">Purely refreshing water delivered to you</p>
+    <button 
+      pButton 
+      label="Shop Now" 
+      icon="pi pi-shopping-cart" 
+      class="cta-button"
+      routerLink="/products">
+    </button>
+  </div>
+</section>
+
+<!-- Featured Products Section -->
+<section class="featured-section">
+  <div class="container">
+    <h2 class="section-title">Featured Products</h2>
+    <div class="products-grid">
+      <div *ngFor="let product of featuredProducts" class="product-item">
+        <p-card>
+          <ng-template pTemplate="header">
+            <img 
+              [src]="product.image" 
+              [alt]="product.name"
+              class="product-image">
+          </ng-template>
+          <div class="product-info">
+            <h3 class="product-name">{{ product.name }}</h3>
+            <p class="product-size">{{ product.size }}</p>
+            <p class="product-price">${{ product.price.toFixed(2) }}</p>
+          </div>
+          <ng-template pTemplate="footer">
+            <button 
+              pButton 
+              label="Add to Cart" 
+              icon="pi pi-shopping-cart"
+              class="add-to-cart-btn"
+              (click)="addToCart(product)">
+            </button>
+          </ng-template>
+        </p-card>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Trust Section -->
+<section class="trust-section">
+  <div class="container">
+    <h2 class="section-title">Why Choose Oasis Water?</h2>
+    <div class="trust-grid">
+      <div class="trust-item">
+        <i class="pi pi-check-circle trust-icon"></i>
+        <h3>Quality Purified Water</h3>
+        <p>Premium quality water purified through advanced filtration systems</p>
+      </div>
+      <div class="trust-item">
+        <i class="pi pi-calendar trust-icon"></i>
+        <h3>6 Days/Week</h3>
+        <p>Reliable delivery service available Monday to Saturday</p>
+      </div>
+      <div class="trust-item">
+        <i class="pi pi-mobile trust-icon"></i>
+        <h3>EcoCash Accepted</h3>
+        <p>Convenient payment options including EcoCash mobile payments</p>
+      </div>
+      <div class="trust-item">
+        <i class="pi pi-clock trust-icon"></i>
+        <h3>Operating Hours</h3>
+        <p>Monday - Saturday: 8:00 AM - 5:00 PM</p>
+      </div>
+      <div class="trust-item">
+        <i class="pi pi-map-marker trust-icon"></i>
+        <h3>Location</h3>
+        <p>Harare, Zimbabwe - Serving the greater Harare area</p>
+      </div>
+      <div class="trust-item">
+        <i class="pi pi-phone trust-icon"></i>
+        <h3>Contact Us</h3>
+        <p>Call us for orders and inquiries</p>
+      </div>
+    </div>
+  </div>
+</section>
