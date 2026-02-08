@@ -6,8 +6,6 @@ import { ButtonModule } from 'primeng/button';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import { Subject, takeUntil } from 'rxjs';
-import { HeaderComponent } from '../../../shared/header/header.component';
-import { FooterComponent } from '../../../shared/footer/footer.component';
 import { ProductService } from '../../../services/product.service';
 import { CartService } from '../../../services/cart.service';
 import { Product } from '../../../models/product.interface';
@@ -20,9 +18,7 @@ import { Product } from '../../../models/product.interface';
     RouterLink,
     CardModule,
     ButtonModule,
-    ToastModule,
-    HeaderComponent,
-    FooterComponent
+    ToastModule
   ],
   providers: [MessageService],
   templateUrl: './home.component.html',
