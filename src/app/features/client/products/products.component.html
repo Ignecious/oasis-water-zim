@@ -16,7 +16,7 @@
     <!-- Products Grid -->
     <div class="products-grid" *ngIf="filteredProducts.length > 0">
       <div *ngFor="let product of filteredProducts">
-        <p-card>
+        <p-card class="product-card">
           <ng-template pTemplate="header">
             <img 
               [src]="product.image" 
