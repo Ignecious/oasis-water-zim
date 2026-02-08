@@ -34,7 +34,7 @@ describe('HeaderComponent', () => {
   });
 
   it('should update cart item count when cart items change', () => {
-    cartService.addToCart({ id: '1', name: 'Test Product', price: 10, category: 'test', stock: 10, imageUrl: '' }, 2);
+    cartService.addToCart({ id: '1', name: 'Test Product', price: 10, category: 'water', size: '1L', description: 'Test', image: 'test.jpg', stock: 10 }, 2);
     expect(component.cartItemCount).toBe(2);
   });
 
