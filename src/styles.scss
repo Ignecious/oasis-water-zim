@@ -1,0 +1,269 @@
+/* Oasis Water Brand Colors */
+$oasis-navy: #003366;
+$oasis-cyan: #00BFFF;
+$oasis-white: #FFFFFF;
+$oasis-light-gray: #F5F5F5;
+
+/* Import PrimeNG styles */
+@import 'primeng/resources/themes/lara-light-blue/theme.css';
+@import 'primeng/resources/primeng.css';
+@import 'primeicons/primeicons.css';
+@import 'primeflex/primeflex.css';
+
+/* Override PrimeNG theme variables */
+:root {
+  --primary-color: #{$oasis-cyan};
+  --primary-color-text: #{$oasis-white};
+  --surface-ground: #{$oasis-light-gray};
+  --text-color: #333333;
+  --text-color-secondary: #666666;
+  --surface-0: #{$oasis-white};
+  --surface-50: #fafafa;
+  --surface-100: #{$oasis-light-gray};
+  --surface-card: #{$oasis-white};
+}
+
+/* Global Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+  background-color: $oasis-light-gray;
+  line-height: 1.6;
+}
+
+/* Custom Button Styles */
+.btn-oasis-primary {
+  background-color: $oasis-cyan !important;
+  color: $oasis-white !important;
+  border: none !important;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  
+  &:hover:not(:disabled) {
+    background-color: darken($oasis-cyan, 10%) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 191, 255, 0.3) !important;
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+.btn-oasis-secondary {
+  background-color: $oasis-navy !important;
+  color: $oasis-white !important;
+  border: none !important;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  
+  &:hover:not(:disabled) {
+    background-color: lighten($oasis-navy, 10%) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 51, 102, 0.3) !important;
+  }
+}
+
+/* Header Styles */
+.oasis-header {
+  background-color: $oasis-navy;
+  color: $oasis-white;
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
+  a {
+    color: $oasis-white;
+    text-decoration: none;
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: $oasis-cyan;
+    }
+  }
+}
+
+/* Logo Styles */
+.oasis-logo {
+  font-size: 2rem;
+  font-weight: 700;
+  color: $oasis-cyan;
+  text-transform: lowercase;
+  letter-spacing: 1px;
+
+  .tagline {
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: $oasis-white;
+    display: block;
+    margin-top: -5px;
+  }
+}
+
+/* Card Styles */
+.oasis-card {
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  background: $oasis-white;
+  
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  }
+}
+
+/* Footer Styles */
+.oasis-footer {
+  background-color: $oasis-cyan;
+  color: $oasis-white;
+  padding: 2rem;
+  margin-top: 3rem;
+
+  a {
+    color: $oasis-white;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+/* Hero Section */
+.hero-section {
+  background: linear-gradient(135deg, $oasis-navy 0%, lighten($oasis-navy, 15%) 100%);
+  color: $oasis-white;
+  padding: 4rem 2rem;
+  text-align: center;
+
+  h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    
+    .highlight {
+      color: $oasis-cyan;
+    }
+  }
+
+  p {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+  }
+}
+
+/* Product Grid */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2rem;
+  padding: 2rem 0;
+}
+
+/* Status Badges */
+.status-badge {
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.875rem;
+  display: inline-block;
+
+  &.pending {
+    background-color: #FFF3CD;
+    color: #856404;
+  }
+
+  &.confirmed {
+    background-color: #D1ECF1;
+    color: #0C5460;
+  }
+
+  &.ready {
+    background-color: #D4EDDA;
+    color: #155724;
+  }
+
+  &.completed {
+    background-color: #E2E3E5;
+    color: #383D41;
+  }
+
+  &.cancelled {
+    background-color: #F8D7DA;
+    color: #721C24;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .hero-section h1 {
+    font-size: 2rem;
+  }
+
+  .hero-section p {
+    font-size: 1.2rem;
+  }
+
+  .product-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 1rem;
+  }
+
+  .oasis-header {
+    padding: 1rem;
+  }
+}
+
+/* Override PrimeNG Button */
+.p-button {
+  &.p-button-primary {
+    background-color: $oasis-cyan;
+    border-color: $oasis-cyan;
+
+    &:hover {
+      background-color: darken($oasis-cyan, 10%);
+      border-color: darken($oasis-cyan, 10%);
+    }
+  }
+}
+
+/* Loading Spinner */
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+}
+
+/* Empty State */
+.empty-state {
+  text-align: center;
+  padding: 3rem;
+  color: #666;
+
+  i {
+    font-size: 4rem;
+    color: #ccc;
+    margin-bottom: 1rem;
+  }
+
+  h3 {
+    margin-bottom: 1rem;
+  }
+}
