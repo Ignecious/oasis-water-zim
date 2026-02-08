@@ -1,1 +1,294 @@
-<p>collection-schedule works!</p>
+<div class="schedule-container">
+  <div class="schedule-header">
+    <div>
+      <h1>Collection Schedule</h1>
+      <p>Manage daily collection time slots and orders</p>
+    </div>
+  </div>
+
+  <!-- Date Selector -->
+  <div class="date-selector-card">
+    <div class="date-controls">
+      <p-button 
+        icon="pi pi-chevron-left" 
+        (onClick)="previousDay()"
+        styleClass="p-button-text p-button-rounded"
+        pTooltip="Previous Day"
+      ></p-button>
+
+      <div class="date-display">
+        <h2>{{ formatSelectedDate() }}</h2>
+        <p-button 
+          label="Today" 
+          icon="pi pi-calendar-plus"
+          (onClick)="goToToday()"
+          styleClass="p-button-text p-button-sm"
+          *ngIf="!isToday()"
+        ></p-button>
+      </div>
+
+      <p-button 
+        icon="pi pi-chevron-right" 
+        (onClick)="nextDay()"
+        styleClass="p-button-text p-button-rounded"
+        pTooltip="Next Day"
+      ></p-button>
+    </div>
+
+    <div class="calendar-picker">
+      <p-calendar 
+        [(ngModel)]="selectedDate"
+        (onSelect)="onDateChange()"
+        [showIcon]="true"
+        [iconDisplay]="'input'"
+        dateFormat="M dd, yy"
+        placeholder="Select date"
+        styleClass="date-picker"
+      ></p-calendar>
+    </div>
+  </div>
+
+  <!-- Summary Stats -->
+  <div class="stats-card" *ngIf="!loading">
+    <div class="stat-item">
+      <i class="pi pi-calendar"></i>
+      <div>
+        <span class="stat-label">Total Collections</span>
+        <span class="stat-value">{{ getTotalCollections() }}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Time Slots -->
+  <div class="time-slots-container" *ngIf="!loading">
+    <!-- Empty State -->
+    <div class="empty-state" *ngIf="!hasCollections()">
+      <i class="pi pi-calendar-times"></i>
+      <h3>No collections scheduled</h3>
+      <p>There are no orders scheduled for collection on this date.</p>
+    </div>
+
+    <!-- Time Slots -->
+    <div class="time-slot-card" *ngFor="let slot of timeSlots">
+      <div class="slot-header" (click)="toggleSlot(slot)">
+        <div class="slot-info">
+          <div class="slot-time">
+            <i class="pi pi-clock"></i>
+            <span>{{ slot.label }}</span>
+          </div>
+          <span 
+            class="collection-badge"
+            [class.badge-success]="slot.severity === 'success'"
+            [class.badge-warning]="slot.severity === 'warning'"
+            [class.badge-danger]="slot.severity === 'danger'"
+          >
+            {{ slot.count }} {{ slot.count === 1 ? 'collection' : 'collections' }}
+          </span>
+        </div>
+        <i 
+          class="pi"
+          [class.pi-chevron-down]="!slot.expanded"
+          [class.pi-chevron-up]="slot.expanded"
+        ></i>
+      </div>
+
+      <!-- Collection Details -->
+      <div class="slot-content" *ngIf="slot.expanded && slot.count > 0">
+        <div class="collection-item" *ngFor="let order of slot.collections">
+          <div class="collection-main">
+            <div class="collection-info">
+              <div class="info-row">
+                <span class="order-number">{{ order.orderNumber }}</span>
+                <p-tag 
+                  [value]="order.status" 
+                  [severity]="getStatusSeverity(order.status)"
+                  [style.text-transform]="'capitalize'"
+                ></p-tag>
+              </div>
+              <div class="customer-name">
+                <i class="pi pi-user"></i>
+                <span>{{ getCustomerName(order) }}</span>
+              </div>
+              <div class="customer-phone">
+                <i class="pi pi-phone"></i>
+                <span>{{ order.customer.phone }}</span>
+              </div>
+            </div>
+
+            <div class="collection-details">
+              <div class="detail-item">
+                <span class="detail-label">Items</span>
+                <span class="detail-value">{{ getItemsSummary(order) }}</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">Total</span>
+                <span class="detail-value amount">${{ order.total.toFixed(2) }}</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">Payment</span>
+                <span class="detail-value payment-badge" [class.payment-ecocash]="order.paymentMethod === 'ecocash'" [class.payment-cash]="order.paymentMethod === 'cash'">
+                  {{ getPaymentMethodLabel(order.paymentMethod) }}
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="collection-actions">
+            <p-button 
+              label="View Order" 
+              icon="pi pi-eye"
+              (onClick)="openOrderDetails(order)"
+              styleClass="p-button-sm p-button-cyan"
+            ></p-button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading State -->
+  <div class="loading-state" *ngIf="loading">
+    <i class="pi pi-spin pi-spinner"></i>
+    <p>Loading collections...</p>
+  </div>
+</div>
+
+<!-- Order Details Dialog (reused from Orders component) -->
+<p-dialog 
+  [(visible)]="displayDialog" 
+  [header]="'Order Details'"
+  [modal]="true"
+  [style]="{width: '800px'}"
+  [draggable]="false"
+  [resizable]="false"
+  *ngIf="selectedOrder"
+>
+  <div class="order-details">
+    <div class="order-header">
+      <h2>{{ selectedOrder.orderNumber }}</h2>
+      <p-tag 
+        [value]="selectedOrder.status" 
+        [severity]="getStatusSeverity(selectedOrder.status)"
+        [style.text-transform]="'capitalize'"
+      ></p-tag>
+    </div>
+
+    <div class="order-section">
+      <h3>Customer Information</h3>
+      <div class="info-grid">
+        <div class="info-item">
+          <label>Name:</label>
+          <span>{{ getCustomerName(selectedOrder) }}</span>
+        </div>
+        <div class="info-item">
+          <label>Phone:</label>
+          <span>{{ selectedOrder.customer.phone }}</span>
+        </div>
+        <div class="info-item">
+          <label>Email:</label>
+          <span>{{ selectedOrder.customer.email }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="order-section">
+      <h3>Order Items</h3>
+      <table class="items-table">
+        <thead>
+          <tr>
+            <th>Product Name</th>
+            <th>Size</th>
+            <th>Quantity</th>
+            <th>Unit Price</th>
+            <th>Line Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of selectedOrder.items">
+            <td>{{ item.product.name }}</td>
+            <td>{{ item.product.size }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>${{ item.product.price.toFixed(2) }}</td>
+            <td><strong>${{ getLineTotal(item.quantity, item.product.price).toFixed(2) }}</strong></td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="4" class="text-right"><strong>Subtotal:</strong></td>
+            <td><strong>${{ selectedOrder.total.toFixed(2) }}</strong></td>
+          </tr>
+          <tr>
+            <td colspan="4" class="text-right"><strong>Total:</strong></td>
+            <td><strong>${{ selectedOrder.total.toFixed(2) }}</strong></td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+
+    <div class="order-section">
+      <h3>Collection Details</h3>
+      <div class="info-grid">
+        <div class="info-item">
+          <label>Date:</label>
+          <span>{{ formatDate(selectedOrder.collectionDetails.date) }}</span>
+        </div>
+        <div class="info-item">
+          <label>Time Slot:</label>
+          <span>{{ selectedOrder.collectionDetails.timeSlot }}</span>
+        </div>
+        <div class="info-item full-width">
+          <label>Address:</label>
+          <span>{{ selectedOrder.collectionDetails.location }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="order-section">
+      <h3>Payment & Status</h3>
+      <div class="payment-section">
+        <div class="info-item">
+          <label>Payment Method:</label>
+          <span>{{ getPaymentMethodLabel(selectedOrder.paymentMethod) }}</span>
+        </div>
+        <div class="info-item" *ngIf="selectedOrder.paymentMethod === 'cash'">
+          <label>Payment Status:</label>
+          <p-checkbox 
+            [(ngModel)]="selectedOrder.paymentStatus"
+            [binary]="true"
+            [trueValue]="'paid'"
+            [falseValue]="'pending'"
+            inputId="paid"
+            label="Paid"
+          ></p-checkbox>
+        </div>
+        <div class="info-item full-width">
+          <label for="orderStatus">Order Status:</label>
+          <p-dropdown 
+            id="orderStatus"
+            [(ngModel)]="selectedOrder.status"
+            [options]="orderStatusOptions"
+            placeholder="Select Status"
+            styleClass="status-dropdown"
+          ></p-dropdown>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-template pTemplate="footer">
+    <p-button 
+      label="Close" 
+      icon="pi pi-times"
+      (onClick)="displayDialog = false"
+      styleClass="p-button-text"
+    ></p-button>
+    <p-button 
+      label="Update Order" 
+      icon="pi pi-check"
+      (onClick)="updateOrder()"
+      styleClass="p-button-cyan"
+    ></p-button>
+  </ng-template>
+</p-dialog>
+
+<p-toast></p-toast>
