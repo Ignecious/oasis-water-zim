@@ -36,13 +36,33 @@
             <p class="product-price">${{ product.price.toFixed(2) }}</p>
           </div>
           <ng-template pTemplate="footer">
+            <!-- Show "Add to Cart" button if item not in cart -->
             <button 
+              *ngIf="getItemQuantity(product.id) === 0"
               pButton 
               label="Add to Cart" 
               icon="pi pi-shopping-cart"
               class="add-to-cart-btn"
               (click)="addToCart(product)">
             </button>
+            
+            <!-- Show quantity controls if item is in cart -->
+            <div *ngIf="getItemQuantity(product.id) > 0" class="quantity-controls">
+              <button 
+                pButton 
+                icon="pi pi-minus" 
+                class="p-button-rounded p-button-cyan quantity-btn"
+                (click)="decreaseQuantity(product.id)">
+              </button>
+              <span class="quantity-display">{{ getItemQuantity(product.id) }}</span>
+              <button 
+                pButton 
+                icon="pi pi-plus" 
+                class="p-button-rounded p-button-cyan quantity-btn"
+                (click)="increaseQuantity(product.id)">
+              </button>
+            </div>
+            
             <a 
               [routerLink]="['/products', product.id]" 
               class="view-details-link">
