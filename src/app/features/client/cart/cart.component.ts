@@ -9,8 +9,7 @@ import { CalendarModule } from 'primeng/calendar';
 import { DropdownModule } from 'primeng/dropdown';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { InputTextModule } from 'primeng/inputtext';
-import { ToastModule } from 'primeng/toast';
-import { MessageService } from 'primeng/api';
+import { BadgeModule } from 'primeng/badge';
 import { Subject, takeUntil } from 'rxjs';
 import { CartService } from '../../../services/cart.service';
 import { CartItem } from '../../../models/cart-item.interface';
@@ -47,15 +46,17 @@ interface OrderConfirmation {
     DropdownModule,
     RadioButtonModule,
     InputTextModule,
-    ToastModule
+    BadgeModule
   ],
-  providers: [MessageService],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.scss'
 })
 export class CartComponent implements OnInit, OnDestroy {
   cartItems: CartItem[] = [];
+  cartItemCount: number = 0;
   subtotal: number = 0;
+  estimatedTax: number = 0;
+  totalAmount: number = 0;
   showCheckoutDialog: boolean = false;
   showConfirmationDialog: boolean = false;
   checkoutForm!: FormGroup;
@@ -78,8 +79,7 @@ export class CartComponent implements OnInit, OnDestroy {
   constructor(
     private cartService: CartService,
     private fb: FormBuilder,
-    private router: Router,
-    private messageService: MessageService
+    private router: Router
   ) {
     this.initializeForm();
   }
@@ -109,12 +109,15 @@ export class CartComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe(items => {
         this.cartItems = items;
-        this.calculateSubtotal();
+        this.cartItemCount = this.cartService.getCartItemCount();
+        this.calculateTotals();
       });
   }
 
-  private calculateSubtotal(): void {
+  private calculateTotals(): void {
     this.subtotal = this.cartService.getCartTotal();
+    this.estimatedTax = this.subtotal * 0.08; // 8% tax
+    this.totalAmount = this.subtotal + this.estimatedTax;
   }
 
   increaseQuantity(productId: string): void {
@@ -127,11 +130,6 @@ export class CartComponent implements OnInit, OnDestroy {
 
   removeItem(productId: string): void {
     this.cartService.removeFromCart(productId);
-    this.messageService.add({
-      severity: 'info',
-      summary: 'Item Removed',
-      detail: 'Item has been removed from your cart'
-    });
   }
 
   getLineTotal(item: CartItem): number {
@@ -147,12 +145,12 @@ export class CartComponent implements OnInit, OnDestroy {
     this.checkoutForm.reset();
   }
 
-  isWeekday(date: Date): boolean {
+  isWeekday = (date: Date): boolean => {
     const day = date.getDay();
     return day >= 1 && day <= 6; // Monday to Saturday
   }
 
-  onConfirmOrder(): void {
+  processCheckout(): void {
     if (this.checkoutForm.valid) {
       this.isProcessingPayment = true;
 
@@ -179,23 +177,11 @@ export class CartComponent implements OnInit, OnDestroy {
 
         // Clear cart
         this.cartService.clearCart();
-
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Order Confirmed',
-          detail: `Your order ${orderNumber} has been confirmed!`
-        });
       }, 1500);
     } else {
       // Mark all fields as touched to show validation errors
       Object.keys(this.checkoutForm.controls).forEach(key => {
         this.checkoutForm.get(key)?.markAsTouched();
-      });
-
-      this.messageService.add({
-        severity: 'error',
-        summary: 'Form Error',
-        detail: 'Please fill in all required fields correctly'
       });
     }
   }
@@ -211,7 +197,13 @@ export class CartComponent implements OnInit, OnDestroy {
   }
 
   continueShopping(): void {
+    this.showConfirmationDialog = false;
     this.router.navigate(['/products']);
+  }
+
+  viewOrderStatus(): void {
+    this.showConfirmationDialog = false;
+    this.router.navigate(['/order-status']);
   }
 
   formatDate(date: Date): string {

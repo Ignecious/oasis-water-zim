@@ -1,115 +1,305 @@
 <p-toast></p-toast>
 
-<!-- Hero Section -->
-<section class="hero-section">
-  <div class="hero-content">
-    <h1 class="hero-title">
-      Welcome to <span class="brand-text">Oasis Water</span>
-    </h1>
-    <p class="hero-subtitle">Purely refreshing water delivered to you</p>
-    <button 
-      pButton 
-      label="Shop Now" 
-      icon="pi pi-shopping-cart" 
-      class="cta-button"
-      routerLink="/products">
-    </button>
+<!-- Wrapper to match Stitch layout -->
+<div class="page-wrapper">
+  
+  <!-- Top Navigation Bar -->
+  <div class="top-nav-bar">
+    <div class="top-nav-content">
+      <div class="contact-items">
+        <div class="contact-item">
+          <i class="pi pi-phone"></i>
+          <span>+263 779 045 285</span>
+        </div>
+        <div class="contact-item">
+          <i class="pi pi-envelope"></i>
+          <span>sales&#64;oasiswater.co.zw</span>
+        </div>
+        <div class="contact-item hours">
+          <i class="pi pi-clock"></i>
+          <span>Mon-Fri 8a-5:30p, Sat 8a-2:30p</span>
+        </div>
+      </div>
+      <div class="social-icons">
+        <a href="#" class="social-link">
+          <i class="pi pi-facebook"></i>
+        </a>
+        <a href="#" class="social-link">
+          <i class="pi pi-instagram"></i>
+        </a>
+      </div>
+    </div>
   </div>
-</section>
 
-<!-- Featured Products Section -->
-<section class="featured-section">
-  <div class="container">
-    <h2 class="section-title">Featured Products</h2>
-    <div class="products-grid">
-      <div *ngFor="let product of featuredProducts" class="product-item">
-        <p-card>
-          <ng-template pTemplate="header">
-            <img 
-              [src]="product.image" 
-              [alt]="product.name"
-              class="product-image">
-          </ng-template>
-          <div class="product-info">
-            <h3 class="product-name">{{ product.name }}</h3>
-            <p class="product-size">{{ product.size }}</p>
-            <p class="product-price">${{ product.price.toFixed(2) }}</p>
-          </div>
-          <ng-template pTemplate="footer">
-            <!-- Show "Add to Cart" button if item not in cart -->
+  <!-- Sticky Header -->
+  <header class="sticky-header">
+    <div class="header-content">
+      <div class="header-left">
+        <div class="logo">
+          <i class="pi pi-circle-fill water-icon"></i>
+          <h2>Oasis Water</h2>
+        </div>
+        <nav class="main-nav">
+          <a routerLink="/" class="nav-link">Home</a>
+          <a routerLink="/products" class="nav-link">Products</a>
+          <a href="#" class="nav-link">Contact</a>
+        </nav>
+      </div>
+      <div class="header-right">
+        <div class="search-box">
+          <i class="pi pi-search"></i>
+          <input type="text" placeholder="Search water..." />
+        </div>
+        <div class="header-actions">
+          <button 
+            pButton 
+            icon="pi pi-shopping-cart" 
+            class="p-button-rounded p-button-text cart-btn"
+            routerLink="/cart">
+          </button>
+          <button 
+            pButton 
+            icon="pi pi-user" 
+            class="p-button-rounded p-button-text user-btn">
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="hero-background">
+        <div class="hero-overlay"></div>
+        <img 
+          src="/assets/stitch-images/hero-background.jpg" 
+          alt="Fresh Water" 
+          class="hero-image" />
+      </div>
+      <div class="hero-content">
+        <div class="hero-text-container">
+          <span class="premium-badge">PREMIUM HYDRATION</span>
+          <h1 class="hero-title">
+            Purely Refreshing<br/>
+            <span class="water-text">Water</span> Delivered
+          </h1>
+          <p class="hero-description">
+            Experience the purest hydration with Oasis Water, delivered straight to your doorstep with our sustainable and quick delivery service.
+          </p>
+          <div class="hero-buttons">
             <button 
-              *ngIf="getItemQuantity(product.id) === 0"
               pButton 
-              label="Add to Cart" 
-              icon="pi pi-shopping-cart"
-              class="add-to-cart-btn"
-              (click)="addToCart(product)">
+              label="Shop Now" 
+              class="shop-btn"
+              routerLink="/products">
             </button>
-            
-            <!-- Show quantity controls if item is in cart -->
-            <div *ngIf="getItemQuantity(product.id) > 0" class="quantity-controls">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section class="featured-products">
+      <div class="section-header">
+        <div class="title-block">
+          <h2>Featured Products</h2>
+          <div class="title-underline"></div>
+        </div>
+        <a routerLink="/products" class="view-all">
+          View All Products <i class="pi pi-arrow-right"></i>
+        </a>
+      </div>
+
+      <div class="products-grid">
+        <!-- Product Card 1 -->
+        <div class="product-card-wrapper">
+          <div class="product-card">
+            <div class="product-image-container">
+              <img 
+                src="/assets/stitch-images/product-sport-500ml.jpg" 
+                alt="Oasis Sport Water" 
+                class="product-img" />
+              <span class="product-badge">Popular</span>
+            </div>
+            <div class="product-body">
+              <div class="product-header">
+                <h3>Oasis Sport Water</h3>
+                <span class="price">$0.50</span>
+              </div>
+              <p class="product-desc">500ml Perfect for your daily workout and on-the-go hydration.</p>
               <button 
                 pButton 
-                icon="pi pi-minus" 
-                class="p-button-rounded p-button-cyan quantity-btn"
-                (click)="decreaseQuantity(product.id)">
-              </button>
-              <span class="quantity-display">{{ getItemQuantity(product.id) }}</span>
-              <button 
-                pButton 
-                icon="pi pi-plus" 
-                class="p-button-rounded p-button-cyan quantity-btn"
-                (click)="increaseQuantity(product.id)">
+                label="Add to Cart" 
+                icon="pi pi-shopping-cart"
+                class="add-cart-btn">
               </button>
             </div>
-            
-            <a 
-              [routerLink]="['/products', product.id]" 
-              class="view-details-link">
-              View Details →
-            </a>
-          </ng-template>
-        </p-card>
-      </div>
-    </div>
-  </div>
-</section>
+          </div>
+        </div>
 
-<!-- Trust Section -->
-<section class="trust-section">
-  <div class="container">
-    <h2 class="section-title">Why Choose Oasis Water?</h2>
-    <div class="trust-grid">
-      <div class="trust-item">
-        <i class="pi pi-check-circle trust-icon"></i>
-        <h3>Quality Purified Water</h3>
-        <p>Premium quality water purified through advanced filtration systems</p>
+        <!-- Product Card 2 -->
+        <div class="product-card-wrapper">
+          <div class="product-card">
+            <div class="product-image-container">
+              <img 
+                src="/assets/stitch-images/product-still-5l.jpg" 
+                alt="Oasis Still Water 5L" 
+                class="product-img" />
+              <span class="product-badge">Best Value</span>
+            </div>
+            <div class="product-body">
+              <div class="product-header">
+                <h3>Oasis Still Water 5L</h3>
+                <span class="price">$2.50</span>
+              </div>
+              <p class="product-desc">Premium purified still water, family size for maximum value.</p>
+              <button 
+                pButton 
+                label="Add to Cart" 
+                icon="pi pi-shopping-cart"
+                class="add-cart-btn">
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product Card 3 -->
+        <div class="product-card-wrapper">
+          <div class="product-card">
+            <div class="product-image-container">
+              <img 
+                src="/assets/stitch-images/product-ice-2kg.jpg" 
+                alt="Pluto Ice Cubes" 
+                class="product-img" />
+              <span class="product-badge premium">Premium</span>
+            </div>
+            <div class="product-body">
+              <div class="product-header">
+                <h3>Pluto Ice Cubes 2kg</h3>
+                <span class="price">$1.50</span>
+              </div>
+              <p class="product-desc">Crystal clear, long-lasting ice cubes for the ultimate chill.</p>
+              <button 
+                pButton 
+                label="Add to Cart" 
+                icon="pi pi-shopping-cart"
+                class="add-cart-btn">
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="trust-item">
-        <i class="pi pi-calendar trust-icon"></i>
-        <h3>6 Days/Week</h3>
-        <p>Reliable delivery service available Monday to Saturday</p>
+    </section>
+
+    <!-- Trust Section -->
+    <section class="trust-section">
+      <div class="section-intro">
+        <h2>Why Oasis?</h2>
+        <p>We pride ourselves on providing the best hydration solutions with unmatched service and quality standards.</p>
       </div>
-      <div class="trust-item">
-        <i class="pi pi-mobile trust-icon"></i>
-        <h3>EcoCash Accepted</h3>
-        <p>Convenient payment options including EcoCash mobile payments</p>
+
+      <div class="trust-grid">
+        <!-- Trust Item 1 -->
+        <div class="trust-card">
+          <div class="icon-circle">
+            <i class="pi pi-check-circle"></i>
+          </div>
+          <h3>Quality Purified Water</h3>
+          <p>Pure, filtered water that exceeds the highest international safety and taste standards.</p>
+        </div>
+
+        <!-- Trust Item 2 -->
+        <div class="trust-card">
+          <div class="icon-circle">
+            <i class="pi pi-truck"></i>
+          </div>
+          <h3>Reliable Delivery</h3>
+          <p>Prompt delivery to your home or office on a scheduled timeline that fits your lifestyle.</p>
+        </div>
+
+        <!-- Trust Item 3 -->
+        <div class="trust-card">
+          <div class="icon-circle">
+            <i class="pi pi-mobile"></i>
+          </div>
+          <h3>Easy Mobile Payments</h3>
+          <p>Secure and convenient payment options via our intuitive mobile app and online portal.</p>
+        </div>
       </div>
-      <div class="trust-item">
-        <i class="pi pi-clock trust-icon"></i>
-        <h3>Operating Hours</h3>
-        <p>Monday - Saturday: 8:00 AM - 5:00 PM</p>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-grid">
+        <!-- Company Info -->
+        <div class="footer-column">
+          <div class="footer-logo">
+            <i class="pi pi-circle-fill water-icon"></i>
+            <h2>Oasis Water</h2>
+          </div>
+          <p class="footer-description">
+            Dedicated to bringing the purest form of life's essential element to every home and business across the nation.
+          </p>
+          <div class="social-links">
+            <a href="#" class="social-icon">
+              <i class="pi pi-facebook"></i>
+            </a>
+            <a href="#" class="social-icon">
+              <i class="pi pi-instagram"></i>
+            </a>
+            <a href="#" class="social-icon">
+              <i class="pi pi-twitter"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="footer-column">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a routerLink="/">Our Story</a></li>
+            <li><a routerLink="/products">Product Range</a></li>
+            <li><a href="#">Corporate Solutions</a></li>
+            <li><a href="#">Sustainability</a></li>
+            <li><a href="#">Careers</a></li>
+          </ul>
+        </div>
+
+        <!-- Support -->
+        <div class="footer-column">
+          <h3>Support</h3>
+          <ul>
+            <li><a href="#">Help Center</a></li>
+            <li><a href="#">Delivery Areas</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Contact Us</a></li>
+          </ul>
+        </div>
+
+        <!-- Newsletter -->
+        <div class="footer-column">
+          <h3>Newsletter</h3>
+          <p>Stay hydrated and updated with our latest offers.</p>
+          <div class="newsletter-form">
+            <input type="email" placeholder="Your email address" />
+            <button pButton label="Subscribe"></button>
+          </div>
+        </div>
       </div>
-      <div class="trust-item">
-        <i class="pi pi-map-marker trust-icon"></i>
-        <h3>Location</h3>
-        <p>Harare, Zimbabwe - Serving the greater Harare area</p>
-      </div>
-      <div class="trust-item">
-        <i class="pi pi-phone trust-icon"></i>
-        <h3>Contact Us</h3>
-        <p>Call us for orders and inquiries</p>
+
+      <div class="footer-bottom">
+        <p>&copy; 2024 Oasis Water Systems. All rights reserved.</p>
+        <div class="footer-bottom-right">
+          <span>Designed with Pure Intentions</span>
+          <i class="pi pi-globe"></i>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </footer>
+
+</div>

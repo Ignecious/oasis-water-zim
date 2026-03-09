@@ -47,8 +47,27 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.productService.getAllProducts()
       .pipe(takeUntil(this.destroy$))
       .subscribe(products => {
-        this.featuredProducts = products.slice(0, 6);
+        this.featuredProducts = products.slice(0, 3);
       });
+  }
+
+  getProductImage(index: number): string {
+    const images = [
+      '/assets/stitch-images/product-sport-500ml.jpg',
+      '/assets/stitch-images/product-still-5l.jpg',
+      '/assets/stitch-images/product-ice-2kg.jpg'
+    ];
+    return images[index % 3];
+  }
+
+  getProductBadgeText(index: number): string {
+    const badges = ['Popular', 'Best Value', 'Premium'];
+    return badges[index % 3];
+  }
+
+  getProductBadgeClass(index: number): string {
+    const classes = ['badge-popular', 'badge-value', 'badge-premium'];
+    return classes[index % 3];
   }
 
   addToCart(product: Product): void {

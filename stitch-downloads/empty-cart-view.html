@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Your Cart | Oasis Water</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#00BFFF",
+                        "secondary": "#003366",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#221610",
+                    },
+                    fontFamily: {
+                        "display": ["Public Sans"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Public Sans', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark min-h-screen flex flex-col font-display">
+<!-- Header Section -->
+<header class="w-full flex items-center justify-between px-6 py-6 md:px-12 bg-white dark:bg-slate-900 border-b border-slate-100 dark:border-slate-800">
+<div class="flex items-center gap-2">
+<div class="p-2 bg-primary/10 rounded-lg">
+<span class="material-symbols-outlined text-secondary dark:text-primary" style="font-variation-settings: 'FILL' 1">water_drop</span>
+</div>
+<h1 class="text-secondary dark:text-slate-100 font-bold text-xl tracking-tight">OASIS WATER</h1>
+</div>
+<div class="flex items-center">
+<button class="relative p-2 text-secondary dark:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors">
+<span class="material-symbols-outlined text-3xl">shopping_cart</span>
+<span class="absolute top-1 right-1 flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+</span>
+</button>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-grow flex flex-col items-center justify-center px-6 py-20">
+<div class="max-w-md w-full text-center space-y-8">
+<!-- Minimalist Illustration Area -->
+<div class="relative flex justify-center mb-10">
+<div class="w-64 h-64 bg-slate-50 dark:bg-slate-800/50 rounded-full flex items-center justify-center relative overflow-hidden">
+<!-- Abstract Background Shape -->
+<div class="absolute inset-0 opacity-10">
+<svg class="w-full h-full" viewbox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+<path d="M44.7,-76.4C58.8,-69.2,71.8,-59.1,79.6,-45.8C87.4,-32.6,90,-16.3,88.5,-0.9C86.9,14.5,81.2,29,72.4,41.4C63.6,53.8,51.7,64.1,38.1,71.2C24.5,78.2,9.3,82.1,-5.1,80.9C-19.5,79.7,-33.1,73.5,-45.6,65.6C-58.1,57.7,-69.5,48.1,-76.3,35.8C-83.1,23.5,-85.3,8.5,-84.1,-6.3C-82.9,-21.2,-78.3,-35.9,-69.4,-48.1C-60.5,-60.3,-47.3,-70,-33.3,-77.3C-19.3,-84.6,-4.5,-89.5,10.1,-87.8C24.7,-86,30.6,-83.5,44.7,-76.4Z" fill="#00BFFF" transform="translate(100 100)"></path>
+</svg>
+</div>
+<!-- Empty Cart Icon -->
+<div class="relative z-10 flex flex-col items-center">
+<span class="material-symbols-outlined text-slate-300 dark:text-slate-600 text-8xl font-light">shopping_basket</span>
+<div class="absolute -bottom-2 -right-2 bg-white dark:bg-slate-900 rounded-full p-2 shadow-sm">
+<span class="material-symbols-outlined text-primary text-3xl">question_mark</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Text Content -->
+<div class="space-y-4">
+<h2 class="text-3xl font-bold text-secondary dark:text-slate-100 tracking-tight">Your cart is empty</h2>
+<p class="text-slate-500 dark:text-slate-400 text-lg leading-relaxed max-w-sm mx-auto">
+                    It looks like you haven't added any premium hydration products to your cart yet. Discover our collection of pure, refreshing water.
+                </p>
+</div>
+<!-- Action Button -->
+<div class="pt-6">
+<a class="group relative inline-flex items-center justify-center px-10 py-4 font-bold text-white transition-all duration-200 bg-secondary dark:bg-primary rounded-xl hover:bg-slate-900 dark:hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary shadow-lg shadow-secondary/20 dark:shadow-primary/20" href="#">
+<span class="relative flex items-center gap-2">
+                        Continue Shopping
+                        <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</span>
+</a>
+</div>
+<!-- Secondary Links -->
+<div class="pt-8 border-t border-slate-100 dark:border-slate-800">
+<p class="text-sm text-slate-400 dark:text-slate-500 uppercase tracking-widest font-semibold mb-4">Quick Links</p>
+<div class="flex justify-center gap-8">
+<a class="text-secondary dark:text-primary font-medium hover:underline decoration-2 underline-offset-4" href="#">Still Mineral Water</a>
+<a class="text-secondary dark:text-primary font-medium hover:underline decoration-2 underline-offset-4" href="#">Sparkling Range</a>
+</div>
+</div>
+</div>
+</main>
+<!-- Visual Accent Element -->
+<div class="fixed bottom-0 left-0 w-full h-1 bg-gradient-to-r from-primary via-secondary to-primary opacity-50"></div>
+</body></html>
