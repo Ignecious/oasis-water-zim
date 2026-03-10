@@ -1,0 +1,57 @@
+<!-- Backdrop Overlay -->
+<div 
+  class="drawer-backdrop" 
+  [class.active]="isOpen"
+  (click)="onBackdropClick()"
+  *ngIf="isOpen">
+</div>
+
+<!-- Side Drawer -->
+<div class="profile-drawer" [class.open]="isOpen">
+  <!-- Header with Close Button -->
+  <div class="drawer-header">
+    <div class="profile-icon">
+      <i class="pi pi-user"></i>
+    </div>
+    <h2>WELCOME</h2>
+    <button class="close-btn" (click)="onClose()" aria-label="Close menu">
+      <i class="pi pi-times"></i>
+    </button>
+  </div>
+
+  <!-- Menu Items -->
+  <div class="drawer-content">
+    <nav class="drawer-menu">
+      <button class="menu-item" (click)="onSignIn()">
+        <i class="pi pi-sign-in"></i>
+        <span>Sign In/Sign Up</span>
+        <i class="pi pi-chevron-right"></i>
+      </button>
+
+      <button class="menu-item" (click)="navigateTo('/products')">
+        <i class="pi pi-search"></i>
+        <span>Find a Product</span>
+        <i class="pi pi-chevron-right"></i>
+      </button>
+
+      <button class="menu-item" (click)="navigateTo('/help-centre')">
+        <i class="pi pi-question-circle"></i>
+        <span>Help Centre</span>
+        <i class="pi pi-chevron-right"></i>
+      </button>
+
+      <button class="menu-item" (click)="navigateTo('/terms-and-conditions')">
+        <i class="pi pi-file-edit"></i>
+        <span>Terms & Conditions</span>
+        <i class="pi pi-chevron-right"></i>
+      </button>
+
+      <button class="menu-item" (click)="navigateTo('/privacy-policy')">
+        <i class="pi pi-shield"></i>
+        <span>Privacy Policy</span>
+        <i class="pi pi-chevron-right"></i>
+      </button>
+    </nav>
+  </div>
+
+</div>
