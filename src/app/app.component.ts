@@ -24,14 +24,14 @@ export class AppComponent {
   constructor(private router: Router) {
     // Check initial route
     this.isAdminRoute = this.router.url.includes('/admin');
-    this.isHomePage = this.router.url === '/' || this.router.url === '' || this.router.url.includes('/products') || this.router.url.includes('/cart');
+    this.isHomePage = this.router.url === '/' || this.router.url === '' || this.router.url.includes('/products') || this.router.url.includes('/cart') || this.router.url.includes('/checkout');
     
-    // Check if current route is admin route, home page, products page, or cart page
+    // Check if current route is admin route, home page, products page, cart page, or checkout page
     this.router.events
       .pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd))
       .subscribe((event) => {
         this.isAdminRoute = event.url.includes('/admin');
-        this.isHomePage = event.url === '/' || event.url === '' || event.url.includes('/products') || event.url.includes('/cart');
+        this.isHomePage = event.url === '/' || event.url === '' || event.url.includes('/products') || event.url.includes('/cart') || event.url.includes('/checkout');
       });
   }
 }

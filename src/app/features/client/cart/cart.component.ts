@@ -137,7 +137,7 @@ export class CartComponent implements OnInit, OnDestroy {
   }
 
   openCheckoutDialog(): void {
-    this.showCheckoutDialog = true;
+    this.router.navigate(['/checkout']);
   }
 
   closeCheckoutDialog(): void {
