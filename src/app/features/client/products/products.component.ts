@@ -12,6 +12,7 @@ import { CartService } from '../../../services/cart.service';
 import { Product } from '../../../models/product.interface';
 import { TopNavBarComponent } from '../../../shared/top-nav-bar/top-nav-bar.component';
 import { StickyHeaderComponent } from '../../../shared/sticky-header/sticky-header.component';
+import { FooterNewComponent } from '../../../shared/footer-new/footer-new.component';
 
 @Component({
   selector: 'app-products',
@@ -25,7 +26,8 @@ import { StickyHeaderComponent } from '../../../shared/sticky-header/sticky-head
     InputTextModule,
     BadgeModule,
     TopNavBarComponent,
-    StickyHeaderComponent
+    StickyHeaderComponent,
+    FooterNewComponent
   ],
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss'

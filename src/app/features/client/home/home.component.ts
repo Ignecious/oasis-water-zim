@@ -11,6 +11,7 @@ import { CartService } from '../../../services/cart.service';
 import { Product } from '../../../models/product.interface';
 import { TopNavBarComponent } from '../../../shared/top-nav-bar/top-nav-bar.component';
 import { StickyHeaderComponent } from '../../../shared/sticky-header/sticky-header.component';
+import { FooterNewComponent } from '../../../shared/footer-new/footer-new.component';
 
 interface TargetOption {
   label: string;
@@ -28,7 +29,8 @@ interface TargetOption {
     ButtonModule,
     SelectButtonModule,
     TopNavBarComponent,
-    StickyHeaderComponent
+    StickyHeaderComponent,
+    FooterNewComponent
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'

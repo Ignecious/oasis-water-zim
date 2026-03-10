@@ -15,6 +15,7 @@ import { CartService } from '../../../services/cart.service';
 import { CartItem } from '../../../models/cart-item.interface';
 import { TopNavBarComponent } from '../../../shared/top-nav-bar/top-nav-bar.component';
 import { StickyHeaderComponent } from '../../../shared/sticky-header/sticky-header.component';
+import { FooterNewComponent } from '../../../shared/footer-new/footer-new.component';
 
 interface TimeSlot {
   label: string;
@@ -50,7 +51,8 @@ interface OrderConfirmation {
     InputTextModule,
     BadgeModule,
     TopNavBarComponent,
-    StickyHeaderComponent
+    StickyHeaderComponent,
+    FooterNewComponent
   ],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.scss'

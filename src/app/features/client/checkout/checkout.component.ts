@@ -20,6 +20,7 @@ import { Customer } from '../../../models/customer.interface';
 import { CartItem } from '../../../models/cart-item.interface';
 import { TopNavBarComponent } from '../../../shared/top-nav-bar/top-nav-bar.component';
 import { StickyHeaderComponent } from '../../../shared/sticky-header/sticky-header.component';
+import { FooterNewComponent } from '../../../shared/footer-new/footer-new.component';
 
 interface FulfillmentOption {
   label: string;
@@ -64,7 +65,8 @@ interface PaymentMethodOption {
     CardModule,
     DividerModule,
     TopNavBarComponent,
-    StickyHeaderComponent
+    StickyHeaderComponent,
+    FooterNewComponent
   ],
   templateUrl: './checkout.component.html',
   styleUrl: './checkout.component.scss'
