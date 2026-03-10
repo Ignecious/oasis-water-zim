@@ -209,10 +209,29 @@
     .cart-btn,
     .user-btn {
       color: #4b5563;
+      position: relative;
 
       &:hover {
         color: $oasis-cyan;
         background: rgba(0, 191, 255, 0.1);
+      }
+
+      .cart-count-badge {
+        position: absolute;
+        top: 0.25rem;
+        right: 0.25rem;
+        background: #dc2626;
+        color: white;
+        font-size: 0.625rem;
+        font-weight: 700;
+        min-width: 1.125rem;
+        height: 1.125rem;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 0.25rem;
+        line-height: 1;
       }
     }
   }
@@ -495,6 +514,58 @@
     &:active {
       transform: translateY(0);
     }
+
+    &.adding {
+      animation: pulse 0.6s ease;
+    }
+  }
+
+  .cart-controls {
+    width: 100%;
+  }
+
+  .quantity-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    width: 100%;
+    padding: 0.5rem;
+    background: rgba(0, 191, 255, 0.05);
+    border-radius: 0.5rem;
+    border: 2px solid $oasis-cyan;
+
+    .quantity-btn {
+      background: $oasis-navy;
+      border-color: $oasis-navy;
+      color: #ffffff;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background: $oasis-cyan;
+        border-color: $oasis-cyan;
+        transform: scale(1.1);
+      }
+
+      &:active {
+        transform: scale(0.95);
+      }
+    }
+
+    .quantity-display {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: $oasis-navy;
+      min-width: 40px;
+      text-align: center;
+    }
   }
 }
 
@@ -754,6 +825,383 @@
   }
 }
 
+// Partner Network Section
+.partner-network {
+  background: white;
+  padding: 3rem 2rem;
+  border-bottom: 1px solid #e5e7eb;
+  text-align: center;
+
+  .partner-label {
+    color: #9ca3af;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 2rem;
+  }
+
+  .partner-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2.5rem 4rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    opacity: 0.8;
+    transition: opacity 0.3s;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  .partner-tile {
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: $oasis-navy;
+    transition: color 0.3s, transform 0.3s;
+
+    &:hover {
+      color: $oasis-cyan;
+      transform: scale(1.05);
+    }
+  }
+}
+
+// Product Tabs
+.product-tabs {
+  display: flex;
+  justify-content: center;
+  margin: 2rem 0;
+
+  ::ng-deep {
+    .p-selectbutton {
+      background: #f1f5f9;
+      padding: 0.25rem;
+      border-radius: 0.75rem;
+
+      .p-button {
+        padding: 0.75rem 2rem;
+        font-weight: 700;
+        border-radius: 0.5rem;
+        border: none;
+        background: transparent;
+        color: #64748b;
+        transition: all 0.3s;
+
+        &.p-highlight {
+          background: white;
+          color: $oasis-navy;
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        &:hover:not(.p-highlight) {
+          background: rgba(255, 255, 255, 0.5);
+          color: $oasis-navy;
+        }
+      }
+    }
+  }
+}
+
+// Value Propositions Section
+.value-section {
+  background: $oasis-navy;
+  padding: 5rem 2rem;
+
+  .value-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .value-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    padding: 2rem;
+    border-radius: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s;
+
+    &:hover {
+      border-color: rgba($oasis-cyan, 0.5);
+      transform: translateY(-5px);
+    }
+
+    .icon-container {
+      width: 3rem;
+      height: 3rem;
+      background: rgba($oasis-cyan, 0.2);
+      border-radius: 0.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+
+      i {
+        font-size: 1.75rem;
+        color: $oasis-cyan;
+      }
+    }
+
+    h3 {
+      color: white;
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+
+    p {
+      color: #cbd5e1;
+      font-size: 0.875rem;
+      line-height: 1.6;
+    }
+  }
+}
+
+// How It Works Section
+.how-it-works {
+  padding: 6rem 2rem;
+  background: white;
+
+  .section-intro {
+    text-align: center;
+    margin-bottom: 4rem;
+
+    h2 {
+      font-size: 2rem;
+      font-weight: 900;
+      color: $oasis-navy;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      color: #64748b;
+      font-size: 1rem;
+    }
+  }
+
+  .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 3rem;
+      left: 25%;
+      right: 25%;
+      height: 2px;
+      background: #e5e7eb;
+      z-index: 0;
+
+      @media (max-width: 768px) {
+        display: none;
+      }
+    }
+  }
+
+  .step-card {
+    text-align: center;
+    position: relative;
+    z-index: 1;
+
+    .step-number {
+      width: 6rem;
+      height: 6rem;
+      background: white;
+      border: 4px solid $oasis-cyan;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+      span {
+        font-size: 2.5rem;
+        font-weight: 900;
+        color: $oasis-cyan;
+      }
+    }
+
+    .step-icon {
+      margin-bottom: 1rem;
+
+      i {
+        font-size: 2.5rem;
+        color: $oasis-cyan;
+      }
+    }
+
+    h4 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: $oasis-navy;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      color: #64748b;
+      font-size: 0.875rem;
+      line-height: 1.6;
+      padding: 0 1rem;
+    }
+  }
+}
+
+// About Section
+.about-section {
+  padding: 6rem 2rem;
+  background: #f8fafc;
+
+  .about-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+  }
+
+  .about-text {
+    h2 {
+      font-size: 2rem;
+      font-weight: 900;
+      color: $oasis-navy;
+      margin-bottom: 1.5rem;
+    }
+
+    p {
+      color: #64748b;
+      font-size: 1rem;
+      line-height: 1.8;
+      margin-bottom: 1rem;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  .about-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+
+  .stat-item {
+    text-align: center;
+    padding: 1.5rem;
+    background: white;
+    border-radius: 1rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+
+    &:hover {
+      transform: translateY(-5px);
+    }
+
+    h3 {
+      font-size: 2.5rem;
+      font-weight: 900;
+      color: $oasis-cyan;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      color: #64748b;
+      font-size: 0.875rem;
+      font-weight: 600;
+    }
+  }
+}
+
+// Footer Updates
+.footer {
+  .footer-contact {
+    margin: 1.5rem 0;
+
+    p {
+      margin: 0.5rem 0;
+      font-size: 0.875rem;
+
+      strong {
+        display: inline-block;
+        width: 80px;
+      }
+
+      a {
+        color: $oasis-cyan;
+        text-decoration: none;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    flex-wrap: wrap;
+    gap: 1rem;
+
+    .payment-badges {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      opacity: 0.7;
+
+      .badge-label {
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        margin-right: 0.5rem;
+      }
+
+      i {
+        font-size: 1.5rem;
+      }
+
+      .badge-text {
+        font-weight: 900;
+        font-size: 0.875rem;
+      }
+    }
+  }
+}
+
+// Corporate Button
+.corporate-btn {
+  border: 2px solid white;
+  background: transparent !important;
+  color: white !important;
+  font-weight: 700;
+  transition: all 0.3s;
+
+  &:hover {
+    background: white !important;
+    color: $oasis-navy !important;
+  }
+}
+
 // Responsive adjustments
 @media (max-width: 768px) {
   .hero-section {
@@ -775,5 +1223,42 @@
       grid-template-columns: 1fr;
       gap: 2rem;
     }
+  }
+
+  .partner-network {
+    .partner-grid {
+      gap: 1.5rem 2rem;
+    }
+
+    .partner-tile {
+      font-size: 1.25rem;
+    }
+  }
+
+  .value-section .value-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .how-it-works .steps-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+
+    .payment-badges {
+      justify-content: center;
+    }
+  }
+}
+
+// Animations
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.95);
   }
 }

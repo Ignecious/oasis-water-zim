@@ -1,41 +1,55 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
-import { MessageService } from 'primeng/api';
-import { ToastModule } from 'primeng/toast';
+import { SelectButtonModule } from 'primeng/selectbutton';
 import { Subject, takeUntil } from 'rxjs';
 import { ProductService } from '../../../services/product.service';
 import { CartService } from '../../../services/cart.service';
 import { Product } from '../../../models/product.interface';
+
+interface TargetOption {
+  label: string;
+  value: 'b2c' | 'b2b';
+}
 
 @Component({
   selector: 'app-home',
   standalone: true,
   imports: [
     CommonModule,
+    FormsModule,
     RouterLink,
     CardModule,
     ButtonModule,
-    ToastModule
+    SelectButtonModule
   ],
-  providers: [MessageService],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
 export class HomeComponent implements OnInit, OnDestroy {
   featuredProducts: Product[] = [];
+  allProducts: Product[] = [];
+  selectedTarget: 'b2c' | 'b2b' = 'b2c';
+  productTargetOptions: TargetOption[] = [
+    { label: 'Home & Individuals', value: 'b2c' },
+    { label: 'Office & Bulk', value: 'b2b' }
+  ];
+  cartItemCount: number = 0;
+  addingToCart: { [key: string]: boolean } = {};
+  
   private destroy$ = new Subject<void>();
 
   constructor(
     private productService: ProductService,
-    private cartService: CartService,
-    private messageService: MessageService
+    private cartService: CartService
   ) {}
 
   ngOnInit(): void {
     this.loadFeaturedProducts();
+    this.subscribeToCart();
   }
 
   ngOnDestroy(): void {
@@ -47,37 +61,56 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.productService.getAllProducts()
       .pipe(takeUntil(this.destroy$))
       .subscribe(products => {
-        this.featuredProducts = products.slice(0, 3);
+        this.allProducts = products;
+        this.featuredProducts = products.filter(p => p.featured === true);
       });
   }
 
-  getProductImage(index: number): string {
-    const images = [
-      '/assets/stitch-images/product-sport-500ml.jpg',
-      '/assets/stitch-images/product-still-5l.jpg',
-      '/assets/stitch-images/product-ice-2kg.jpg'
-    ];
-    return images[index % 3];
+  subscribeToCart(): void {
+    this.cartService.cartItems$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((items: any[]) => {
+        this.cartItemCount = items.reduce((sum: number, item: any) => sum + item.quantity, 0);
+      });
   }
 
-  getProductBadgeText(index: number): string {
-    const badges = ['Popular', 'Best Value', 'Premium'];
-    return badges[index % 3];
+  getFilteredProducts(): Product[] {
+    if (this.selectedTarget === 'b2c') {
+      return this.featuredProducts.filter(p => 
+        p.target === 'b2c' || p.target === 'both'
+      );
+    } else {
+      return this.allProducts.filter(p => 
+        p.target === 'b2b' || p.target === 'both'
+      );
+    }
   }
 
-  getProductBadgeClass(index: number): string {
-    const classes = ['badge-popular', 'badge-value', 'badge-premium'];
-    return classes[index % 3];
+  scrollToProducts(): void {
+    const element = document.querySelector('.featured-products');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   }
 
-  addToCart(product: Product): void {
+  addToCart(product: Product, event?: Event): void {
+    if (event) {
+      event.stopPropagation();
+    }
+    
+    // Visual feedback - button animation
+    this.addingToCart[product.id] = true;
+    
     this.cartService.addToCart(product, 1);
-    this.messageService.add({
-      severity: 'success',
-      summary: 'Added to Cart',
-      detail: `${product.name} (${product.size}) has been added to your cart`,
-      life: 3000
-    });
+    
+    // Reset button state after animation
+    setTimeout(() => {
+      this.addingToCart[product.id] = false;
+    }, 600);
+  }
+
+  isAddingToCart(productId: string): boolean {
+    return this.addingToCart[productId] || false;
   }
 
   increaseQuantity(productId: string): void {
