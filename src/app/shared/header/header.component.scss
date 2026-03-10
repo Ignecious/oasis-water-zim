@@ -176,6 +176,18 @@
   font-weight: 600;
 }
 
+.profile-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+
+  &:hover {
+    color: #00BFFF;
+    border-bottom-color: #00BFFF;
+  }
+}
+
 // Responsive Design
 @media (max-width: 768px) {
   .top-bar {

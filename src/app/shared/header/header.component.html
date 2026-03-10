@@ -60,7 +60,17 @@
           <i class="pi pi-list"></i>
           <span>Order Status</span>
         </a>
+        <button class="nav-link profile-btn" (click)="toggleProfileDrawer()" aria-label="Profile Menu">
+          <i class="pi pi-user"></i>
+          <span>Profile</span>
+        </button>
       </nav>
     </div>
   </div>
 </header>
+
+<!-- Profile Drawer -->
+<app-profile-drawer 
+  [isOpen]="isProfileDrawerOpen" 
+  (closeDrawer)="closeProfileDrawer()">
+</app-profile-drawer>
