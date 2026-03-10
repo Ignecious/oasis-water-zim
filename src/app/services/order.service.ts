@@ -51,6 +51,7 @@ export class OrderService {
           }
         ],
         total: 24.00,
+        fulfillmentType: 'collection',
         paymentMethod: 'ecocash',
         paymentStatus: 'paid',
         collectionDetails: {
@@ -85,6 +86,7 @@ export class OrderService {
           }
         ],
         total: 14.00,
+        fulfillmentType: 'collection',
         paymentMethod: 'cash',
         paymentStatus: 'pending',
         collectionDetails: {
@@ -118,6 +120,7 @@ export class OrderService {
           }
         ],
         total: 12.00,
+        fulfillmentType: 'collection',
         paymentMethod: 'ecocash',
         paymentStatus: 'paid',
         collectionDetails: {
@@ -152,6 +155,7 @@ export class OrderService {
           }
         ],
         total: 45.00,
+        fulfillmentType: 'collection',
         paymentMethod: 'cash',
         paymentStatus: 'paid',
         collectionDetails: {
@@ -185,6 +189,7 @@ export class OrderService {
           }
         ],
         total: 12.00,
+        fulfillmentType: 'collection',
         paymentMethod: 'ecocash',
         paymentStatus: 'paid',
         collectionDetails: {
@@ -231,6 +236,7 @@ export class OrderService {
           }
         ],
         total: 5.50,
+        fulfillmentType: 'collection',
         paymentMethod: 'ecocash',
         paymentStatus: 'paid',
         collectionDetails: {
@@ -265,6 +271,7 @@ export class OrderService {
           }
         ],
         total: 9.00,
+        fulfillmentType: 'collection',
         paymentMethod: 'cash',
         paymentStatus: 'pending',
         collectionDetails: {
@@ -310,6 +317,7 @@ export class OrderService {
           }
         ],
         total: 25.00,
+        fulfillmentType: 'collection',
         paymentMethod: 'ecocash',
         paymentStatus: 'paid',
         collectionDetails: {
@@ -344,6 +352,7 @@ export class OrderService {
           }
         ],
         total: 9.00,
+        fulfillmentType: 'collection',
         paymentMethod: 'cash',
         paymentStatus: 'paid',
         collectionDetails: {
@@ -389,6 +398,7 @@ export class OrderService {
           }
         ],
         total: 32.00,
+        fulfillmentType: 'collection',
         paymentMethod: 'ecocash',
         paymentStatus: 'paid',
         collectionDetails: {
@@ -423,6 +433,7 @@ export class OrderService {
           }
         ],
         total: 17.00,
+        fulfillmentType: 'collection',
         paymentMethod: 'cash',
         paymentStatus: 'pending',
         collectionDetails: {
@@ -457,6 +468,7 @@ export class OrderService {
       customer,
       items,
       total: items.reduce((sum, item) => sum + (item.product.price * item.quantity), 0),
+      fulfillmentType: 'collection',
       paymentMethod,
       paymentStatus: paymentMethod === 'ecocash' ? 'paid' : 'pending',
       collectionDetails,

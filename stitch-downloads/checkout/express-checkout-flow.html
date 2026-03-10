@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#25d1f4", // Using the primary from theme config which matches the "Deep Sky Blue" request
+                        "navy-dark": "#003366",
+                        "background-light": "#f5f8f8",
+                        "background-dark": "#101f22",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<title>Oasis Water | Express Checkout</title>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen">
+<header class="sticky top-0 z-50 w-full bg-white/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="text-primary">
+<span class="material-symbols-outlined text-3xl font-bold">water_drop</span>
+</div>
+<h1 class="text-xl font-black tracking-tight text-navy-dark dark:text-white uppercase">Oasis Water</h1>
+</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Shop</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">My Orders</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Support</a>
+</nav>
+<div class="flex items-center gap-4">
+<div class="h-10 w-10 rounded-full bg-slate-200 dark:bg-slate-700 flex items-center justify-center overflow-hidden">
+<img class="h-full w-full object-cover" data-alt="User profile avatar of Tinashe Shumba" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBpylauqp-b9PRYIIMVb-JZBYZMyrrr9SPsvFEzW59pjDWTxrGhnMwjJgr3jl96NW0TPsP099qDawg7aX4oOgg92EQ1nTVz05U1wRSpiDn-x5MGCaO18Ii-x3Fdpnv6AJrkjZHmW5ZnlzJC_f4BmoLoGXeSg2YVBjQeMo7kvPGCh3NP69ww7wtYxZlqR9EQxwXUdmS02yuhVpW4o4YmV-f2nINDFgWASeWjT7R5fSngu8wKz5mfF_bow9ZhJGsR0ew8V8T6z-Tm5PST"/>
+</div>
+</div>
+</div>
+</header>
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+<div class="flex flex-col lg:flex-row gap-8">
+<div class="flex-1 space-y-8">
+<div>
+<div class="flex items-center gap-2 text-slate-500 text-sm mb-4">
+<span>Cart</span>
+<span class="material-symbols-outlined text-xs">chevron_right</span>
+<span class="text-primary font-semibold">Checkout</span>
+</div>
+<h2 class="text-3xl font-black text-navy-dark dark:text-white">Express Checkout</h2>
+<p class="text-slate-500 dark:text-slate-400 mt-1">Review your details and complete your hydration order.</p>
+</div>
+<section class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-6 shadow-sm">
+<div class="flex items-center justify-between mb-6">
+<div class="flex items-center gap-3">
+<div class="h-10 w-10 rounded-lg bg-primary/10 text-primary flex items-center justify-center">
+<span class="material-symbols-outlined">person</span>
+</div>
+<h3 class="text-lg font-bold text-navy-dark dark:text-white">Customer Details</h3>
+</div>
+<button class="text-primary text-sm font-bold hover:underline flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">edit</span> Edit
+                        </button>
+</div>
+<div class="bg-primary/5 border border-primary/20 rounded-lg p-5 flex items-start gap-4">
+<div class="flex-1">
+<div class="flex items-center gap-2 mb-1">
+<span class="text-navy-dark dark:text-white font-bold text-lg">Tinashe Shumba</span>
+<span class="bg-primary text-white text-[10px] px-2 py-0.5 rounded-full font-bold uppercase tracking-wider">Verified</span>
+</div>
+<div class="text-slate-600 dark:text-slate-400 text-sm space-y-1">
+<p class="flex items-center gap-2"><span class="material-symbols-outlined text-xs">mail</span> tinashe@gmail.com</p>
+<p class="flex items-center gap-2"><span class="material-symbols-outlined text-xs">phone_iphone</span> 07832556879</p>
+</div>
+</div>
+</div>
+</section>
+<section class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-6 shadow-sm">
+<div class="flex items-center gap-3 mb-6">
+<div class="h-10 w-10 rounded-lg bg-primary/10 text-primary flex items-center justify-center">
+<span class="material-symbols-outlined">local_shipping</span>
+</div>
+<h3 class="text-lg font-bold text-navy-dark dark:text-white">Fulfillment</h3>
+</div>
+<div class="flex p-1 bg-slate-100 dark:bg-slate-800 rounded-lg mb-6 max-w-sm">
+<button class="flex-1 py-2 px-4 rounded-md text-sm font-bold bg-white dark:bg-slate-700 shadow-sm text-primary">Collection</button>
+<button class="flex-1 py-2 px-4 rounded-md text-sm font-bold text-slate-500 dark:text-slate-400">Delivery</button>
+</div>
+<div class="flex items-center gap-4 mb-8 p-4 bg-slate-50 dark:bg-slate-800/50 rounded-lg border border-slate-100 dark:border-slate-800">
+<div class="h-12 w-12 rounded-lg bg-navy-dark flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-white">location_on</span>
+</div>
+<div>
+<p class="text-sm font-bold text-navy-dark dark:text-white">Harare Main Depot</p>
+<p class="text-sm text-slate-500">181 Selous Avenue, Harare, Zimbabwe</p>
+</div>
+<div class="ml-auto">
+<img class="h-12 w-12 rounded-md object-cover" data-alt="Map location showing Harare Depot" data-location="Harare" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCZPAb6xM658pdVq5gjJH3tdw0ZnC5kY07EttwKLI_jpFbidEsXzEnfpglX2-B3e7eJ_wZtAHoNnTIIoGRncvL_GA2NE39b5vx3vzgrcx3NNoASvhTx83KIzD3gzHb0x8SSC1S6XemaOCtOK7wi-drSbI5NsTkc5UptrBUAX4_-8zEBwz6D4McJgbAVo--uMskkGTqYzYJlbve7aAW7DnIZxBpLhLZTQIs18KS5QNAzVzSMgzOI7kGkuA_SlYjEf5hmHfenYXqCkv_O"/>
+</div>
+</div>
+<div class="space-y-4">
+<label class="text-sm font-bold text-navy-dark dark:text-white block">Select Date</label>
+<div class="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
+<button class="flex flex-col items-center justify-center min-w-[70px] h-20 rounded-xl border-2 border-primary bg-primary/5">
+<span class="text-xs font-medium text-primary">Today</span>
+<span class="text-lg font-bold text-primary">24</span>
+<span class="text-xs font-medium text-primary">Oct</span>
+</button>
+<button class="flex flex-col items-center justify-center min-w-[70px] h-20 rounded-xl border border-slate-200 dark:border-slate-700 hover:border-primary transition-colors">
+<span class="text-xs font-medium text-slate-500">Fri</span>
+<span class="text-lg font-bold text-navy-dark dark:text-white">25</span>
+<span class="text-xs font-medium text-slate-500">Oct</span>
+</button>
+<button class="flex flex-col items-center justify-center min-w-[70px] h-20 rounded-xl border border-slate-200 dark:border-slate-700 hover:border-primary transition-colors">
+<span class="text-xs font-medium text-slate-500">Sat</span>
+<span class="text-lg font-bold text-navy-dark dark:text-white">26</span>
+<span class="text-xs font-medium text-slate-500">Oct</span>
+</button>
+<button class="flex flex-col items-center justify-center min-w-[70px] h-20 rounded-xl border border-slate-200 dark:border-slate-700 hover:border-primary transition-colors opacity-50 cursor-not-allowed">
+<span class="text-xs font-medium text-slate-500">Sun</span>
+<span class="text-lg font-bold text-navy-dark dark:text-white">27</span>
+<span class="text-xs font-medium text-slate-500">Oct</span>
+</button>
+<button class="flex flex-col items-center justify-center min-w-[70px] h-20 rounded-xl border border-slate-200 dark:border-slate-700 hover:border-primary transition-colors">
+<span class="text-xs font-medium text-slate-500">Mon</span>
+<span class="text-lg font-bold text-navy-dark dark:text-white">28</span>
+<span class="text-xs font-medium text-slate-500">Oct</span>
+</button>
+</div>
+<label class="text-sm font-bold text-navy-dark dark:text-white block pt-2">Select Time Slot</label>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+<button class="py-3 px-4 rounded-lg border border-slate-200 dark:border-slate-700 text-sm font-medium hover:border-primary">08:00 - 10:00</button>
+<button class="py-3 px-4 rounded-lg border-2 border-primary bg-primary/5 text-sm font-bold text-primary flex items-center justify-center gap-2">
+                                10:00 - 12:00 <span class="material-symbols-outlined text-sm">check_circle</span>
+</button>
+<button class="py-3 px-4 rounded-lg border border-slate-200 dark:border-slate-700 text-sm font-medium hover:border-primary">12:00 - 14:00</button>
+<button class="py-3 px-4 rounded-lg border border-slate-200 dark:border-slate-700 text-sm font-medium hover:border-primary">14:00 - 16:00</button>
+</div>
+</div>
+</section>
+<section class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-6 shadow-sm">
+<div class="flex items-center gap-3 mb-6">
+<div class="h-10 w-10 rounded-lg bg-primary/10 text-primary flex items-center justify-center">
+<span class="material-symbols-outlined">payments</span>
+</div>
+<h3 class="text-lg font-bold text-navy-dark dark:text-white">Payment Method</h3>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- EcoCash -->
+<div class="relative group cursor-pointer rounded-xl border border-slate-200 dark:border-slate-800 p-4 hover:border-primary transition-all flex items-center gap-4">
+<div class="h-12 w-12 rounded-lg bg-slate-50 dark:bg-slate-800 flex items-center justify-center">
+<img class="h-8 w-8 object-contain" data-alt="EcoCash logo mobile payment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCZ3ExnOLr4pPh8rP5fHQjTskcQLN2C2K2YhUsHbftZ7BpUeiXepqz-UTqSrbj7THjGqLxYKnIKyDbOwh24mdtgkYXiK77ALNQPkl1pmEBd8h4cZ_Ix6i7bPTT3jtuA8KaI9z6M_g2k0OYnfYwr5lDuEpalaYJp3wsz6YaMCfQH9F8nAEmDz9aH5HM8WGG91c-6vULfKXSOHAEn73oQzo_9lF7Iakq9x0nVXDn_keZ-lRx8nod4AUhTstBwR1LHPkDLj0IvIlfcSwWS"/>
+</div>
+<div>
+<p class="font-bold text-navy-dark dark:text-white">EcoCash</p>
+<p class="text-xs text-slate-500">Mobile Wallet</p>
+</div>
+</div>
+<!-- ZIPIT -->
+<div class="relative group cursor-pointer rounded-xl border border-slate-200 dark:border-slate-800 p-4 hover:border-primary transition-all flex items-center gap-4">
+<div class="h-12 w-12 rounded-lg bg-slate-50 dark:bg-slate-800 flex items-center justify-center">
+<img class="h-8 w-8 object-contain" data-alt="ZIPIT banking logo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBxfh0SBNLjYdMYc4Li1Osf-Z50KAWABvEZBX7AwgWiJpK9oKDPP_GSPiProONOsDUA_0b5aTYRDwP_xgsMJSMce4PivkBrVWDHjJt3pLyU0XBcOvX6rg6sphyOPieO53jO67FyTAqOPhtsBpIE3J9RklvmxIyPVFclYhhAtdKhziiobHkdlYiZrrcHwRw-igEnIwH_eoMsZtqZ4SchAx9Y8KFuSxtVl6xRFCKmocqi7axKqON4E-9R4xZRnuXXMRr4B7lU2pkLO5jh"/>
+</div>
+<div>
+<p class="font-bold text-navy-dark dark:text-white">ZIPIT</p>
+<p class="text-xs text-slate-500">Instant Transfer</p>
+</div>
+</div>
+<!-- Card -->
+<div class="relative group cursor-pointer rounded-xl border border-slate-200 dark:border-slate-800 p-4 hover:border-primary transition-all flex items-center gap-4">
+<div class="h-12 w-12 rounded-lg bg-slate-50 dark:bg-slate-800 flex items-center justify-center">
+<img class="h-8 w-8 object-contain" data-alt="Zimswitch and card payment logo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCw9x2srlKiu6QbR1PXSLXNGT-rGWFnbJGM0KhP2xqSho4iQTdr6PL3uWb1PwU0CMbKc0zXL6Q7qQs0I1wmVuLDT7_EVLJr7SFsWZ4yKN5FXT4XkFb-kyBmonec6pF5UtcFv3hJGwq-VltVaukB-BzDKP0y085hkA2FEowYphmCuLrBWMl9ftp0whKhwgbFkUfIGrwtppqeB2SXtJE3gvn9viPB0iptmcdAACX28HcGEYV17hEoaWCPcH-0OauawYP4o2f_AhgQlZ6S"/>
+</div>
+<div class="flex-1">
+<p class="font-bold text-navy-dark dark:text-white">Card / Zimswitch</p>
+<p class="text-xs text-slate-500">Visa, Mastercard, Zimswitch</p>
+</div>
+</div>
+<!-- COD -->
+<div class="relative group cursor-pointer rounded-xl border-2 border-primary bg-primary/5 p-4 transition-all flex items-center gap-4">
+<div class="h-12 w-12 rounded-lg bg-primary text-white flex items-center justify-center">
+<span class="material-symbols-outlined">handshake</span>
+</div>
+<div class="flex-1">
+<p class="font-bold text-navy-dark dark:text-white">Cash on Delivery</p>
+<p class="text-xs text-slate-500">Pay at Door</p>
+</div>
+<span class="material-symbols-outlined text-primary">check_circle</span>
+</div>
+</div>
+</section>
+<section class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-6 shadow-sm">
+<div class="flex items-center gap-3 mb-4">
+<div class="h-10 w-10 rounded-lg bg-primary/10 text-primary flex items-center justify-center">
+<span class="material-symbols-outlined">notes</span>
+</div>
+<h3 class="text-lg font-bold text-navy-dark dark:text-white">Additional Info</h3>
+</div>
+<textarea class="w-full rounded-lg border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 focus:ring-primary focus:border-primary text-sm min-h-[100px]" placeholder="e.g. Please leave the bottles by the side gate or knock twice..."></textarea>
+</section>
+</div>
+<!-- Sidebar -->
+<aside class="w-full lg:w-[400px]">
+<div class="sticky top-24 bg-navy-dark text-white rounded-2xl p-8 shadow-xl">
+<h3 class="text-xl font-bold mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined">shopping_bag</span> Order Summary
+                    </h3>
+<div class="space-y-4 mb-8">
+<div class="flex justify-between items-start">
+<div class="flex gap-3">
+<div class="h-12 w-12 rounded-lg bg-white/10 flex items-center justify-center overflow-hidden">
+<img class="h-full w-full object-cover" data-alt="18.9 Litre water bottle" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1QwN2O9Oi_xTM_r9odMt2oS4GO1gsHLkHkTEzLqiNepug5mk-zX-6QvxT2seEL-H-1bKNTmipQP9S0ymvmzQr4ORnzILt0Of1BRu8ACLdS69M-GDn-8p2tVZWTyshBL6S5O7NYiq1NtpImLfkKK7ieha5qQu2qXdn01rlEjXHpH3L6R6SLqHp0dIZuygETuasXiH0iYmXXCpphiAwHPNXZ5IeClMhdI-Yc0TdcdoE14J0zJFE_Ddq8iXi1qMGvJZ594sYj7ZxfFmB"/>
+</div>
+<div>
+<p class="font-bold text-sm">18.9L Water Refill</p>
+<p class="text-xs text-white/60">Quantity: 2</p>
+</div>
+</div>
+<p class="font-bold text-sm">$10.00</p>
+</div>
+</div>
+<div class="space-y-3 border-t border-white/10 pt-6 mb-6">
+<div class="flex justify-between text-sm text-white/70">
+<span>Subtotal</span>
+<span>$10.00</span>
+</div>
+<div class="flex justify-between text-sm text-white/70">
+<span>Delivery Fee</span>
+<span class="text-primary font-bold">FREE</span>
+</div>
+<div class="flex justify-between text-sm text-white/70">
+<span>Estimated Tax</span>
+<span>$1.50</span>
+</div>
+</div>
+<div class="flex justify-between items-center mb-8">
+<span class="text-lg font-medium">Total</span>
+<span class="text-3xl font-black text-primary">$11.50</span>
+</div>
+<button class="w-full bg-primary hover:bg-primary/90 text-navy-dark py-4 rounded-xl font-black text-lg transition-transform active:scale-95 shadow-lg shadow-primary/20">
+                        Confirm COD Order
+                    </button>
+<div class="mt-6 flex items-center justify-center gap-2 text-xs text-white/50">
+<span class="material-symbols-outlined text-sm">verified_user</span>
+                        Secure Checkout Powered by Oasis Water
+                    </div>
+</div>
+</aside>
+</div>
+</main>
+<footer class="mt-20 border-t border-slate-200 dark:border-slate-800 py-10 bg-white dark:bg-background-dark">
+<div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-6">
+<div class="flex items-center gap-2 opacity-50">
+<span class="material-symbols-outlined text-xl">water_drop</span>
+<span class="text-sm font-bold uppercase tracking-widest">Oasis Water</span>
+</div>
+<div class="flex gap-6 text-sm text-slate-500 font-medium">
+<a href="#">Privacy Policy</a>
+<a href="#">Terms of Service</a>
+<a href="#">Contact Us</a>
+</div>
+<div class="text-slate-400 text-xs">
+                © 2024 Oasis Water Zimbabwe. All rights reserved.
+            </div>
+</div>
+</footer>
+</body></html>
