@@ -1,66 +1,147 @@
-<p-toast></p-toast>
+<!-- Top Navigation Bar (Pinned) -->
+<div class="top-nav-bar">
+  <div class="top-nav-content">
+    <div class="contact-items">
+      <div class="contact-item">
+        <i class="pi pi-phone"></i>
+        <span>+263 779 045 285</span>
+      </div>
+      <div class="contact-item">
+        <i class="pi pi-envelope"></i>
+        <span>sales&#64;oasiswater.co.zw</span>
+      </div>
+      <div class="contact-item hours">
+        <i class="pi pi-clock"></i>
+        <span>Mon-Fri 8a-5:30p, Sat 8a-2:30p</span>
+      </div>
+    </div>
+    <div class="social-icons">
+      <a href="#" class="social-link">
+        <i class="pi pi-facebook"></i>
+      </a>
+      <a href="#" class="social-link">
+        <i class="pi pi-instagram"></i>
+      </a>
+    </div>
+  </div>
+</div>
 
-<div class="products-page">
-  <div class="container">
+<!-- Sticky Header -->
+<header class="sticky-header">
+  <div class="header-content">
+    <div class="header-left">
+      <div class="logo">
+        <i class="pi pi-circle-fill water-icon"></i>
+        <h2 routerLink="/">Oasis Water</h2>
+      </div>
+      <nav class="main-nav">
+        <a routerLink="/" class="nav-link">Home</a>
+        <a routerLink="/products" class="nav-link active">Products</a>
+        <a href="#" class="nav-link">Contact</a>
+      </nav>
+    </div>
+    <div class="header-right">
+      <div class="search-box">
+        <i class="pi pi-search"></i>
+        <input 
+          type="text" 
+          pInputText
+          placeholder="Search products..." 
+          [(ngModel)]="searchQuery"
+          (ngModelChange)="onSearchChange()" />
+      </div>
+      <div class="header-actions">
+        <button 
+          pButton 
+          icon="pi pi-shopping-cart" 
+          class="p-button-rounded p-button-text cart-btn"
+          routerLink="/cart">
+          <span *ngIf="cartItemCount > 0" class="cart-count-badge">{{ cartItemCount }}</span>
+        </button>
+        <button 
+          pButton 
+          icon="pi pi-user" 
+          class="p-button-rounded p-button-text user-btn">
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Main Content -->
+<main class="products-main">
+  <div class="products-container">
+    
+    <!-- Page Header -->
     <div class="page-header">
       <h1>Our Products</h1>
       <p class="subtitle">Discover our range of premium water, ice, and accessories</p>
     </div>
 
-    <!-- Category Tabs -->
-    <p-tabView (onChange)="onTabChange($event)" class="category-tabs">
-      <p-tabPanel *ngFor="let category of categories" [header]="category.label">
-      </p-tabPanel>
-    </p-tabView>
+    <!-- Category Filters -->
+    <div class="category-filters">
+      <button 
+        *ngFor="let category of categories"
+        pButton 
+        [label]="category.label"
+        class="category-btn"
+        [ngClass]="{'active': selectedCategory === category.value}"
+        (click)="selectCategory(category.value)">
+      </button>
+    </div>
 
     <!-- Products Grid -->
     <div class="products-grid" *ngIf="filteredProducts.length > 0">
-      <div *ngFor="let product of filteredProducts">
-        <p-card class="product-card">
+      <div *ngFor="let product of filteredProducts; let i = index" class="product-card-wrapper">
+        <p-card styleClass="product-card">
           <ng-template pTemplate="header">
-            <img 
-              [src]="product.image" 
-              [alt]="product.name"
-              class="product-image">
-          </ng-template>
-          <div class="product-info">
-            <h3 class="product-name">{{ product.name }}</h3>
-            <p class="product-size">{{ product.size }}</p>
-            <p class="product-price">${{ product.price.toFixed(2) }}</p>
-          </div>
-          <ng-template pTemplate="footer">
-            <!-- Show "Add to Cart" button if item not in cart -->
-            <button 
-              *ngIf="getItemQuantity(product.id) === 0"
-              pButton 
-              label="Add to Cart" 
-              icon="pi pi-shopping-cart"
-              class="add-to-cart-btn"
-              (click)="addToCart(product)">
-            </button>
-            
-            <!-- Show quantity controls if item is in cart -->
-            <div *ngIf="getItemQuantity(product.id) > 0" class="quantity-controls">
-              <button 
-                pButton 
-                icon="pi pi-minus" 
-                class="p-button-rounded p-button-cyan quantity-btn"
-                (click)="decreaseQuantity(product.id)">
-              </button>
-              <span class="quantity-display">{{ getItemQuantity(product.id) }}</span>
-              <button 
-                pButton 
-                icon="pi pi-plus" 
-                class="p-button-rounded p-button-cyan quantity-btn"
-                (click)="increaseQuantity(product.id)">
-              </button>
+            <div class="product-image-container">
+              <img 
+                [src]="product.image" 
+                [alt]="product.name"
+                class="product-img">
+              <span *ngIf="getBestSellerBadge(i)" class="best-seller-badge">Best Seller</span>
             </div>
-            
-            <a 
-              [routerLink]="['/products', product.id]" 
-              class="view-details-link">
-              View Details →
-            </a>
+          </ng-template>
+          
+          <div class="product-body">
+            <div class="product-header">
+              <h3>{{ product.name }}</h3>
+              <span class="price">${{ product.price.toFixed(2) }}</span>
+            </div>
+            <p class="product-desc">{{ product.size }}</p>
+          </div>
+
+          <ng-template pTemplate="footer">
+            <div class="product-footer">
+              <!-- Add to Cart Button (when not in cart) -->
+              <button 
+                *ngIf="getItemQuantity(product.id) === 0"
+                pButton 
+                label="Add to Cart" 
+                icon="pi pi-shopping-cart"
+                class="add-cart-btn"
+                [ngClass]="{'adding': isAddingToCart(product.id)}"
+                (click)="addToCart(product, $event)">
+              </button>
+              
+              <!-- Quantity Controls (when in cart) -->
+              <div *ngIf="getItemQuantity(product.id) > 0" class="quantity-controls">
+                <button 
+                  pButton 
+                  icon="pi pi-minus" 
+                  class="p-button-rounded p-button-sm quantity-btn"
+                  (click)="decreaseQuantity(product.id)">
+                </button>
+                <span class="quantity-display">{{ getItemQuantity(product.id) }}</span>
+                <button 
+                  pButton 
+                  icon="pi pi-plus" 
+                  class="p-button-rounded p-button-sm quantity-btn"
+                  (click)="increaseQuantity(product.id)">
+                </button>
+              </div>
+            </div>
           </ng-template>
         </p-card>
       </div>
@@ -70,7 +151,85 @@
     <div class="empty-state" *ngIf="filteredProducts.length === 0">
       <i class="pi pi-inbox empty-icon"></i>
       <h2>No Products Found</h2>
-      <p>There are no products available in this category at the moment.</p>
+      <p>Try adjusting your search or filter to find what you're looking for.</p>
+      <button 
+        pButton 
+        label="View All Products" 
+        class="p-button-outlined"
+        (click)="selectCategory('all'); searchQuery = ''; onSearchChange()">
+      </button>
+    </div>
+
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-content">
+    <div class="footer-grid">
+      <!-- Company Info -->
+      <div class="footer-column">
+        <div class="footer-logo">
+          <i class="pi pi-circle-fill water-icon"></i>
+          <h2>Oasis Water</h2>
+        </div>
+        <p class="footer-description">
+          Dedicated to bringing the purest form of life's essential element to every home and business across the nation.
+        </p>
+        <div class="social-links">
+          <a href="#" class="social-icon">
+            <i class="pi pi-facebook"></i>
+          </a>
+          <a href="#" class="social-icon">
+            <i class="pi pi-instagram"></i>
+          </a>
+          <a href="#" class="social-icon">
+            <i class="pi pi-twitter"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Quick Links -->
+      <div class="footer-column">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a routerLink="/">Our Story</a></li>
+          <li><a routerLink="/products">Product Range</a></li>
+          <li><a href="#">Corporate Solutions</a></li>
+          <li><a href="#">Sustainability</a></li>
+          <li><a href="#">Careers</a></li>
+        </ul>
+      </div>
+
+      <!-- Support -->
+      <div class="footer-column">
+        <h3>Support</h3>
+        <ul>
+          <li><a href="#">Help Center</a></li>
+          <li><a href="#">Delivery Areas</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+          <li><a href="#">Contact Us</a></li>
+        </ul>
+      </div>
+
+      <!-- Newsletter -->
+      <div class="footer-column">
+        <h3>Newsletter</h3>
+        <p>Stay hydrated and updated with our latest offers.</p>
+        <div class="newsletter-form">
+          <input type="email" placeholder="Your email address" />
+          <button pButton label="Subscribe"></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2024 Oasis Water Systems. All rights reserved.</p>
+      <div class="footer-bottom-right">
+        <span>Designed with Pure Intentions</span>
+        <i class="pi pi-globe"></i>
+      </div>
     </div>
   </div>
-</div>
+</footer>

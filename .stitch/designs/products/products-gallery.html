@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#00bfff",
+                        "background-light": "#f5f8f8",
+                        "background-dark": "#101f22",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<title>Oasis Water - Our Products</title>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100"><div class="bg-[#003366] text-white/90 py-2.5 px-4 md:px-10 lg:px-20 border-b border-white/5">
+<div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between text-[13px] font-medium gap-3 sm:gap-0">
+<div class="flex flex-wrap items-center justify-center sm:justify-start gap-4 md:gap-8">
+<div class="flex items-center gap-2 hover:text-primary transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-lg" style="">call</span>
+<span class="" style="">+263 779 045 285</span>
+</div>
+<div class="flex items-center gap-2 hover:text-primary transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-lg" style="">mail</span>
+<span class="" style="">sales@oasiswater.co.zw</span>
+</div>
+<div class="flex items-center gap-2 text-white/70">
+<span class="material-symbols-outlined text-lg" style="">schedule</span>
+<span class="" style="">Mon-Fri 8a-5:30p, Sat 8a-2:30p</span>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<a class="hover:text-primary transition-all" href="#" style="">
+<svg class="w-5 h-5 fill-current" viewbox="0 0 24 24">
+<path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3l-.5 3H13v6.8c4.56-.93 8-4.96 8-9.8z"></path>
+</svg>
+</a>
+<a class="hover:text-primary transition-all" href="#" style="">
+<svg class="w-5 h-5 fill-current" viewbox="0 0 24 24">
+<path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.28.058 1.688.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"></path>
+</svg>
+</a>
+</div>
+</div>
+</div>
+<header class="sticky top-0 z-50 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex justify-between items-center h-16">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-2 text-primary">
+<h2 class="text-slate-900 dark:text-white text-xl font-bold tracking-tight" style=""><br/></h2>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden sm:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xl" style="">search</span>
+<input class="bg-slate-100 dark:bg-slate-800 border-none rounded-lg pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-primary w-64" placeholder="Search products..." type="text"/>
+</div>
+<button class="p-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg relative" style="">
+<span class="material-symbols-outlined" style="">shopping_cart</span>
+<span class="absolute top-1 right-1 w-2 h-2 bg-primary rounded-full"></span>
+</button>
+<button class="p-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg" style="">
+<span class="material-symbols-outlined" style="">account_circle</span>
+</button>
+</div>
+</div>
+</div>
+</header>
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+<div class="flex flex-col gap-8">
+<div class="flex flex-col items-center text-center space-y-4">
+<h1 class="text-4xl font-bold text-slate-900 dark:text-white tracking-tight" style="">Premium Hydration</h1>
+<p class="text-slate-600 dark:text-slate-400 max-w-2xl" style="">Pure, crisp, and refreshing. Discover our range of premium water solutions, ice products, and professional accessories designed for your lifestyle.</p>
+</div>
+<div class="flex overflow-x-auto pb-4 gap-2 no-scrollbar border-b border-slate-200 dark:border-slate-800">
+<button class="px-6 py-2 rounded-full bg-primary text-white font-semibold text-sm whitespace-nowrap" style="">All Products</button>
+<button class="px-6 py-2 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-primary/10 hover:text-primary font-medium text-sm whitespace-nowrap flex items-center gap-2" style="">
+<span class="material-symbols-outlined text-lg" style="">water_full</span> Still Water
+                </button>
+<button class="px-6 py-2 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-primary/10 hover:text-primary font-medium text-sm whitespace-nowrap flex items-center gap-2" style="">
+<span class="material-symbols-outlined text-lg" style="">fitness_center</span> Sport Water
+                </button>
+<button class="px-6 py-2 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-primary/10 hover:text-primary font-medium text-sm whitespace-nowrap flex items-center gap-2" style="">
+<span class="material-symbols-outlined text-lg" style="">group</span> Family Jugs
+                </button>
+<button class="px-6 py-2 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-primary/10 hover:text-primary font-medium text-sm whitespace-nowrap flex items-center gap-2" style="">
+<span class="material-symbols-outlined text-lg" style="">ac_unit</span> Ice
+                </button>
+<button class="px-6 py-2 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-primary/10 hover:text-primary font-medium text-sm whitespace-nowrap flex items-center gap-2" style="">
+<span class="material-symbols-outlined text-lg" style="">eco</span> Accessories
+                </button>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+<!-- Product Card 1 -->
+<div class="group bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden hover:shadow-xl transition-all duration-300">
+<div class="aspect-square bg-slate-50 dark:bg-slate-800 relative overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center group-hover:scale-110 transition-transform duration-500" data-alt="Clear bottled mineral water on a blue background" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBJjLia2rcmjXt_FqZPHdp-sexKlfHIIbx12TWOwIFayEHoczKuSrsCzhbkTR6e9YDvIAvlJYAiCb8NWfkt6TvqBgrGTNmNOpGdyr9Joi9z1e_djTWkB9C032z4nhNTOYPk8pBte7Tbl-z6S9xYibW3kTKCN8EIVGdhnWEI5tN4zwYYX69flk38o9kmtHFLg0n52LABgMbLlgoBIruLph283-6kf-ezh6PXopa6YtaxzO6pJ35vDo5xg0Cv0RlG6z95bLiYpXw_nJ9f");'></div>
+<div class="absolute top-3 left-3 bg-primary text-white text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded" style="">Best Seller</div>
+</div>
+<div class="p-5">
+<div class="flex justify-between items-start mb-1">
+<h3 class="font-bold text-slate-900 dark:text-white" style="">Premium Still Water</h3>
+<span class="text-primary font-bold" style="">$1.50</span>
+</div>
+<p class="text-xs text-slate-500 dark:text-slate-400 mb-4 line-clamp-2" style="">Naturally filtered alkaline water with a balanced mineral profile.</p>
+<div class="flex items-center gap-2">
+<button class="flex-1 bg-primary hover:bg-primary/90 text-white font-bold py-2 rounded-lg text-sm transition-colors flex items-center justify-center gap-2" style="">
+<span class="material-symbols-outlined text-lg" style="">add_shopping_cart</span>
+                                Add to Cart
+                            </button>
+</div>
+</div>
+</div>
+<!-- Product Card 2 -->
+<div class="group bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden hover:shadow-xl transition-all duration-300">
+<div class="aspect-square bg-slate-50 dark:bg-slate-800 relative overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center group-hover:scale-110 transition-transform duration-500" data-alt="Sport bottle with water splash and fresh fruit" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA0L6-S1OsdM-Tj3ivAT80Z7Dg2CxROTOYlPKKIQwsl1bXWQZITv948znZD-LO5YJ-dRDzR44dhJRV6gBDZQ13TSqbBnx3m7VvJT5yITYW-wfBy0WCK3eUOkyZ0p6B3SDqcw6m2GJVB6s1BbsFQNjnBAfgiaJU55FbZr8UJLAN9OQtL1CgfEaojo8J30AdZ6yjsnQeB92uFhY6a-rQRl3yIsROA0jIEYin4wrjkJEQEi15j_cGL8S7_u8jlOHrkyaxbDl1clov0cwO5");'></div>
+</div>
+<div class="p-5">
+<div class="flex justify-between items-start mb-1">
+<h3 class="font-bold text-slate-900 dark:text-white" style="">Active Sport Flow</h3>
+<span class="text-primary font-bold" style="">$2.25</span>
+</div>
+<p class="text-xs text-slate-500 dark:text-slate-400 mb-4 line-clamp-2" style="">High-electrolyte formula for peak performance and recovery.</p>
+<div class="flex items-center gap-2">
+<button class="flex-1 bg-primary hover:bg-primary/90 text-white font-bold py-2 rounded-lg text-sm transition-colors flex items-center justify-center gap-2" style="">
+<span class="material-symbols-outlined text-lg" style="">add_shopping_cart</span>
+                                Add to Cart
+                            </button>
+</div>
+</div>
+</div>
+<!-- Product Card 3 -->
+<div class="group bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden hover:shadow-xl transition-all duration-300">
+<div class="aspect-square bg-slate-50 dark:bg-slate-800 relative overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center group-hover:scale-110 transition-transform duration-500" data-alt="Large 5-gallon water dispenser jug" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDTGqeKp2gWD9AwVLbjzzQWHTzvg682f3OYh_bSW2XxbkuBXXWP4SJ9Rk1QNXwXxgMz8fX9h1VICdf_yuz1DCX6y1rbjarGO0-kdOE-Xxf2TbRbArSW9dTcTCtkKfIPdzewLECKH1726XRIqIdvwmf18JFSSJMjWSwc9luh-6JKkKS8RJgI8lVPps5EVPSBGRqwUXbOxl7s8PrSxG_YiCY2JwR1Y4m6KoeaUTMks8crGP7SKfR5T2pejL6xCfY_A-Td7OXsM1jV2pid");'></div>
+</div>
+<div class="p-5">
+<div class="flex justify-between items-start mb-1">
+<h3 class="font-bold text-slate-900 dark:text-white" style="">Family Jug (5 Gallon)</h3>
+<span class="text-primary font-bold" style="">$12.99</span>
+</div>
+<p class="text-xs text-slate-500 dark:text-slate-400 mb-4 line-clamp-2" style="">The eco-friendly choice for home or office hydration.</p>
+<div class="flex items-center gap-2">
+<button class="flex-1 bg-primary hover:bg-primary/90 text-white font-bold py-2 rounded-lg text-sm transition-colors flex items-center justify-center gap-2" style="">
+<span class="material-symbols-outlined text-lg" style="">add_shopping_cart</span>
+                                Add to Cart
+                            </button>
+</div>
+</div>
+</div>
+<!-- Product Card 4 -->
+<div class="group bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden hover:shadow-xl transition-all duration-300">
+<div class="aspect-square bg-slate-50 dark:bg-slate-800 relative overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center group-hover:scale-110 transition-transform duration-500" data-alt="Crystal clear ice cubes in a glass" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCaLzMzQ2IDSIVAc7ghqIc0ujgaIrP6fFRyqccbUdM1PdN2bHbBvSez1Kabk6r8pdQnQ-Z3NVObz2IjU3sVUq5vOUy98B1gttFJuGtTCdkOWDxZlMc5LDax4gwlcKWUfQTKFHFB00uKe14xCCENS1NqaA0n_aRvmTA40QRLuF1kN4-4bFyAk6gviYiX1VMY6hf8fDFayis3lbCjIknhEyr8hyZGd-xRav3iEQxzHe11xzIHNkB954CQN7tj8j0LlnN26GxnbSSR9MdK");'></div>
+</div>
+<div class="p-5">
+<div class="flex justify-between items-start mb-1">
+<h3 class="font-bold text-slate-900 dark:text-white" style="">Premium Ice Cubes</h3>
+<span class="text-primary font-bold" style="">$4.50</span>
+</div>
+<p class="text-xs text-slate-500 dark:text-slate-400 mb-4 line-clamp-2" style="">Triple-filtered, slow-melting cubes for cocktails and drinks.</p>
+<div class="flex items-center gap-2">
+<button class="flex-1 bg-primary hover:bg-primary/90 text-white font-bold py-2 rounded-lg text-sm transition-colors flex items-center justify-center gap-2" style="">
+<span class="material-symbols-outlined text-lg" style="">add_shopping_cart</span>
+                                Add to Cart
+                            </button>
+</div>
+</div>
+</div>
+<!-- Product Card 5 -->
+<div class="group bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden hover:shadow-xl transition-all duration-300">
+<div class="aspect-square bg-slate-50 dark:bg-slate-800 relative overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center group-hover:scale-110 transition-transform duration-500" data-alt="Stainless steel reusable water bottle" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBtxnFT22Flrrydx3ToiF9bKHdJB5KvdibZdc9asxvXjjQmqEwWhSRBPZbMvPKDSCkreC-GdKyl_rXFwYM4xMS6ZWncZCiVjWDFGZ7B097M4cm8vznKg62BEhp_LnYF6F-gvl8t8AJCcqnNKm-lldrWQbi_rTzFnujYVhz-kKA_wohJ-OM1OWPrDZr3OddPx8kRI54X0LsKcVsEQUn1YfehE06F1XGHhLMuDjJIagcvaya2VCdNE3KyBwlizPCbEP_G-jrRp1f8IHxZ");'></div>
+</div>
+<div class="p-5">
+<div class="flex justify-between items-start mb-1">
+<h3 class="font-bold text-slate-900 dark:text-white" style="">Oasis Steel Bottle</h3>
+<span class="text-primary font-bold" style="">$24.00</span>
+</div>
+<p class="text-xs text-slate-500 dark:text-slate-400 mb-4 line-clamp-2" style="">Insulated 750ml bottle, keeps water cold for 24 hours.</p>
+<div class="flex items-center gap-2">
+<button class="flex-1 bg-primary hover:bg-primary/90 text-white font-bold py-2 rounded-lg text-sm transition-colors flex items-center justify-center gap-2" style="">
+<span class="material-symbols-outlined text-lg" style="">add_shopping_cart</span>
+                                Add to Cart
+                            </button>
+</div>
+</div>
+</div>
+<!-- Product Card 6 -->
+<div class="group bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden hover:shadow-xl transition-all duration-300">
+<div class="aspect-square bg-slate-50 dark:bg-slate-800 relative overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center group-hover:scale-110 transition-transform duration-500" data-alt="Elegant tabletop water dispenser" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDjX7_yu8PnVExL8D61wyg1pPt0z6LwOH_pImkjslauv5MB4CWBfeuxiIOnnzN9SVcsYn9uvWxQS1B-msTVWpUhzQMMEZG5tpm_rKLss9EWzc_P2qnsUuPAIdeYFwx7nEmqsQ9n6zVIlyENQIgbhBpP5Pw2RK41CBDqY__A_MlTlynUJ2wEuvw0QcGhYR9TtyUXCu2_Qa_p4CfBvj5WqB_IXm5OOkm7e587lO89BCtw5DxRJDUaRN1DydCtI6EiJyjOH9FeX_ajDRCF");'></div>
+</div>
+<div class="p-5">
+<div class="flex justify-between items-start mb-1">
+<h3 class="font-bold text-slate-900 dark:text-white" style="">Smart Dispenser</h3>
+<span class="text-primary font-bold" style="">$89.00</span>
+</div>
+<p class="text-xs text-slate-500 dark:text-slate-400 mb-4 line-clamp-2" style="">Minimalist tabletop dispenser with temperature control.</p>
+<div class="flex items-center gap-2">
+<button class="flex-1 bg-primary hover:bg-primary/90 text-white font-bold py-2 rounded-lg text-sm transition-colors flex items-center justify-center gap-2" style="">
+<span class="material-symbols-outlined text-lg" style="">add_shopping_cart</span>
+                                Add to Cart
+                            </button>
+</div>
+</div>
+</div>
+<!-- Product Card 7 -->
+<div class="group bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden hover:shadow-xl transition-all duration-300">
+<div class="aspect-square bg-slate-50 dark:bg-slate-800 relative overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center group-hover:scale-110 transition-transform duration-500" data-alt="Crushed ice in a colorful cocktail" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAXNlAlVKpuvOOkxywvleWGDJpzqC2tqqccfY4rRmZthhUjiSaQ2DTvX0d3tRBM1hcU1bifJtABeTIKbjo166S-FLKhF7G2fOkAUxHBVK-R4TVqIy25eIf7FQUDrESqxdhd4FBL_dG7y3i9BFbmLg41-eHJa9cupYR-CDB1Nb4VgEIyMvHt7HkdQON_R_22c8iVOGc9oz9gqZPSeke1d2PAqSKmUVkbj9IdUHYNj9Z_B2xfsufjqtSmEzlUE21wjsAoselgvX-_eETp");'></div>
+</div>
+<div class="p-5">
+<div class="flex justify-between items-start mb-1">
+<h3 class="font-bold text-slate-900 dark:text-white" style="">Crushed Flake Ice</h3>
+<span class="text-primary font-bold" style="">$3.99</span>
+</div>
+<p class="text-xs text-slate-500 dark:text-slate-400 mb-4 line-clamp-2" style="">Perfect for smoothies, cooling bins, and seafood displays.</p>
+<div class="flex items-center gap-2">
+<button class="flex-1 bg-primary hover:bg-primary/90 text-white font-bold py-2 rounded-lg text-sm transition-colors flex items-center justify-center gap-2" style="">
+<span class="material-symbols-outlined text-lg" style="">add_shopping_cart</span>
+                                Add to Cart
+                            </button>
+</div>
+</div>
+</div>
+<!-- Product Card 8 -->
+<div class="group bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden hover:shadow-xl transition-all duration-300">
+<div class="aspect-square bg-slate-50 dark:bg-slate-800 relative overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center group-hover:scale-110 transition-transform duration-500" data-alt="Handheld water misting fan bottle" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCHeFudWdDLtN3_RiFUgckNIv5zjLlg4SNh8V7OI7yi0dlM1yj1fbXs1ARz_b1plmF0WEVrwJjaD0HQX8WjluRGLP3IvIA3Uqf6_z-NHeOkvv0CT5OXZdWlIIbB5yo-l_K47ziOU4Y38D3_odLzTyTsazVAF1TR54pmbi7SvyTvHqJganAGpcxyXWYsTIKalqbKI1enGyIaRluzxCDxmI1eJRkiYwPNXYtT30N-uGA4dqznOYfOTV7H-4PuHj7QjE2KueukT4-HimU4");'></div>
+</div>
+<div class="p-5">
+<div class="flex justify-between items-start mb-1">
+<h3 class="font-bold text-slate-900 dark:text-white" style="">Misting Sport Cap</h3>
+<span class="text-primary font-bold" style="">$6.50</span>
+</div>
+<p class="text-xs text-slate-500 dark:text-slate-400 mb-4 line-clamp-2" style="">Universal fit spray cap for instant cooling during workouts.</p>
+<div class="flex items-center gap-2">
+<button class="flex-1 bg-primary hover:bg-primary/90 text-white font-bold py-2 rounded-lg text-sm transition-colors flex items-center justify-center gap-2" style="">
+<span class="material-symbols-outlined text-lg" style="">add_shopping_cart</span>
+                                Add to Cart
+                            </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Pagination/Load More -->
+<div class="flex justify-center py-8">
+<button class="px-8 py-3 rounded-xl border-2 border-primary text-primary font-bold hover:bg-primary hover:text-white transition-all duration-300" style="">
+                    Load More Products
+                </button>
+</div>
+</div>
+</main>
+<footer class="bg-white dark:bg-background-dark border-t border-slate-200 dark:border-slate-800 pt-12 pb-8">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+<div class="space-y-4">
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined text-3xl font-bold" style="">water_drop</span>
+<h2 class="text-slate-900 dark:text-white text-xl font-bold tracking-tight" style="">Oasis Water</h2>
+</div>
+<p class="text-sm text-slate-500 dark:text-slate-400" style="">Pure hydration delivered to your doorstep. Committed to sustainability and crystal clear quality since 1998.</p>
+</div>
+<div>
+<h4 class="font-bold text-slate-900 dark:text-white mb-4" style="">Quick Links</h4>
+<ul class="space-y-2 text-sm text-slate-500 dark:text-slate-400">
+<li class="" style=""><a class="hover:text-primary transition-colors" href="#" style="">Order Tracking</a></li>
+<li class="" style=""><a class="hover:text-primary transition-colors" href="#" style="">Subscription Plans</a></li>
+<li class="" style=""><a class="hover:text-primary transition-colors" href="#" style="">Find a Store</a></li>
+<li class="" style=""><a class="hover:text-primary transition-colors" href="#" style="">Bottle Returns</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold text-slate-900 dark:text-white mb-4" style="">Support</h4>
+<ul class="space-y-2 text-sm text-slate-500 dark:text-slate-400">
+<li class="" style=""><a class="hover:text-primary transition-colors" href="#" style="">Help Center</a></li>
+<li class="" style=""><a class="hover:text-primary transition-colors" href="#" style="">Shipping Policy</a></li>
+<li class="" style=""><a class="hover:text-primary transition-colors" href="#" style="">Wholesale</a></li>
+<li class="" style=""><a class="hover:text-primary transition-colors" href="#" style="">Contact Us</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold text-slate-900 dark:text-white mb-4" style="">Newsletter</h4>
+<p class="text-sm text-slate-500 dark:text-slate-400 mb-4" style="">Join for hydration tips and exclusive offers.</p>
+<div class="flex gap-2">
+<input class="flex-1 bg-slate-100 dark:bg-slate-800 border-none rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-primary" placeholder="Email address" type="email"/>
+<button class="bg-primary text-white p-2 rounded-lg" style="">
+<span class="material-symbols-outlined" style="">send</span>
+</button>
+</div>
+</div>
+</div>
+<div class="border-t border-slate-200 dark:border-slate-800 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4">
+<p class="text-xs text-slate-500 dark:text-slate-400" style="">© 2024 Oasis Water Systems. All rights reserved.</p>
+<div class="flex gap-4">
+<a class="text-slate-400 hover:text-primary" href="#" style=""><span class="material-symbols-outlined" style="">social_leaderboard</span></a>
+<a class="text-slate-400 hover:text-primary" href="#" style=""><span class="material-symbols-outlined" style="">alternate_email</span></a>
+<a class="text-slate-400 hover:text-primary" href="#" style=""><span class="material-symbols-outlined" style="">share</span></a>
+</div>
+</div>
+</div>
+</footer>
+</body></html>

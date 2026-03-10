@@ -21,7 +21,7 @@ export class ProductService {
         category: 'water', 
         size: '500ml', 
         price: 0.50, 
-        image: 'assets/products/oasis-sport-500ml.jpg', 
+        image: 'assets/stitch-images/product-sport-500ml.jpg', 
         description: 'Perfect for hydration on the go. Pure, refreshing water in a convenient size.',
         stock: 100,
         featured: true
@@ -32,7 +32,7 @@ export class ProductService {
         category: 'water', 
         size: '1.5L', 
         price: 1.00, 
-        image: 'assets/products/oasis-1.5l.jpg', 
+        image: 'assets/stitch-images/product-still-5l.jpg', 
         description: 'Pure refreshing water for everyday hydration. Ideal for home and office.',
         stock: 150,
         featured: true
@@ -43,7 +43,7 @@ export class ProductService {
         category: 'water', 
         size: '5L', 
         price: 2.50, 
-        image: 'assets/products/oasis-5l.jpg', 
+        image: 'assets/stitch-images/product-still-5l.jpg', 
         description: 'Ideal for home use. Great value for daily hydration needs.',
         stock: 80,
         featured: false
@@ -54,7 +54,7 @@ export class ProductService {
         category: 'water', 
         size: '10L', 
         price: 4.50, 
-        image: 'assets/products/oasis-10l.jpg', 
+        image: 'assets/stitch-images/product-sport-500ml.jpg', 
         description: 'Great value for families. Perfect for larger households.',
         stock: 60,
         featured: false
@@ -65,7 +65,7 @@ export class ProductService {
         category: 'water', 
         size: '19L', 
         price: 8.00, 
-        image: 'assets/products/oasis-19l.jpg', 
+        image: 'assets/stitch-images/product-still-5l.jpg', 
         description: 'Bulk water for offices and events. Premium quality purified water.',
         stock: 50,
         featured: true
@@ -78,7 +78,7 @@ export class ProductService {
         category: 'ice', 
         size: '2kg', 
         price: 1.50, 
-        image: 'assets/products/pluto-ice-2kg.jpg', 
+        image: 'assets/stitch-images/product-ice-2kg.jpg', 
         description: 'Crystal clear ice cubes for your drinks. Made from purified water.',
         stock: 120,
         featured: true
@@ -89,7 +89,7 @@ export class ProductService {
         category: 'ice', 
         size: '5kg', 
         price: 3.50, 
-        image: 'assets/products/pluto-ice-5kg.jpg', 
+        image: 'assets/stitch-images/product-ice-2kg.jpg', 
         description: 'Perfect for events and parties. High-quality crystal clear ice.',
         stock: 90,
         featured: false
@@ -100,7 +100,7 @@ export class ProductService {
         category: 'ice', 
         size: '8kg', 
         price: 5.00, 
-        image: 'assets/products/pluto-ice-8kg.jpg', 
+        image: 'assets/stitch-images/product-ice-2kg.jpg', 
         description: 'Bulk ice for parties and large gatherings. Premium quality.',
         stock: 70,
         featured: false
@@ -111,7 +111,7 @@ export class ProductService {
         category: 'ice', 
         size: '3kg', 
         price: 2.00, 
-        image: 'assets/products/pluto-crushed-ice.jpg', 
+        image: 'assets/stitch-images/product-ice-2kg.jpg', 
         description: 'Finely crushed ice perfect for smoothies and cocktails.',
         stock: 85,
         featured: false
@@ -122,7 +122,7 @@ export class ProductService {
         category: 'ice', 
         size: '4kg', 
         price: 2.50, 
-        image: 'assets/products/pluto-ice-tubes.jpg', 
+        image: 'assets/stitch-images/product-ice-2kg.jpg', 
         description: 'Tube-shaped ice for long-lasting cooling. Great for coolers.',
         stock: 95,
         featured: false
@@ -135,7 +135,7 @@ export class ProductService {
         category: 'water', 
         size: '330ml', 
         price: 0.75, 
-        image: 'assets/products/oasis-sparkling-330ml.jpg', 
+        image: 'assets/stitch-images/product-sport-500ml.jpg', 
         description: 'Refreshing sparkling water with natural carbonation.',
         stock: 110,
         featured: false
@@ -146,7 +146,7 @@ export class ProductService {
         category: 'water', 
         size: '500ml', 
         price: 0.85, 
-        image: 'assets/products/oasis-flavored-500ml.jpg', 
+        image: 'assets/stitch-images/product-sport-500ml.jpg', 
         description: 'Lightly flavored water with natural fruit essence.',
         stock: 90,
         featured: false
@@ -157,7 +157,7 @@ export class ProductService {
         category: 'water', 
         size: '750ml', 
         price: 0.80, 
-        image: 'assets/products/oasis-750ml.jpg', 
+        image: 'assets/stitch-images/product-still-5l.jpg', 
         description: 'Mid-size bottle perfect for outdoor activities.',
         stock: 120,
         featured: false
@@ -170,7 +170,7 @@ export class ProductService {
         category: 'accessories', 
         size: 'Standard', 
         price: 10.00, 
-        image: 'assets/products/cooler-bag.jpg', 
+        image: 'assets/stitch-images/product-sport-500ml.jpg', 
         description: 'Insulated cooler bag to keep your beverages cold. Durable and portable.',
         stock: 40,
         featured: false
@@ -181,7 +181,7 @@ export class ProductService {
         category: 'dispensers', 
         size: 'Hot & Cold', 
         price: 45.00, 
-        image: 'assets/products/dispenser.jpg', 
+        image: 'assets/stitch-images/product-still-5l.jpg', 
         description: 'Dual temperature dispenser for convenience. Hot and cold water on demand.',
         stock: 25,
         featured: false
@@ -192,7 +192,7 @@ export class ProductService {
         category: 'dispensers', 
         size: 'Manual', 
         price: 8.00, 
-        image: 'assets/products/pump-dispenser.jpg', 
+        image: 'assets/stitch-images/product-ice-2kg.jpg', 
         description: 'Manual pump dispenser for 19L bottles. No electricity required.',
         stock: 55,
         featured: false
@@ -203,7 +203,7 @@ export class ProductService {
         category: 'accessories', 
         size: '5L Capacity', 
         price: 12.00, 
-        image: 'assets/products/ice-bucket.jpg', 
+        image: 'assets/stitch-images/product-ice-2kg.jpg', 
         description: 'Insulated ice bucket with lid. Keeps ice frozen for hours.',
         stock: 35,
         featured: false
@@ -214,7 +214,7 @@ export class ProductService {
         category: 'accessories', 
         size: '6x 750ml', 
         price: 15.00, 
-        image: 'assets/products/bottle-set.jpg', 
+        image: 'assets/stitch-images/product-sport-500ml.jpg', 
         description: 'Set of 6 reusable water bottles. Perfect for families.',
         stock: 30,
         featured: false
