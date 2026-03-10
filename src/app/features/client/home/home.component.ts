@@ -9,6 +9,9 @@ import { Subject, takeUntil } from 'rxjs';
 import { ProductService } from '../../../services/product.service';
 import { CartService } from '../../../services/cart.service';
 import { Product } from '../../../models/product.interface';
+import { TopNavBarComponent } from '../../../shared/top-nav-bar/top-nav-bar.component';
+import { StickyHeaderComponent } from '../../../shared/sticky-header/sticky-header.component';
+import { FooterNewComponent } from '../../../shared/footer-new/footer-new.component';
 
 interface TargetOption {
   label: string;
@@ -24,7 +27,10 @@ interface TargetOption {
     RouterLink,
     CardModule,
     ButtonModule,
-    SelectButtonModule
+    SelectButtonModule,
+    TopNavBarComponent,
+    StickyHeaderComponent,
+    FooterNewComponent
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
@@ -37,7 +43,6 @@ export class HomeComponent implements OnInit, OnDestroy {
     { label: 'Home & Individuals', value: 'b2c' },
     { label: 'Office & Bulk', value: 'b2b' }
   ];
-  cartItemCount: number = 0;
   addingToCart: { [key: string]: boolean } = {};
   
   private destroy$ = new Subject<void>();
@@ -49,7 +54,6 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.loadFeaturedProducts();
-    this.subscribeToCart();
   }
 
   ngOnDestroy(): void {
@@ -63,14 +67,6 @@ export class HomeComponent implements OnInit, OnDestroy {
       .subscribe(products => {
         this.allProducts = products;
         this.featuredProducts = products.filter(p => p.featured === true);
-      });
-  }
-
-  subscribeToCart(): void {
-    this.cartService.cartItems$
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((items: any[]) => {
-        this.cartItemCount = items.reduce((sum: number, item: any) => sum + item.quantity, 0);
       });
   }
 

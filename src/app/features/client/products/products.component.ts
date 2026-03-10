@@ -10,6 +10,9 @@ import { Subject, takeUntil } from 'rxjs';
 import { ProductService } from '../../../services/product.service';
 import { CartService } from '../../../services/cart.service';
 import { Product } from '../../../models/product.interface';
+import { TopNavBarComponent } from '../../../shared/top-nav-bar/top-nav-bar.component';
+import { StickyHeaderComponent } from '../../../shared/sticky-header/sticky-header.component';
+import { FooterNewComponent } from '../../../shared/footer-new/footer-new.component';
 
 @Component({
   selector: 'app-products',
@@ -21,7 +24,10 @@ import { Product } from '../../../models/product.interface';
     CardModule,
     ButtonModule,
     InputTextModule,
-    BadgeModule
+    BadgeModule,
+    TopNavBarComponent,
+    StickyHeaderComponent,
+    FooterNewComponent
   ],
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss'
@@ -31,7 +37,6 @@ export class ProductsComponent implements OnInit, OnDestroy {
   filteredProducts: Product[] = [];
   selectedCategory: string = 'all';
   searchQuery: string = '';
-  cartItemCount: number = 0;
   addingToCart: { [key: string]: boolean } = {};
   private destroy$ = new Subject<void>();
 
@@ -50,7 +55,6 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.loadProducts();
-    this.subscribeToCart();
   }
 
   ngOnDestroy(): void {
@@ -64,14 +68,6 @@ export class ProductsComponent implements OnInit, OnDestroy {
       .subscribe(products => {
         this.allProducts = products;
         this.filterProducts();
-      });
-  }
-
-  subscribeToCart(): void {
-    this.cartService.cartItems$
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((items: any[]) => {
-        this.cartItemCount = items.reduce((sum: number, item: any) => sum + item.quantity, 0);
       });
   }
 

@@ -2,69 +2,10 @@
 <div class="page-wrapper">
   
   <!-- Top Navigation Bar -->
-  <div class="top-nav-bar">
-    <div class="top-nav-content">
-      <div class="contact-items">
-        <div class="contact-item">
-          <i class="pi pi-phone"></i>
-          <span>+263 779 045 285</span>
-        </div>
-        <div class="contact-item">
-          <i class="pi pi-envelope"></i>
-          <span>sales&#64;oasiswater.co.zw</span>
-        </div>
-        <div class="contact-item hours">
-          <i class="pi pi-clock"></i>
-          <span>Mon-Fri 8a-5:30p, Sat 8a-2:30p</span>
-        </div>
-      </div>
-      <div class="social-icons">
-        <a href="#" class="social-link">
-          <i class="pi pi-facebook"></i>
-        </a>
-        <a href="#" class="social-link">
-          <i class="pi pi-instagram"></i>
-        </a>
-      </div>
-    </div>
-  </div>
+  <app-top-nav-bar></app-top-nav-bar>
 
   <!-- Sticky Header -->
-  <header class="sticky-header">
-    <div class="header-content">
-      <div class="header-left">
-        <div class="logo">
-          <i class="pi pi-circle-fill water-icon"></i>
-          <h2>Oasis Water</h2>
-        </div>
-        <nav class="main-nav">
-          <a routerLink="/" class="nav-link">Home</a>
-          <a routerLink="/products" class="nav-link">Products</a>
-          <a href="#" class="nav-link">Contact</a>
-        </nav>
-      </div>
-      <div class="header-right">
-        <div class="search-box">
-          <i class="pi pi-search"></i>
-          <input type="text" placeholder="Search water..." />
-        </div>
-        <div class="header-actions">
-          <button 
-            pButton 
-            icon="pi pi-shopping-cart" 
-            class="p-button-rounded p-button-text cart-btn"
-            routerLink="/cart">
-            <span *ngIf="cartItemCount > 0" class="cart-count-badge">{{ cartItemCount }}</span>
-          </button>
-          <button 
-            pButton 
-            icon="pi pi-user" 
-            class="p-button-rounded p-button-text user-btn">
-          </button>
-        </div>
-      </div>
-    </div>
-  </header>
+  <app-sticky-header></app-sticky-header>
 
   <!-- Main Content -->
   <main>
@@ -326,80 +267,6 @@
   </main>
 
   <!-- Footer -->
-  <footer class="footer">
-    <div class="footer-content">
-      <div class="footer-grid">
-        <!-- Company Info & Contact -->
-        <div class="footer-column">
-          <div class="footer-logo">
-            <i class="pi pi-circle-fill water-icon"></i>
-            <h2>Oasis Water</h2>
-          </div>
-          <p class="footer-description">
-            Providing the purest refreshment for homes and businesses across Zimbabwe.
-          </p>
-          <div class="footer-contact">
-            <p><strong>Address:</strong> 181 Selous Avenue, Harare</p>
-            <p><strong>Phone:</strong> <a href="tel:+263779045285">+263 779 045 285</a></p>
-            <p><strong>Email:</strong> <a href="mailto:sales@oasiswater.co.zw">sales&#64;oasiswater.co.zw</a></p>
-            <p><strong>Corporate:</strong> <a href="mailto:corporate@oasiswater.co.zw">corporate&#64;oasiswater.co.zw</a></p>
-          </div>
-          <div class="social-links">
-            <a href="https://facebook.com" target="_blank" class="social-icon" aria-label="Facebook">
-              <i class="pi pi-facebook"></i>
-            </a>
-            <a href="https://instagram.com" target="_blank" class="social-icon" aria-label="Instagram">
-              <i class="pi pi-instagram"></i>
-            </a>
-          </div>
-        </div>
-
-        <!-- Quick Links & B2B -->
-        <div class="footer-column">
-          <h3>Quick Links</h3>
-          <ul>
-            <li><a routerLink="/products">Products</a></li>
-            <li><a routerLink="/order-status">Order Status</a></li>
-            <li><a href="#">Corporate Solutions</a></li>
-            <li><a href="#">Wholesale Accounts</a></li>
-            <li><a href="#">Our Story</a></li>
-          </ul>
-        </div>
-
-        <!-- Customer Support & Policies -->
-        <div class="footer-column">
-          <h3>Customer Support</h3>
-          <ul>
-            <li><a href="#">Shipping & Delivery</a></li>
-            <li><a href="#">Returns & Refunds</a></li>
-            <li><a href="#">Privacy Policy</a></li>
-            <li><a href="#">Terms of Service</a></li>
-            <li><a href="#">Contact Us</a></li>
-          </ul>
-        </div>
-
-        <!-- Newsletter -->
-        <div class="footer-column">
-          <h3>Stay Refreshed</h3>
-          <p>Subscribe for special offers and health tips.</p>
-          <div class="newsletter-form">
-            <input type="email" placeholder="Email address" />
-            <button pButton label="Join" class="subscribe-btn"></button>
-          </div>
-        </div>
-      </div>
-
-      <div class="footer-bottom">
-        <p>&copy; 2026 Oasis Water Zimbabwe. All rights reserved.</p>
-        <div class="payment-badges">
-          <span class="badge-label">Secure Payments:</span>
-          <i class="pi pi-credit-card" title="Visa/Mastercard"></i>
-          <span class="badge-text">EcoCash</span>
-          <span class="badge-text">COD</span>
-          <i class="pi pi-lock" title="SSL Secure"></i>
-        </div>
-      </div>
-    </div>
-  </footer>
+  <app-footer-new></app-footer-new>
 
 </div>

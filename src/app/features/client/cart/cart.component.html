@@ -1,63 +1,8 @@
 <!-- Top Navigation Bar (Pinned) -->
-<div class="top-nav-bar">
-  <div class="top-nav-content">
-    <div class="contact-items">
-      <div class="contact-item">
-        <i class="pi pi-phone"></i>
-        <span>+263 779 045 285</span>
-      </div>
-      <div class="contact-item">
-        <i class="pi pi-envelope"></i>
-        <span>sales&#64;oasiswater.co.zw</span>
-      </div>
-      <div class="contact-item hours">
-        <i class="pi pi-clock"></i>
-        <span>Mon-Fri 8a-5:30p, Sat 8a-2:30p</span>
-      </div>
-    </div>
-    <div class="social-icons">
-      <a href="#" class="social-link">
-        <i class="pi pi-facebook"></i>
-      </a>
-      <a href="#" class="social-link">
-        <i class="pi pi-instagram"></i>
-      </a>
-    </div>
-  </div>
-</div>
+<app-top-nav-bar></app-top-nav-bar>
 
 <!-- Sticky Header -->
-<header class="sticky-header">
-  <div class="header-content">
-    <div class="header-left">
-      <div class="logo">
-        <i class="pi pi-circle-fill water-icon"></i>
-        <h2 routerLink="/">Oasis Water</h2>
-      </div>
-      <nav class="main-nav">
-        <a routerLink="/" class="nav-link">Home</a>
-        <a routerLink="/products" class="nav-link">Products</a>
-        <a href="#" class="nav-link">Contact</a>
-      </nav>
-    </div>
-    <div class="header-right">
-      <div class="header-actions">
-        <button 
-          pButton 
-          icon="pi pi-shopping-cart" 
-          class="p-button-rounded p-button-text cart-btn"
-          routerLink="/cart">
-          <span *ngIf="cartItemCount > 0" class="cart-count-badge">{{ cartItemCount }}</span>
-        </button>
-        <button 
-          pButton 
-          icon="pi pi-user" 
-          class="p-button-rounded p-button-text user-btn">
-        </button>
-      </div>
-    </div>
-  </div>
-</header>
+<app-sticky-header></app-sticky-header>
 
 <!-- Main Content -->
 <main class="cart-main">
@@ -124,7 +69,7 @@
       <div class="cart-items-section">
         <div class="cart-header">
           <h2>Your Cart</h2>
-          <span class="items-count">{{ cartItemCount }} {{ cartItemCount === 1 ? 'Item' : 'Items' }}</span>
+          <span class="items-count">{{ getTotalItemCount() }} {{ getTotalItemCount() === 1 ? 'Item' : 'Items' }}</span>
         </div>
 
         <div class="cart-items-list">
@@ -225,75 +170,7 @@
 </main>
 
 <!-- Footer -->
-<footer class="footer">
-  <div class="footer-content">
-    <div class="footer-grid">
-      <!-- Company Info -->
-      <div class="footer-column">
-        <div class="footer-logo">
-          <i class="pi pi-circle-fill water-icon"></i>
-          <h2>Oasis Water</h2>
-        </div>
-        <p class="footer-description">
-          Dedicated to bringing the purest form of life's essential element to every home and business across the nation.
-        </p>
-        <div class="social-links">
-          <a href="#" class="social-icon">
-            <i class="pi pi-facebook"></i>
-          </a>
-          <a href="#" class="social-icon">
-            <i class="pi pi-instagram"></i>
-          </a>
-          <a href="#" class="social-icon">
-            <i class="pi pi-twitter"></i>
-          </a>
-        </div>
-      </div>
-
-      <!-- Quick Links -->
-      <div class="footer-column">
-        <h3>Quick Links</h3>
-        <ul>
-          <li><a routerLink="/">Our Story</a></li>
-          <li><a routerLink="/products">Product Range</a></li>
-          <li><a href="#">Corporate Solutions</a></li>
-          <li><a href="#">Sustainability</a></li>
-          <li><a href="#">Careers</a></li>
-        </ul>
-      </div>
-
-      <!-- Support -->
-      <div class="footer-column">
-        <h3>Support</h3>
-        <ul>
-          <li><a href="#">Help Center</a></li>
-          <li><a href="#">Delivery Areas</a></li>
-          <li><a href="#">Privacy Policy</a></li>
-          <li><a href="#">Terms of Service</a></li>
-          <li><a href="#">Contact Us</a></li>
-        </ul>
-      </div>
-
-      <!-- Newsletter -->
-      <div class="footer-column">
-        <h3>Newsletter</h3>
-        <p>Stay hydrated and updated with our latest offers.</p>
-        <div class="newsletter-form">
-          <input type="email" placeholder="Your email address" />
-          <button pButton label="Subscribe"></button>
-        </div>
-      </div>
-    </div>
-
-    <div class="footer-bottom">
-      <p>&copy; 2024 Oasis Water Systems. All rights reserved.</p>
-      <div class="footer-bottom-right">
-        <span>Designed with Pure Intentions</span>
-        <i class="pi pi-globe"></i>
-      </div>
-    </div>
-  </div>
-</footer>
+<app-footer-new></app-footer-new>
 
 <!-- Checkout Dialog -->
 <p-dialog 
