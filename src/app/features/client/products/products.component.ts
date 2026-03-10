@@ -38,7 +38,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   categories = [
     { label: 'All Products', value: 'all' },
     { label: 'Still Water', value: 'water' },
-    { label: 'Sparkling', value: 'sparkling' },
+    { label: 'Dispensers', value: 'dispensers' },
     { label: 'Ice', value: 'ice' },
     { label: 'Accessories', value: 'accessories' }
   ];

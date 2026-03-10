@@ -1,5 +1,3 @@
-<p-toast></p-toast>
-
 <!-- Wrapper to match Stitch layout -->
 <div class="page-wrapper">
   
@@ -56,6 +54,7 @@
             icon="pi pi-shopping-cart" 
             class="p-button-rounded p-button-text cart-btn"
             routerLink="/cart">
+            <span *ngIf="cartItemCount > 0" class="cart-count-badge">{{ cartItemCount }}</span>
           </button>
           <button 
             pButton 
@@ -82,17 +81,24 @@
         <div class="hero-text-container">
           <span class="premium-badge">PREMIUM HYDRATION</span>
           <h1 class="hero-title">
-            Purely Refreshing<br/>
-            <span class="water-text">Water</span> Delivered
+            Zimbabwe's Trusted Water Provider
+            <span class="water-text">Since 2014</span>
           </h1>
           <p class="hero-description">
-            Experience the purest hydration with Oasis Water, delivered straight to your doorstep with our sustainable and quick delivery service.
+            Available at Pick n Pay, SPAR, OK Zimbabwe, and 100+ locations nationwide. 
+            Delivering pure refreshment to homes and businesses across Harare for over 12 years.
           </p>
           <div class="hero-buttons">
             <button 
               pButton 
-              label="Shop Now" 
+              label="Shop Products" 
               class="shop-btn"
+              (click)="scrollToProducts()">
+            </button>
+            <button 
+              pButton 
+              label="Corporate Accounts" 
+              class="corporate-btn"
               routerLink="/products">
             </button>
           </div>
@@ -100,11 +106,26 @@
       </div>
     </section>
 
-    <!-- Featured Products -->
+    <!-- Partner Trust Network -->
+    <section class="partner-network">
+      <p class="partner-label">Trusted by our nationwide partners</p>
+      <div class="partner-grid">
+        <div class="partner-tile">Pick n Pay</div>
+        <div class="partner-tile">SPAR</div>
+        <div class="partner-tile">OK Zimbabwe</div>
+        <div class="partner-tile">Food Lover's Market</div>
+        <div class="partner-tile">TM Supermarkets</div>
+        <div class="partner-tile">TOTAL</div>
+        <div class="partner-tile">PUMA</div>
+        <div class="partner-tile">ZUVA</div>
+      </div>
+    </section>
+
+    <!-- Featured Products with B2C/B2B Tabs -->
     <section class="featured-products">
       <div class="section-header">
         <div class="title-block">
-          <h2>Featured Products</h2>
+          <h2>Choose Your Oasis</h2>
           <div class="title-underline"></div>
         </div>
         <a routerLink="/products" class="view-all">
@@ -112,120 +133,193 @@
         </a>
       </div>
 
+      <!-- Tab Toggle for B2C/B2B -->
+      <div class="product-tabs">
+        <p-selectButton 
+          [options]="productTargetOptions" 
+          [(ngModel)]="selectedTarget" 
+          optionLabel="label"
+          optionValue="value">
+        </p-selectButton>
+      </div>
+
+      <!-- Dynamic Product Grid -->
       <div class="products-grid">
-        <!-- Product Card 1 -->
-        <div class="product-card-wrapper">
+        <div *ngFor="let product of getFilteredProducts()" class="product-card-wrapper">
           <div class="product-card">
             <div class="product-image-container">
               <img 
-                src="/assets/stitch-images/product-sport-500ml.jpg" 
-                alt="Oasis Sport Water" 
+                [src]="product.image" 
+                [alt]="product.name" 
                 class="product-img" />
-              <span class="product-badge">Popular</span>
+              <span 
+                *ngIf="product.featured && product.id === 'p1'" 
+                class="product-badge">Popular</span>
+              <span 
+                *ngIf="product.featured && product.id === 'p3'" 
+                class="product-badge best-value">Best Value</span>
             </div>
             <div class="product-body">
               <div class="product-header">
-                <h3>Oasis Sport Water</h3>
-                <span class="price">$0.50</span>
+                <h3>{{product.name}}</h3>
+                <span class="price">${{product.price.toFixed(2)}}</span>
               </div>
-              <p class="product-desc">500ml Perfect for your daily workout and on-the-go hydration.</p>
-              <button 
-                pButton 
-                label="Add to Cart" 
-                icon="pi pi-shopping-cart"
-                class="add-cart-btn">
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Product Card 2 -->
-        <div class="product-card-wrapper">
-          <div class="product-card">
-            <div class="product-image-container">
-              <img 
-                src="/assets/stitch-images/product-still-5l.jpg" 
-                alt="Oasis Still Water 5L" 
-                class="product-img" />
-              <span class="product-badge">Best Value</span>
-            </div>
-            <div class="product-body">
-              <div class="product-header">
-                <h3>Oasis Still Water 5L</h3>
-                <span class="price">$2.50</span>
+              <p class="product-desc">{{product.size}} - {{product.description}}</p>
+              
+              <!-- Add to Cart or Quantity Controls -->
+              <div class="cart-controls">
+                <!-- Show Add to Cart button when quantity is 0 -->
+                <button 
+                  *ngIf="getItemQuantity(product.id) === 0"
+                  pButton 
+                  label="Add to Cart" 
+                  icon="pi pi-shopping-cart"
+                  class="add-cart-btn"
+                  [ngClass]="{'adding': isAddingToCart(product.id)}"
+                  (click)="addToCart(product, $event)">
+                </button>
+                
+                <!-- Show quantity controls when item is in cart -->
+                <div *ngIf="getItemQuantity(product.id) > 0" class="quantity-controls">
+                  <button 
+                    pButton 
+                    icon="pi pi-minus"
+                    class="quantity-btn"
+                    (click)="decreaseQuantity(product.id)">
+                  </button>
+                  <span class="quantity-display">{{getItemQuantity(product.id)}}</span>
+                  <button 
+                    pButton 
+                    icon="pi pi-plus"
+                    class="quantity-btn"
+                    (click)="increaseQuantity(product.id)">
+                  </button>
+                </div>
               </div>
-              <p class="product-desc">Premium purified still water, family size for maximum value.</p>
-              <button 
-                pButton 
-                label="Add to Cart" 
-                icon="pi pi-shopping-cart"
-                class="add-cart-btn">
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Product Card 3 -->
-        <div class="product-card-wrapper">
-          <div class="product-card">
-            <div class="product-image-container">
-              <img 
-                src="/assets/stitch-images/product-ice-2kg.jpg" 
-                alt="Pluto Ice Cubes" 
-                class="product-img" />
-              <span class="product-badge premium">Premium</span>
-            </div>
-            <div class="product-body">
-              <div class="product-header">
-                <h3>Pluto Ice Cubes 2kg</h3>
-                <span class="price">$1.50</span>
-              </div>
-              <p class="product-desc">Crystal clear, long-lasting ice cubes for the ultimate chill.</p>
-              <button 
-                pButton 
-                label="Add to Cart" 
-                icon="pi pi-shopping-cart"
-                class="add-cart-btn">
-              </button>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Trust Section -->
-    <section class="trust-section">
-      <div class="section-intro">
-        <h2>Why Oasis?</h2>
-        <p>We pride ourselves on providing the best hydration solutions with unmatched service and quality standards.</p>
-      </div>
-
-      <div class="trust-grid">
-        <!-- Trust Item 1 -->
-        <div class="trust-card">
-          <div class="icon-circle">
-            <i class="pi pi-check-circle"></i>
+    <!-- Value Propositions -->
+    <section class="value-section">
+      <div class="value-grid">
+        <!-- Purity -->
+        <div class="value-card">
+          <div class="icon-container">
+            <i class="pi pi-shield"></i>
           </div>
-          <h3>Quality Purified Water</h3>
-          <p>Pure, filtered water that exceeds the highest international safety and taste standards.</p>
+          <h3>Purity First</h3>
+          <p>Every drop is rigorously lab-tested using carbon filtration to ensure the highest international safety standards.</p>
         </div>
 
-        <!-- Trust Item 2 -->
-        <div class="trust-card">
-          <div class="icon-circle">
+        <!-- Reliability -->
+        <div class="value-card">
+          <div class="icon-container">
             <i class="pi pi-truck"></i>
           </div>
-          <h3>Reliable Delivery</h3>
-          <p>Prompt delivery to your home or office on a scheduled timeline that fits your lifestyle.</p>
+          <h3>Reliability</h3>
+          <p>Dedicated Oasis trucks on standby to ensure your home or office has scheduled delivery across Harare.</p>
         </div>
 
-        <!-- Trust Item 3 -->
-        <div class="trust-card">
-          <div class="icon-circle">
-            <i class="pi pi-mobile"></i>
+        <!-- Payments -->
+        <div class="value-card">
+          <div class="icon-container">
+            <i class="pi pi-credit-card"></i>
           </div>
-          <h3>Easy Mobile Payments</h3>
-          <p>Secure and convenient payment options via our intuitive mobile app and online portal.</p>
+          <h3>Easy Payments</h3>
+          <p>Pay via EcoCash, Visa, Mastercard, or Cash on Delivery. Seamless and secure checkout experience.</p>
+        </div>
+
+        <!-- Corporate -->
+        <div class="value-card">
+          <div class="icon-container">
+            <i class="pi pi-building"></i>
+          </div>
+          <h3>Corporate Partner</h3>
+          <p>Custom billing and scheduled deliveries tailored for large corporate environments and wholesale accounts.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works">
+      <div class="section-intro">
+        <h2>How It Works</h2>
+        <p>Hydration in three simple steps</p>
+      </div>
+
+      <div class="steps-grid">
+        <!-- Step 1 -->
+        <div class="step-card">
+          <div class="step-number">
+            <span>1</span>
+          </div>
+          <div class="step-icon">
+            <i class="pi pi-th-large"></i>
+          </div>
+          <h4>Choose</h4>
+          <p>Select from our range of bottled water, dispensers, or premium ice products.</p>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="step-card">
+          <div class="step-number">
+            <span>2</span>
+          </div>
+          <div class="step-icon">
+            <i class="pi pi-credit-card"></i>
+          </div>
+          <h4>Payment</h4>
+          <p>Securely checkout using your preferred payment method including Cash on Delivery.</p>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="step-card">
+          <div class="step-number">
+            <span>3</span>
+          </div>
+          <div class="step-icon">
+            <i class="pi pi-box"></i>
+          </div>
+          <h4>Fast Delivery</h4>
+          <p>Our fleet delivers directly to your door within 24 hours across Harare.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Us -->
+    <section class="about-section">
+      <div class="about-container">
+        <div class="about-text">
+          <h2>About Oasis Water Zimbabwe</h2>
+          <p>
+            Established in 2014 and based in Harare, Oasis Water Zimbabwe has been serving the nation for over 12 years. 
+            We specialize in the production and distribution of purified water, purified ice, bulk raw water, and FMCG products.
+          </p>
+          <p>
+            Our commitment to quality and reliability has made us the trusted choice for homes, businesses, and major retailers across Zimbabwe. 
+            From our state-of-the-art purification facility to our nationwide distribution network, we ensure every drop meets the highest standards.
+          </p>
+        </div>
+        <div class="about-stats">
+          <div class="stat-item">
+            <h3>12+</h3>
+            <p>Years Serving Zimbabwe</p>
+          </div>
+          <div class="stat-item">
+            <h3>100+</h3>
+            <p>Distribution Locations</p>
+          </div>
+          <div class="stat-item">
+            <h3>6</h3>
+            <p>Trusted Brands</p>
+          </div>
+          <div class="stat-item">
+            <h3>Every Day</h3>
+            <p>Quality Guaranteed</p>
+          </div>
         </div>
       </div>
     </section>
@@ -235,46 +329,49 @@
   <footer class="footer">
     <div class="footer-content">
       <div class="footer-grid">
-        <!-- Company Info -->
+        <!-- Company Info & Contact -->
         <div class="footer-column">
           <div class="footer-logo">
             <i class="pi pi-circle-fill water-icon"></i>
             <h2>Oasis Water</h2>
           </div>
           <p class="footer-description">
-            Dedicated to bringing the purest form of life's essential element to every home and business across the nation.
+            Providing the purest refreshment for homes and businesses across Zimbabwe.
           </p>
+          <div class="footer-contact">
+            <p><strong>Address:</strong> 181 Selous Avenue, Harare</p>
+            <p><strong>Phone:</strong> <a href="tel:+263779045285">+263 779 045 285</a></p>
+            <p><strong>Email:</strong> <a href="mailto:sales@oasiswater.co.zw">sales&#64;oasiswater.co.zw</a></p>
+            <p><strong>Corporate:</strong> <a href="mailto:corporate@oasiswater.co.zw">corporate&#64;oasiswater.co.zw</a></p>
+          </div>
           <div class="social-links">
-            <a href="#" class="social-icon">
+            <a href="https://facebook.com" target="_blank" class="social-icon" aria-label="Facebook">
               <i class="pi pi-facebook"></i>
             </a>
-            <a href="#" class="social-icon">
+            <a href="https://instagram.com" target="_blank" class="social-icon" aria-label="Instagram">
               <i class="pi pi-instagram"></i>
-            </a>
-            <a href="#" class="social-icon">
-              <i class="pi pi-twitter"></i>
             </a>
           </div>
         </div>
 
-        <!-- Quick Links -->
+        <!-- Quick Links & B2B -->
         <div class="footer-column">
           <h3>Quick Links</h3>
           <ul>
-            <li><a routerLink="/">Our Story</a></li>
-            <li><a routerLink="/products">Product Range</a></li>
+            <li><a routerLink="/products">Products</a></li>
+            <li><a routerLink="/order-status">Order Status</a></li>
             <li><a href="#">Corporate Solutions</a></li>
-            <li><a href="#">Sustainability</a></li>
-            <li><a href="#">Careers</a></li>
+            <li><a href="#">Wholesale Accounts</a></li>
+            <li><a href="#">Our Story</a></li>
           </ul>
         </div>
 
-        <!-- Support -->
+        <!-- Customer Support & Policies -->
         <div class="footer-column">
-          <h3>Support</h3>
+          <h3>Customer Support</h3>
           <ul>
-            <li><a href="#">Help Center</a></li>
-            <li><a href="#">Delivery Areas</a></li>
+            <li><a href="#">Shipping & Delivery</a></li>
+            <li><a href="#">Returns & Refunds</a></li>
             <li><a href="#">Privacy Policy</a></li>
             <li><a href="#">Terms of Service</a></li>
             <li><a href="#">Contact Us</a></li>
@@ -283,20 +380,23 @@
 
         <!-- Newsletter -->
         <div class="footer-column">
-          <h3>Newsletter</h3>
-          <p>Stay hydrated and updated with our latest offers.</p>
+          <h3>Stay Refreshed</h3>
+          <p>Subscribe for special offers and health tips.</p>
           <div class="newsletter-form">
-            <input type="email" placeholder="Your email address" />
-            <button pButton label="Subscribe"></button>
+            <input type="email" placeholder="Email address" />
+            <button pButton label="Join" class="subscribe-btn"></button>
           </div>
         </div>
       </div>
 
       <div class="footer-bottom">
-        <p>&copy; 2024 Oasis Water Systems. All rights reserved.</p>
-        <div class="footer-bottom-right">
-          <span>Designed with Pure Intentions</span>
-          <i class="pi pi-globe"></i>
+        <p>&copy; 2026 Oasis Water Zimbabwe. All rights reserved.</p>
+        <div class="payment-badges">
+          <span class="badge-label">Secure Payments:</span>
+          <i class="pi pi-credit-card" title="Visa/Mastercard"></i>
+          <span class="badge-text">EcoCash</span>
+          <span class="badge-text">COD</span>
+          <i class="pi pi-lock" title="SSL Secure"></i>
         </div>
       </div>
     </div>

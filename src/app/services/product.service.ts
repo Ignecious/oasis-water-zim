@@ -14,26 +14,28 @@ export class ProductService {
 
   private getDemoProducts(): Product[] {
     return [
-      // Bottled Water
+      // Bottled Water - Consumer (B2C)
       { 
         id: 'p1', 
         name: 'Oasis Sport Water', 
         category: 'water', 
-        size: '500ml', 
-        price: 0.50, 
+        target: 'b2c',
+        size: '750ml', 
+        price: 0.85, 
         image: 'assets/stitch-images/product-sport-500ml.jpg', 
-        description: 'Perfect for hydration on the go. Pure, refreshing water in a convenient size.',
+        description: 'Perfect for the gym and active lifestyles. Refreshing purified water on the go.',
         stock: 100,
         featured: true
       },
       { 
         id: 'p2', 
-        name: 'Oasis Still Water', 
+        name: 'Oasis Mineral Water', 
         category: 'water', 
-        size: '1.5L', 
-        price: 1.00, 
+        target: 'b2c',
+        size: '2L', 
+        price: 1.20, 
         image: 'assets/stitch-images/product-still-5l.jpg', 
-        description: 'Pure refreshing water for everyday hydration. Ideal for home and office.',
+        description: 'Pure mineral water for everyday hydration. Available at major retailers.',
         stock: 150,
         featured: true
       },
@@ -41,45 +43,51 @@ export class ProductService {
         id: 'p3', 
         name: 'Oasis Still Water', 
         category: 'water', 
+        target: 'b2c',
         size: '5L', 
         price: 2.50, 
         image: 'assets/stitch-images/product-still-5l.jpg', 
-        description: 'Ideal for home use. Great value for daily hydration needs.',
+        description: 'Weekly family hydration essential. Great value for daily needs.',
         stock: 80,
-        featured: false
+        featured: true
       },
+      
+      // Bulk Water - Office & Commercial (B2B)
       { 
         id: 'p4', 
-        name: 'Oasis Still Water', 
-        category: 'water', 
-        size: '10L', 
-        price: 4.50, 
-        image: 'assets/stitch-images/product-sport-500ml.jpg', 
-        description: 'Great value for families. Perfect for larger households.',
-        stock: 60,
+        name: 'Dispenser Bottle', 
+        category: 'dispensers', 
+        target: 'b2b',
+        size: '18.9L', 
+        price: 8.00, 
+        image: 'assets/stitch-images/product-still-5l.jpg', 
+        description: 'Standard dispenser bottle for offices and commercial use. Fits all standard dispensers.',
+        stock: 50,
         featured: false
       },
       { 
         id: 'p5', 
-        name: 'Oasis Purified Water', 
-        category: 'water', 
-        size: '19L', 
-        price: 8.00, 
+        name: 'Dispenser Bottle with Tap', 
+        category: 'dispensers', 
+        target: 'b2b',
+        size: '20L', 
+        price: 10.00, 
         image: 'assets/stitch-images/product-still-5l.jpg', 
-        description: 'Bulk water for offices and events. Premium quality purified water.',
-        stock: 50,
-        featured: true
+        description: 'Convenient tap-equipped container perfect for events and functions.',
+        stock: 40,
+        featured: false
       },
       
-      // Ice Products
+      // Ice Products - Available for both B2C and B2B
       { 
         id: 'p6', 
         name: 'Pluto Ice Cubes', 
         category: 'ice', 
+        target: 'both',
         size: '2kg', 
-        price: 1.50, 
+        price: 1.20, 
         image: 'assets/stitch-images/product-ice-2kg.jpg', 
-        description: 'Crystal clear ice cubes for your drinks. Made from purified water.',
+        description: 'Crystal clear, slow-melting ice cubes made from purified water.',
         stock: 120,
         featured: true
       },
@@ -87,6 +95,7 @@ export class ProductService {
         id: 'p7', 
         name: 'Pluto Ice Cubes', 
         category: 'ice', 
+        target: 'both',
         size: '5kg', 
         price: 3.50, 
         image: 'assets/stitch-images/product-ice-2kg.jpg', 
@@ -98,6 +107,7 @@ export class ProductService {
         id: 'p8', 
         name: 'Pluto Ice Cubes', 
         category: 'ice', 
+        target: 'both',
         size: '8kg', 
         price: 5.00, 
         image: 'assets/stitch-images/product-ice-2kg.jpg', 
@@ -107,100 +117,73 @@ export class ProductService {
       },
       { 
         id: 'p9', 
-        name: 'Pluto Crushed Ice', 
+        name: 'Pluto Ice Blocks', 
         category: 'ice', 
-        size: '3kg', 
-        price: 2.00, 
+        target: 'both',
+        size: '5kg', 
+        price: 4.00, 
         image: 'assets/stitch-images/product-ice-2kg.jpg', 
-        description: 'Finely crushed ice perfect for smoothies and cocktails.',
+        description: 'Large ice blocks for extended cooling. Ideal for coolers and events.',
         stock: 85,
         featured: false
       },
       { 
         id: 'p10', 
-        name: 'Pluto Ice Tubes', 
+        name: 'Pluto Ice Blocks', 
         category: 'ice', 
-        size: '4kg', 
-        price: 2.50, 
+        target: 'both',
+        size: '10kg', 
+        price: 7.50, 
         image: 'assets/stitch-images/product-ice-2kg.jpg', 
-        description: 'Tube-shaped ice for long-lasting cooling. Great for coolers.',
-        stock: 95,
+        description: 'Extra large ice blocks for commercial use and major events.',
+        stock: 65,
         featured: false
       },
       
-      // More Water Varieties
+      // Dispensers & Equipment - Commercial (B2B)
       { 
         id: 'p11', 
-        name: 'Oasis Sparkling Water', 
-        category: 'water', 
-        size: '330ml', 
-        price: 0.75, 
-        image: 'assets/stitch-images/product-sport-500ml.jpg', 
-        description: 'Refreshing sparkling water with natural carbonation.',
-        stock: 110,
-        featured: false
-      },
-      { 
-        id: 'p12', 
-        name: 'Oasis Flavored Water', 
-        category: 'water', 
-        size: '500ml', 
-        price: 0.85, 
-        image: 'assets/stitch-images/product-sport-500ml.jpg', 
-        description: 'Lightly flavored water with natural fruit essence.',
-        stock: 90,
-        featured: false
-      },
-      { 
-        id: 'p13', 
-        name: 'Oasis Still Water', 
-        category: 'water', 
-        size: '750ml', 
-        price: 0.80, 
-        image: 'assets/stitch-images/product-still-5l.jpg', 
-        description: 'Mid-size bottle perfect for outdoor activities.',
-        stock: 120,
-        featured: false
-      },
-      
-      // Accessories
-      { 
-        id: 'p14', 
-        name: 'Keep Bag Cooler', 
-        category: 'accessories', 
-        size: 'Standard', 
-        price: 10.00, 
-        image: 'assets/stitch-images/product-sport-500ml.jpg', 
-        description: 'Insulated cooler bag to keep your beverages cold. Durable and portable.',
-        stock: 40,
-        featured: false
-      },
-      { 
-        id: 'p15', 
         name: 'Water Dispenser', 
         category: 'dispensers', 
-        size: 'Hot & Cold', 
+        target: 'b2b',
+        size: 'Hot  & Cold', 
         price: 45.00, 
         image: 'assets/stitch-images/product-still-5l.jpg', 
-        description: 'Dual temperature dispenser for convenience. Hot and cold water on demand.',
+        description: 'Dual temperature dispenser for offices. Hot and cold water on demand.',
         stock: 25,
         featured: false
       },
       { 
-        id: 'p16', 
+        id: 'p12', 
         name: 'Pump Dispenser', 
         category: 'dispensers', 
+        target: 'both',
         size: 'Manual', 
         price: 8.00, 
         image: 'assets/stitch-images/product-ice-2kg.jpg', 
-        description: 'Manual pump dispenser for 19L bottles. No electricity required.',
+        description: 'Manual pump dispenser for 18.9L bottles. No electricity required.',
         stock: 55,
         featured: false
       },
+      
+      // Accessories - Consumer and Business
       { 
-        id: 'p17', 
+        id: 'p13', 
+        name: 'Keep Bag Cooler', 
+        category: 'accessories', 
+        target: 'both',
+        size: 'Standard', 
+        price: 10.00, 
+        image: 'assets/stitch-images/product-sport-500ml.jpg', 
+        description: 'Insulated cooler bag to keep beverages cold. Durable and portable.',
+        stock: 40,
+        featured: false
+      },
+      { 
+        id: 'p14', 
         name: 'Ice Bucket', 
         category: 'accessories', 
+        target: 'both',
         size: '5L Capacity', 
         price: 12.00, 
         image: 'assets/stitch-images/product-ice-2kg.jpg', 
@@ -209,9 +192,10 @@ export class ProductService {
         featured: false
       },
       { 
-        id: 'p18', 
+        id: 'p15', 
         name: 'Water Bottle Set', 
         category: 'accessories', 
+        target: 'b2c',
         size: '6x 750ml', 
         price: 15.00, 
         image: 'assets/stitch-images/product-sport-500ml.jpg', 
