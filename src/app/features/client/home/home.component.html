@@ -2,69 +2,10 @@
 <div class="page-wrapper">
   
   <!-- Top Navigation Bar -->
-  <div class="top-nav-bar">
-    <div class="top-nav-content">
-      <div class="contact-items">
-        <div class="contact-item">
-          <i class="pi pi-phone"></i>
-          <span>+263 779 045 285</span>
-        </div>
-        <div class="contact-item">
-          <i class="pi pi-envelope"></i>
-          <span>sales&#64;oasiswater.co.zw</span>
-        </div>
-        <div class="contact-item hours">
-          <i class="pi pi-clock"></i>
-          <span>Mon-Fri 8a-5:30p, Sat 8a-2:30p</span>
-        </div>
-      </div>
-      <div class="social-icons">
-        <a href="#" class="social-link">
-          <i class="pi pi-facebook"></i>
-        </a>
-        <a href="#" class="social-link">
-          <i class="pi pi-instagram"></i>
-        </a>
-      </div>
-    </div>
-  </div>
+  <app-top-nav-bar></app-top-nav-bar>
 
   <!-- Sticky Header -->
-  <header class="sticky-header">
-    <div class="header-content">
-      <div class="header-left">
-        <div class="logo">
-          <i class="pi pi-circle-fill water-icon"></i>
-          <h2>Oasis Water</h2>
-        </div>
-        <nav class="main-nav">
-          <a routerLink="/" class="nav-link">Home</a>
-          <a routerLink="/products" class="nav-link">Products</a>
-          <a href="#" class="nav-link">Contact</a>
-        </nav>
-      </div>
-      <div class="header-right">
-        <div class="search-box">
-          <i class="pi pi-search"></i>
-          <input type="text" placeholder="Search water..." />
-        </div>
-        <div class="header-actions">
-          <button 
-            pButton 
-            icon="pi pi-shopping-cart" 
-            class="p-button-rounded p-button-text cart-btn"
-            routerLink="/cart">
-            <span *ngIf="cartItemCount > 0" class="cart-count-badge">{{ cartItemCount }}</span>
-          </button>
-          <button 
-            pButton 
-            icon="pi pi-user" 
-            class="p-button-rounded p-button-text user-btn">
-          </button>
-        </div>
-      </div>
-    </div>
-  </header>
+  <app-sticky-header></app-sticky-header>
 
   <!-- Main Content -->
   <main>

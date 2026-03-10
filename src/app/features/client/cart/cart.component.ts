@@ -13,6 +13,8 @@ import { BadgeModule } from 'primeng/badge';
 import { Subject, takeUntil } from 'rxjs';
 import { CartService } from '../../../services/cart.service';
 import { CartItem } from '../../../models/cart-item.interface';
+import { TopNavBarComponent } from '../../../shared/top-nav-bar/top-nav-bar.component';
+import { StickyHeaderComponent } from '../../../shared/sticky-header/sticky-header.component';
 
 interface TimeSlot {
   label: string;
@@ -46,14 +48,15 @@ interface OrderConfirmation {
     DropdownModule,
     RadioButtonModule,
     InputTextModule,
-    BadgeModule
+    BadgeModule,
+    TopNavBarComponent,
+    StickyHeaderComponent
   ],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.scss'
 })
 export class CartComponent implements OnInit, OnDestroy {
   cartItems: CartItem[] = [];
-  cartItemCount: number = 0;
   subtotal: number = 0;
   estimatedTax: number = 0;
   totalAmount: number = 0;
@@ -109,7 +112,6 @@ export class CartComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe(items => {
         this.cartItems = items;
-        this.cartItemCount = this.cartService.getCartItemCount();
         this.calculateTotals();
       });
   }
@@ -222,5 +224,9 @@ export class CartComponent implements OnInit, OnDestroy {
 
   get hasCartItems(): boolean {
     return this.cartItems.length > 0;
+  }
+
+  getTotalItemCount(): number {
+    return this.cartItems.reduce((count, item) => count + item.quantity, 0);
   }
 }

@@ -1,0 +1,227 @@
+@import '../../../styles.scss';
+
+.sticky-header {
+  position: sticky;
+  top: 40px; // Position below the top nav bar (which is 40px tall)
+  background: white;
+  z-index: 999;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(0, 51, 102, 0.1);
+
+  .header-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+
+    @media (max-width: 1024px) {
+      padding: 1rem;
+      gap: 1rem;
+    }
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+      gap: 0.75rem;
+      padding: 0.75rem 1rem;
+    }
+  }
+
+  .header-left {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+
+    @media (max-width: 1024px) {
+      gap: 2rem;
+    }
+
+    @media (max-width: 768px) {
+      width: 100%;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-decoration: none;
+    color: $oasis-navy;
+
+    .water-icon {
+      font-size: 1.75rem;
+      color: $oasis-cyan;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin: 0;
+      color: $oasis-navy;
+
+      @media (max-width: 768px) {
+        font-size: 1.25rem;
+      }
+    }
+  }
+
+  .main-nav {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+
+    @media (max-width: 1024px) {
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 768px) {
+      gap: 1rem;
+    }
+
+    .nav-link {
+      text-decoration: none;
+      color: #4b5563;
+      font-weight: 500;
+      font-size: 1rem;
+      transition: color 0.2s ease;
+      white-space: nowrap;
+
+      &:hover {
+        color: $oasis-cyan;
+      }
+
+      &.active {
+        color: $oasis-navy;
+        font-weight: 600;
+      }
+
+      @media (max-width: 768px) {
+        font-size: 0.875rem;
+      }
+    }
+  }
+
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+
+    @media (max-width: 768px) {
+      width: 100%;
+      gap: 1rem;
+    }
+  }
+
+  .search-box {
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    @media (max-width: 768px) {
+      flex: 1;
+    }
+
+    i {
+      position: absolute;
+      left: 1rem;
+      color: #9ca3af;
+      font-size: 1rem;
+    }
+
+    input {
+      padding: 0.75rem 1rem 0.75rem 2.75rem;
+      border: 1px solid #e5e7eb;
+      border-radius: 24px;
+      width: 300px;
+      font-size: 0.9375rem;
+      transition: all 0.2s ease;
+
+      @media (max-width: 1024px) {
+        width: 250px;
+      }
+
+      @media (max-width: 768px) {
+        width: 100%;
+      }
+
+      &:focus {
+        outline: none;
+        border-color: $oasis-cyan;
+        box-shadow: 0 0 0 3px rgba(0, 191, 255, 0.1);
+      }
+
+      &::placeholder {
+        color: #9ca3af;
+      }
+    }
+  }
+
+  .header-actions {
+    display: flex;
+    gap: 0.5rem;
+
+    .cart-btn, .user-btn {
+      color: #4b5563;
+      position: relative;
+      overflow: visible !important;
+
+      &:hover {
+        color: $oasis-cyan;
+        background: rgba(0, 191, 255, 0.1);
+      }
+
+      .cart-count-badge {
+        position: absolute;
+        top: 0.25rem;
+        right: 0.25rem;
+        background: #dc2626;
+        color: white;
+        font-size: 0.625rem;
+        font-weight: 700;
+        min-width: 1.125rem;
+        height: 1.125rem;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 0.25rem;
+        line-height: 1;
+      }
+    }
+  }
+}
+
+// User Menu Overlay - Positioned closer to button
+::ng-deep .user-menu-overlay {
+  margin-top: 0.25rem !important; // Reduced from 0.5rem for tighter positioning
+  min-width: 200px;
+  
+  .p-menu {
+    border: 1px solid $oasis-navy;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 51, 102, 0.15);
+  }
+  
+  .p-menuitem-link {
+    padding: 0.875rem 1rem;
+    color: $oasis-navy;
+    
+    .p-menuitem-icon {
+      color: $oasis-cyan;
+      margin-right: 0.75rem;
+    }
+    
+    &:hover {
+      background-color: rgba(0, 191, 255, 0.1);
+      color: $oasis-navy;
+    }
+  }
+  
+  .p-menu-separator {
+    border-top: 1px solid rgba(0, 51, 102, 0.1);
+  }
+}

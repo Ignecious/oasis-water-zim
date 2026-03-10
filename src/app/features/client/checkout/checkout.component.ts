@@ -18,6 +18,8 @@ import { FulfillmentType, PaymentMethod } from '../../../models/order.interface'
 import { Address } from '../../../models/address.interface';
 import { Customer } from '../../../models/customer.interface';
 import { CartItem } from '../../../models/cart-item.interface';
+import { TopNavBarComponent } from '../../../shared/top-nav-bar/top-nav-bar.component';
+import { StickyHeaderComponent } from '../../../shared/sticky-header/sticky-header.component';
 
 interface FulfillmentOption {
   label: string;
@@ -60,7 +62,9 @@ interface PaymentMethodOption {
     CheckboxModule,
     ButtonModule,
     CardModule,
-    DividerModule
+    DividerModule,
+    TopNavBarComponent,
+    StickyHeaderComponent
   ],
   templateUrl: './checkout.component.html',
   styleUrl: './checkout.component.scss'
@@ -84,7 +88,6 @@ export class CheckoutComponent implements OnInit {
   addresses: Address[] = [];
   selectedAddress: Address | null = null;
   cartItems: CartItem[] = [];
-  cartItemCount: number = 0;
   
   // Date and time selection
   dateChips: DateChip[] = [];
@@ -167,7 +170,6 @@ export class CheckoutComponent implements OnInit {
   private loadCart(): void {
     this.cartService.cartItems$.subscribe(items => {
       this.cartItems = items;
-      this.cartItemCount = this.cartService.getCartItemCount();
     });
   }
 
