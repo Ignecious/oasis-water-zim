@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { delay } from 'rxjs/operators';
-import { Order, CustomerDetails, OrderStatus, PaymentMethod } from '../models/order.interface';
+import { Order, CustomerDetails, OrderStatus, PaymentMethod, FulfillmentType } from '../models/order.interface';
 import { CartItem } from '../models/cart-item.interface';
 import { CollectionDetails } from '../models/collection-slot.interface';
+import { Address } from '../models/address.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ import { CollectionDetails } from '../models/collection-slot.interface';
 export class OrderService {
   private ordersSubject = new BehaviorSubject<Order[]>(this.getDemoOrders());
   public orders$ = this.ordersSubject.asObservable();
-  private orderCounter = 12;
+  private orderCounter = 1100; // Start at 1100 for OAS-001100 format
 
   constructor() { }
 
@@ -460,18 +461,21 @@ export class OrderService {
     items: CartItem[],
     paymentMethod: PaymentMethod,
     collectionDetails: CollectionDetails,
+    fulfillmentType: FulfillmentType = 'collection',
+    deliveryAddress?: Address,
     ecocashNumber?: string
   ): Observable<Order> {
     const order: Order = {
-      orderNumber: `OW-2026-${String(this.orderCounter++).padStart(3, '0')}`,
+      orderNumber: `OAS-${String(this.orderCounter++).padStart(6, '0')}`,
       orderDate: new Date(),
       customer,
       items,
       total: items.reduce((sum, item) => sum + (item.product.price * item.quantity), 0),
-      fulfillmentType: 'collection',
+      fulfillmentType,
       paymentMethod,
-      paymentStatus: paymentMethod === 'ecocash' ? 'paid' : 'pending',
+      paymentStatus: paymentMethod === 'cash' ? 'pending' : paymentMethod === 'ecocash' ? 'paid' : 'pending',
       collectionDetails,
+      deliveryAddress,
       status: 'pending',
       ecocashNumber
     };

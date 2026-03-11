@@ -1,0 +1,707 @@
+// Oasis Water Branding Colors
+$primary-teal: #00A8C5;
+$secondary-blue: #005B82;
+$success-emerald: #059669;
+$warning-amber: #F59E0B;
+$error-red: #FF5C5C;
+$text-dark: #333;
+$text-light: #666;
+$bg-light: #F5F5F5;
+$bg-white: #FFFFFF;
+$border-color: #E0E0E0;
+
+// Container Styles
+.loading-container,
+.not-found-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  padding: 2rem;
+  text-align: center;
+
+  .spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid $bg-light;
+    border-top-color: $primary-teal;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    color: $text-light;
+    font-size: 1.1rem;
+  }
+}
+
+.not-found-content {
+  i {
+    font-size: 4rem;
+    color: $warning-amber;
+    margin-bottom: 1rem;
+  }
+
+  h2 {
+    color: $text-dark;
+    margin-bottom: 0.5rem;
+  }
+
+  p {
+    margin-bottom: 1.5rem;
+  }
+
+  .btn-primary {
+    padding: 0.75rem 2rem;
+    background-color: $primary-teal;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: darken($primary-teal, 10%);
+    }
+  }
+}
+
+// Order Confirmation Container
+.order-confirmation-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  animation: fadeIn 0.5s ease-in-out;
+
+  // Success Header
+  .success-header {
+    text-align: center;
+    margin-bottom: 2rem;
+    padding: 2rem;
+    background: linear-gradient(135deg, $primary-teal 0%, $secondary-blue 100%);
+    border-radius: 12px;
+    color: white;
+    animation: slideDown 0.6s ease-out;
+
+    .success-icon {
+      i {
+        font-size: 4rem;
+        animation: scaleIn 0.6s ease-out 0.2s both;
+      }
+    }
+
+    h1 {
+      margin: 1rem 0 0.5rem;
+      font-size: 2rem;
+      font-weight: 700;
+    }
+
+    .success-message {
+      font-size: 1.1rem;
+      opacity: 0.95;
+      margin: 0;
+    }
+  }
+
+  // Order Number Badge
+  .order-number-badge {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    background-color: $bg-light;
+    border-left: 4px solid $primary-teal;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+
+    .label {
+      font-weight: 600;
+      color: $text-light;
+      font-size: 0.95rem;
+    }
+
+    .number {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: $secondary-blue;
+      letter-spacing: 1px;
+    }
+  }
+
+  // Email Notification
+  .email-notification {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.5rem;
+    background-color: #e8f4f8;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    border: 1px solid lighten($primary-teal, 30%);
+
+    i {
+      font-size: 1.5rem;
+      color: $primary-teal;
+    }
+
+    p {
+      margin: 0;
+      color: $text-dark;
+      font-size: 0.95rem;
+
+      strong {
+        color: $secondary-blue;
+      }
+    }
+  }
+
+  // Card Styles
+  .order-details-card,
+  .fulfillment-card,
+  .order-items-card,
+  .customer-info-card {
+    background-color: $bg-white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+
+    &:hover {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    h2 {
+      color: $secondary-blue;
+      margin-top: 0;
+      margin-bottom: 1.25rem;
+      font-size: 1.3rem;
+      font-weight: 600;
+      padding-bottom: 0.75rem;
+      border-bottom: 2px solid $bg-light;
+    }
+  }
+
+  // Order Details Grid
+  .details-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.25rem;
+
+    .detail-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+
+      .detail-label {
+        font-size: 0.85rem;
+        color: $text-light;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      .detail-value {
+        font-size: 1rem;
+        color: $text-dark;
+        font-weight: 600;
+      }
+    }
+  }
+
+  // Status Badges
+  .status-badge {
+    display: inline-block;
+    padding: 0.35rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+
+    &.paid {
+      background-color: lighten($success-emerald, 45%);
+      color: darken($success-emerald, 10%);
+    }
+
+    &.pending {
+      background-color: lighten($warning-amber, 40%);
+      color: darken($warning-amber, 10%);
+    }
+
+    &.status-pending {
+      background-color: lighten($warning-amber, 40%);
+      color: darken($warning-amber, 10%);
+    }
+
+    &.status-processing {
+      background-color: lighten($primary-teal, 45%);
+      color: darken($primary-teal, 10%);
+    }
+
+    &.status-ready {
+      background-color: lighten($success-emerald, 45%);
+      color: darken($success-emerald, 10%);
+    }
+
+    &.status-completed {
+      background-color: lighten($secondary-blue, 55%);
+      color: darken($secondary-blue, 5%);
+    }
+  }
+
+  // Fulfillment Card
+  .fulfillment-card {
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+
+      i {
+        font-size: 1.8rem;
+        color: $primary-teal;
+      }
+
+      h2 {
+        margin: 0;
+        padding: 0;
+        border: none;
+      }
+    }
+
+    .fulfillment-details {
+      .detail-row {
+        display: flex;
+        gap: 1rem;
+        padding: 1rem 0;
+        border-bottom: 1px solid $bg-light;
+
+        &:last-child {
+          border-bottom: none;
+        }
+
+        > i {
+          font-size: 1.3rem;
+          color: $primary-teal;
+          margin-top: 0.25rem;
+          min-width: 24px;
+        }
+
+        .detail-content {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          gap: 0.4rem;
+
+          .detail-label {
+            font-size: 0.85rem;
+            color: $text-light;
+            font-weight: 500;
+          }
+
+          .detail-value {
+            font-size: 1rem;
+            color: $text-dark;
+            font-weight: 600;
+          }
+        }
+      }
+    }
+
+    .info-box {
+      display: flex;
+      gap: 1rem;
+      padding: 1rem;
+      background-color: lighten($primary-teal, 48%);
+      border-left: 3px solid $primary-teal;
+      border-radius: 6px;
+      margin-top: 1.25rem;
+
+      i {
+        font-size: 1.2rem;
+        color: $primary-teal;
+        margin-top: 0.2rem;
+      }
+
+      p {
+        margin: 0;
+        font-size: 0.9rem;
+        color: darken($primary-teal, 20%);
+        line-height: 1.5;
+      }
+    }
+
+    &.collection {
+      border-left: 4px solid $primary-teal;
+    }
+
+    &.delivery {
+      border-left: 4px solid $secondary-blue;
+
+      .card-header i,
+      .detail-row > i,
+      .info-box {
+        color: $secondary-blue;
+        border-left-color: $secondary-blue;
+      }
+
+      .info-box {
+        background-color: lighten($secondary-blue, 58%);
+        border-left-color: $secondary-blue;
+
+        p {
+          color: darken($secondary-blue, 15%);
+        }
+      }
+    }
+  }
+
+  // Order Items
+  .order-items-card {
+    .items-list {
+      .item-row {
+        display: grid;
+        grid-template-columns: 80px 1fr auto auto;
+        gap: 1rem;
+        padding: 1rem 0;
+        border-bottom: 1px solid $bg-light;
+        align-items: center;
+
+        &:last-child {
+          border-bottom: none;
+        }
+
+        .item-image {
+          width: 80px;
+          height: 80px;
+          object-fit: cover;
+          border-radius: 8px;
+          border: 1px solid $border-color;
+        }
+
+        .item-details {
+          h3 {
+            margin: 0 0 0.25rem;
+            font-size: 1.05rem;
+            color: $text-dark;
+            font-weight: 600;
+          }
+
+          .item-description {
+            margin: 0 0 0.25rem;
+            font-size: 0.85rem;
+            color: $text-light;
+          }
+
+          .item-size {
+            margin: 0;
+            font-size: 0.8rem;
+            color: $text-light;
+            font-weight: 500;
+          }
+        }
+
+        .item-quantity {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          padding: 0.5rem 1rem;
+          background-color: $bg-light;
+          border-radius: 8px;
+
+          .quantity-label {
+            font-size: 0.75rem;
+            color: $text-light;
+            font-weight: 500;
+          }
+
+          .quantity-value {
+            font-size: 1.2rem;
+            color: $text-dark;
+            font-weight: 700;
+          }
+        }
+
+        .item-price {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-end;
+          min-width: 100px;
+
+          .unit-price {
+            font-size: 0.8rem;
+            color: $text-light;
+            margin-bottom: 0.25rem;
+          }
+
+          .total-price {
+            font-size: 1.15rem;
+            color: $secondary-blue;
+            font-weight: 700;
+          }
+        }
+      }
+    }
+
+    .order-total {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 0 0.5rem;
+      margin-top: 1rem;
+      border-top: 2px solid $secondary-blue;
+
+      .total-label {
+        font-size: 1.2rem;
+        color: $text-dark;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      .total-amount {
+        font-size: 1.8rem;
+        color: $secondary-blue;
+        font-weight: 700;
+      }
+    }
+  }
+
+  // Customer Information
+  .customer-info-card {
+    .customer-details {
+      .customer-row {
+        display: flex;
+        gap: 1rem;
+        padding: 0.75rem 0;
+        border-bottom: 1px solid $bg-light;
+
+        &:last-child {
+          border-bottom: none;
+        }
+
+        i {
+          font-size: 1.2rem;
+          color: $primary-teal;
+          margin-top: 0.25rem;
+          min-width: 24px;
+        }
+
+        div {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          gap: 0.3rem;
+
+          .detail-label {
+            font-size: 0.8rem;
+            color: $text-light;
+            font-weight: 500;
+          }
+
+          .detail-value {
+            font-size: 0.95rem;
+            color: $text-dark;
+            font-weight: 600;
+          }
+        }
+      }
+    }
+  }
+
+  // Action Buttons
+  .action-buttons {
+    display: flex;
+    gap: 1rem;
+    margin: 2rem 0;
+    flex-wrap: wrap;
+
+    button {
+      flex: 1;
+      min-width: 200px;
+      padding: 1rem 1.5rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+
+      i {
+        font-size: 1.1rem;
+      }
+
+      &.btn-download {
+        background-color: $secondary-blue;
+        color: white;
+
+        &:hover {
+          background-color: darken($secondary-blue, 10%);
+          transform: translateY(-2px);
+          box-shadow: 0 4px 12px rgba($secondary-blue, 0.3);
+        }
+      }
+
+      &.btn-secondary {
+        background-color: $bg-light;
+        color: $text-dark;
+        border: 2px solid $border-color;
+
+        &:hover {
+          background-color: darken($bg-light, 5%);
+          border-color: $primary-teal;
+          color: $primary-teal;
+        }
+      }
+    }
+  }
+
+  // Support Info
+  .support-info {
+    text-align: center;
+    padding: 1.5rem;
+    background-color: $bg-light;
+    border-radius: 8px;
+    margin-top: 2rem;
+
+    p {
+      margin: 0 0 0.75rem;
+      color: $text-light;
+      font-size: 0.95rem;
+    }
+
+    .contact-details {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+
+      span {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: $secondary-blue;
+        font-weight: 600;
+        font-size: 0.95rem;
+
+        i {
+          color: $primary-teal;
+        }
+      }
+    }
+  }
+}
+
+// Animations
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// Responsive Design
+@media (max-width: 768px) {
+  .order-confirmation-container {
+    padding: 1rem 0.5rem;
+
+    .success-header {
+      padding: 1.5rem 1rem;
+
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      .success-message {
+        font-size: 0.95rem;
+      }
+    }
+
+    .order-number-badge {
+      flex-direction: column;
+      gap: 0.5rem;
+      text-align: center;
+    }
+
+    .details-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .order-items-card .items-list .item-row {
+      grid-template-columns: 60px 1fr;
+      gap: 0.75rem;
+
+      .item-image {
+        width: 60px;
+        height: 60px;
+      }
+
+      .item-quantity,
+      .item-price {
+        grid-column: 2;
+      }
+
+      .item-quantity {
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+        padding: 0.5rem;
+        margin-top: 0.5rem;
+      }
+
+      .item-price {
+        align-items: flex-start;
+        margin-top: 0.25rem;
+      }
+    }
+
+    .action-buttons {
+      flex-direction: column;
+
+      button {
+        width: 100%;
+        min-width: unset;
+      }
+    }
+
+    .support-info .contact-details {
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+  }
+}
