@@ -128,7 +128,14 @@
                     class="quantity-btn"
                     (click)="decreaseQuantity(product.id)">
                   </button>
-                  <span class="quantity-display">{{getItemQuantity(product.id)}}</span>
+                  <input 
+                    type="number" 
+                    class="quantity-input"
+                    [value]="getItemQuantity(product.id)"
+                    (change)="updateQuantity(product.id, $event)"
+                    (blur)="validateQuantity(product.id, $event)"
+                    min="1"
+                    step="1">
                   <button 
                     pButton 
                     icon="pi pi-plus"

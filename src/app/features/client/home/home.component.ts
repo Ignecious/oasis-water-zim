@@ -120,4 +120,27 @@ export class HomeComponent implements OnInit, OnDestroy {
   getItemQuantity(productId: string): number {
     return this.cartService.getItemQuantity(productId);
   }
+
+  updateQuantity(productId: string, event: Event): void {
+    const input = event.target as HTMLInputElement;
+    const newQuantity = parseInt(input.value, 10);
+    
+    if (!isNaN(newQuantity) && newQuantity > 0) {
+      this.cartService.updateQuantity(productId, newQuantity);
+    } else {
+      // Reset to current quantity if invalid
+      input.value = this.getItemQuantity(productId).toString();
+    }
+  }
+
+  validateQuantity(productId: string, event: Event): void {
+    const input = event.target as HTMLInputElement;
+    const currentQuantity = this.getItemQuantity(productId);
+    const newQuantity = parseInt(input.value, 10);
+    
+    // Ensure valid quantity on blur
+    if (isNaN(newQuantity) || newQuantity < 1) {
+      input.value = currentQuantity.toString();
+    }
+  }
 }

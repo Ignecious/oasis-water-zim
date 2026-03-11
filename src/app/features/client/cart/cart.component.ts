@@ -90,6 +90,8 @@ export class CartComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    // Scroll to top when cart page loads
+    window.scrollTo(0, 0);
     this.loadCart();
   }
 
