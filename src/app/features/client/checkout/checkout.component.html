@@ -217,9 +217,27 @@
   [modal]="true"
   [draggable]="false"
   [resizable]="false"
+  [closable]="true"
   styleClass="add-address-modal"
-  header="Add New Address">
+  [showHeader]="false">
+  
+  <!-- Custom Header -->
+  <div class="custom-modal-header">
+    <div class="header-content">
+      <i class="pi pi-map-marker header-icon"></i>
+      <h2 class="header-title">Add New Address</h2>
+    </div>
+    <button 
+      type="button" 
+      class="close-btn"
+      (click)="closeAddAddressModal()">
+      <i class="pi pi-times"></i>
+    </button>
+  </div>
+
+  <!-- Modal Content -->
   <div class="modal-content">
+    <!-- Street Address -->
     <div class="form-field">
       <label for="street">Street Address</label>
       <input 
@@ -227,55 +245,79 @@
         type="text" 
         pInputText 
         [(ngModel)]="newAddress.street"
-        placeholder="Enter street address" />
+        placeholder="15 Samora Avenue, Harare" />
     </div>
 
-    <div class="form-field">
-      <label for="suburb">Suburb</label>
-      <input 
-        id="suburb"
-        type="text" 
-        pInputText 
-        [(ngModel)]="newAddress.suburb"
-        placeholder="Enter suburb" />
+    <!-- Suburb & City Grid -->
+    <div class="form-grid">
+      <div class="form-field">
+        <label for="suburb">Suburb</label>
+        <input 
+          id="suburb"
+          type="text" 
+          pInputText 
+          [(ngModel)]="newAddress.suburb"
+          placeholder="Spring Valley" />
+      </div>
+
+      <div class="form-field">
+        <label for="city">City</label>
+        <input 
+          id="city"
+          type="text" 
+          pInputText 
+          [(ngModel)]="newAddress.city"
+          placeholder="Harare" />
+      </div>
     </div>
 
+    <!-- Delivery Notes -->
     <div class="form-field">
-      <label for="city">City</label>
-      <input 
-        id="city"
-        type="text" 
-        pInputText 
-        [(ngModel)]="newAddress.city"
-        placeholder="Enter city" />
+      <div class="label-with-optional">
+        <label for="deliveryNotes">Delivery Notes</label>
+        <span class="optional-tag">Optional</span>
+      </div>
+      <textarea 
+        id="deliveryNotes"
+        pInputTextarea
+        [(ngModel)]="newAddress.deliveryNotes"
+        placeholder="Gate code, drop-off instructions, etc."
+        rows="3"
+        [autoResize]="false">
+      </textarea>
     </div>
 
-    <div class="form-field">
+    <!-- Save as Default Checkbox -->
+    <div class="checkbox-field">
       <p-checkbox 
         [(ngModel)]="newAddress.isDefault"
         [binary]="true"
         inputId="isDefault"
-        label="Set as default address">
+        label="Save as default address">
       </p-checkbox>
     </div>
   </div>
 
+  <!-- Custom Footer -->
   <ng-template pTemplate="footer">
-    <button 
-      pButton 
-      type="button" 
-      label="Cancel" 
-      class="p-button-text"
-      (click)="closeAddAddressModal()">
-    </button>
-    <button 
-      pButton 
-      type="button" 
-      label="Save Address" 
-      icon="pi pi-check"
-      [disabled]="!newAddress.street || !newAddress.suburb || !newAddress.city"
-      (click)="saveNewAddress()">
-    </button>
+    <div class="modal-actions">
+      <button 
+        pButton 
+        type="button" 
+        label="Cancel" 
+        class="cancel-btn"
+        (click)="closeAddAddressModal()">
+      </button>
+      <button 
+        pButton 
+        type="button" 
+        label="Save Address" 
+        icon="pi pi-save"
+        class="save-btn"
+        [disabled]="!newAddress.street || !newAddress.suburb || !newAddress.city"
+        (click)="saveNewAddress()">
+      </button>
+    </div>
   </ng-template>
 </p-dialog>
 </main>

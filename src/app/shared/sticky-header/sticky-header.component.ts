@@ -19,18 +19,18 @@ import { ProfileDrawerComponent } from '../profile-drawer/profile-drawer.compone
   styleUrl: './sticky-header.component.scss'
 })
 export class StickyHeaderComponent implements OnInit, OnDestroy {
-  cartItemCount: number = 0;
+  cartTotal: number = 0;
   isProfileDrawerOpen: boolean = false;
   private destroy$ = new Subject<void>();
 
   constructor(private cartService: CartService) {}
 
   ngOnInit(): void {
-    // Subscribe to cart items and calculate count
+    // Subscribe to cart items and calculate total amount
     this.cartService.cartItems$
       .pipe(takeUntil(this.destroy$))
       .subscribe((items: any[]) => {
-        this.cartItemCount = items.reduce((count, item) => count + item.quantity, 0);
+        this.cartTotal = items.reduce((total, item) => total + (item.product.price * item.quantity), 0);
       });
   }
 

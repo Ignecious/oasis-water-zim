@@ -15,7 +15,7 @@ import { ProfileDrawerComponent } from '../profile-drawer/profile-drawer.compone
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent implements OnInit, OnDestroy {
-  cartItemCount = 0;
+  cartTotal = 0;
   isProfileDrawerOpen = false;
   private destroy$ = new Subject<void>();
 
@@ -25,7 +25,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.cartService.cartItems$
       .pipe(takeUntil(this.destroy$))
       .subscribe(items => {
-        this.cartItemCount = items.reduce((count, item) => count + item.quantity, 0);
+        this.cartTotal = items.reduce((total, item) => total + (item.product.price * item.quantity), 0);
       });
   }
 

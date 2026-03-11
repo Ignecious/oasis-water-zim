@@ -21,7 +21,7 @@
           icon="pi pi-shopping-cart" 
           class="p-button-rounded p-button-text cart-btn"
           routerLink="/cart">
-          <span *ngIf="cartItemCount > 0" class="cart-count-badge">{{ cartItemCount }}</span>
+          <span *ngIf="cartTotal > 0" class="cart-total-badge">${{ cartTotal.toFixed(2) }}</span>
         </button>
         <button 
           pButton 

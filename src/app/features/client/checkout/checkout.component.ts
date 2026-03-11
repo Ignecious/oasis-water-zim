@@ -5,6 +5,7 @@ import { Router, RouterLink } from '@angular/router';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { DialogModule } from 'primeng/dialog';
 import { InputTextModule } from 'primeng/inputtext';
+import { InputTextareaModule } from 'primeng/inputtextarea';
 import { CheckboxModule } from 'primeng/checkbox';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
@@ -60,6 +61,7 @@ interface PaymentMethodOption {
     SelectButtonModule,
     DialogModule,
     InputTextModule,
+    InputTextareaModule,
     CheckboxModule,
     ButtonModule,
     CardModule,
@@ -137,7 +139,8 @@ export class CheckoutComponent implements OnInit {
     suburb: '',
     city: 'Harare',
     type: 'home' as const,
-    isDefault: false
+    isDefault: false,
+    deliveryNotes: ''
   };
 
   constructor(
@@ -262,7 +265,8 @@ export class CheckoutComponent implements OnInit {
       suburb: '',
       city: 'Harare',
       type: 'home',
-      isDefault: false
+      isDefault: false,
+      deliveryNotes: ''
     };
   }
 
