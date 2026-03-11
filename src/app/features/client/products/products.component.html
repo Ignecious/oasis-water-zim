@@ -4,6 +4,9 @@
 <!-- Sticky Header -->
 <app-sticky-header></app-sticky-header>
 
+<!-- Toast for notifications -->
+<p-toast></p-toast>
+
 <!-- Main Content -->
 <main class="products-main">
   <div class="products-container">
@@ -46,6 +49,7 @@
               <span class="price">${{ product.price.toFixed(2) }}</span>
             </div>
             <p class="product-desc">{{ product.size }}</p>
+            <p *ngIf="getMOQText(product)" class="moq-text">{{ getMOQText(product) }}</p>
           </div>
 
           <ng-template pTemplate="footer">
@@ -75,8 +79,8 @@
                   [value]="getItemQuantity(product.id)"
                   (change)="updateQuantity(product.id, $event)"
                   (blur)="validateQuantity(product.id, $event)"
-                  min="1"
-                  step="1">
+                  [min]="getMinQuantity(product)"
+                  [step]="getQuantityStep(product)">
                 <button 
                   pButton 
                   icon="pi pi-plus" 

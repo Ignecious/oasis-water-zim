@@ -6,6 +6,8 @@ import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { BadgeModule } from 'primeng/badge';
+import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
 import { Subject, takeUntil } from 'rxjs';
 import { ProductService } from '../../../services/product.service';
 import { CartService } from '../../../services/cart.service';
@@ -25,10 +27,12 @@ import { FooterNewComponent } from '../../../shared/footer-new/footer-new.compon
     ButtonModule,
     InputTextModule,
     BadgeModule,
+    ToastModule,
     TopNavBarComponent,
     StickyHeaderComponent,
     FooterNewComponent
   ],
+  providers: [MessageService],
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss'
 })
@@ -50,7 +54,8 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
   constructor(
     private productService: ProductService,
-    private cartService: CartService
+    private cartService: CartService,
+    private messageService: MessageService
   ) {}
 
   ngOnInit(): void {
@@ -105,10 +110,24 @@ export class ProductsComponent implements OnInit, OnDestroy {
       event.stopPropagation();
     }
     
+    // Check MOQ validation
+    const initialQty = product.minOrderQty || 1;
+    const validation = this.cartService.validateMinimumQuantity(product, initialQty);
+    
+    if (!validation.isValid) {
+      this.messageService.add({
+        severity: 'warn',
+        summary: 'Minimum Order Not Met',
+        detail: validation.message,
+        life: 3000
+      });
+      return;
+    }
+    
     // Visual feedback - button animation
     this.addingToCart[product.id] = true;
     
-    this.cartService.addToCart(product, 1);
+    this.cartService.addToCart(product, initialQty);
     
     // Reset button state after animation
     setTimeout(() => {
@@ -140,9 +159,25 @@ export class ProductsComponent implements OnInit, OnDestroy {
   updateQuantity(productId: string, event: Event): void {
     const input = event.target as HTMLInputElement;
     const newQuantity = parseInt(input.value, 10);
+    const product = this.allProducts.find(p => p.id === productId);
+    
+    if (!product) return;
     
     if (!isNaN(newQuantity) && newQuantity > 0) {
-      this.cartService.updateQuantity(productId, newQuantity);
+      const validation = this.cartService.validateMinimumQuantity(product, newQuantity);
+      
+      if (validation.isValid) {
+        this.cartService.updateQuantity(productId, newQuantity);
+      } else {
+        this.messageService.add({
+          severity: 'warn',
+          summary: 'Invalid Quantity',
+          detail: validation.message,
+          life: 3000
+        });
+        // Reset to current quantity if invalid
+        input.value = this.getItemQuantity(productId).toString();
+      }
     } else {
       // Reset to current quantity if invalid
       input.value = this.getItemQuantity(productId).toString();
@@ -153,10 +188,55 @@ export class ProductsComponent implements OnInit, OnDestroy {
     const input = event.target as HTMLInputElement;
     const currentQuantity = this.getItemQuantity(productId);
     const newQuantity = parseInt(input.value, 10);
+    const product = this.allProducts.find(p => p.id === productId);
+    
+    if (!product) return;
     
     // Ensure valid quantity on blur
     if (isNaN(newQuantity) || newQuantity < 1) {
       input.value = currentQuantity.toString();
+      return;
     }
+    
+    // Validate against MOQ rules
+    const validation = this.cartService.validateMinimumQuantity(product, newQuantity);
+    if (!validation.isValid) {
+      this.messageService.add({
+        severity: 'warn',
+        summary: 'Invalid Quantity',
+        detail: validation.message,
+        life: 3000
+      });
+      input.value = currentQuantity.toString();
+    }
+  }
+
+  /**
+   * Get MOQ helper text for a product
+   */
+  getMOQText(product: Product): string {
+    if (!product.minOrderQty) {
+      return '';
+    }
+    
+    const unitLabel = product.unitType || 'units';
+    if (product.qtyIncrement && product.qtyIncrement > 1) {
+      return `Sold in ${unitLabel} (min: ${product.minOrderQty})`;
+    }
+    return `Minimum order: ${product.minOrderQty} ${unitLabel}`;
+  }
+
+  /**
+   * Get the minimum value for quantity input
+   */
+  getMinQuantity(product: Product): number {
+    return product.minOrderQty || 1;
+  }
+
+  /**
+   * Get the step value for quantity input
+   */
+  getQuantityStep(product: Product): number {
+    return product.qtyIncrement || 1;
   }
 }

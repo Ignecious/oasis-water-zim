@@ -264,6 +264,14 @@
     flex: 1;
   }
 
+  .moq-text {
+    font-size: 0.75rem;
+    color: $oasis-cyan;
+    margin: 0.25rem 0 1rem 0;
+    font-weight: 500;
+    font-style: italic;
+  }
+
   .add-cart-btn {
     background: $oasis-navy;
     border-color: $oasis-navy;

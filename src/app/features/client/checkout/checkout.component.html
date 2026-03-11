@@ -195,6 +195,18 @@
             </span>
           </div>
 
+          <!-- MOQ Error Messages -->
+          <div *ngIf="hasCartMOQErrors()" class="moq-errors">
+            <div class="error-header">
+              <i class="pi pi-exclamation-triangle"></i>
+              <span>Minimum Order Requirements Not Met</span>
+            </div>
+            <ul class="error-list">
+              <li *ngFor="let error of getCartMOQErrors()">{{ error }}</li>
+            </ul>
+            <p class="error-hint">Please adjust quantities in your cart before proceeding.</p>
+          </div>
+
           <button 
             pButton 
             type="button" 
