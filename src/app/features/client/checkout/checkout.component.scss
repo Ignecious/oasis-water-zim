@@ -629,55 +629,235 @@ $success-green: #10B981;
 // Add Address Modal
 ::ng-deep .add-address-modal {
   .p-dialog {
-    max-width: 500px;
+    max-width: 520px;
     width: 90%;
-  }
-
-  .p-dialog-header {
-    padding: 1.5rem;
-    background: white;
-    border-bottom: 1px solid $oasis-border;
+    border-radius: 12px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
   }
 
   .p-dialog-content {
-    padding: 1.5rem;
+    padding: 0;
   }
 
   .p-dialog-footer {
-    padding: 1rem 1.5rem;
-    background: $oasis-light-bg;
-    border-top: 1px solid $oasis-border;
+    padding: 0;
+    background: transparent;
+    border-top: none;
+  }
+}
+
+// Custom Modal Header
+.custom-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid #E2E8F0;
+  background: white;
+
+  .header-content {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+
+    .header-icon {
+      font-size: 1.5rem;
+      color: $oasis-cyan;
+    }
+
+    .header-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: $oasis-navy;
+      margin: 0;
+      letter-spacing: -0.01em;
+    }
+  }
+
+  .close-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border: none;
+    background: transparent;
+    color: #64748B;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background: #F1F5F9;
+      color: $oasis-navy;
+    }
+
+    i {
+      font-size: 1.125rem;
+    }
   }
 }
 
 .modal-content {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.25rem;
+  padding: 1.5rem;
+  max-height: 70vh;
+  overflow-y: auto;
 }
 
 .form-field {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.375rem;
 
   label {
-    font-weight: 500;
+    font-weight: 600;
     color: $oasis-navy;
     font-size: 0.875rem;
   }
 
-  input {
+  input, textarea {
     width: 100%;
-    padding: 0.75rem;
-    border: 1px solid $oasis-border;
-    border-radius: 6px;
+    padding: 0.75rem 1rem;
+    border: 1px solid #CBD5E1;
+    border-radius: 8px;
     font-size: 0.9375rem;
+    transition: all 0.2s ease;
+    color: #1E293B;
+
+    &::placeholder {
+      color: #94A3B8;
+    }
 
     &:focus {
       outline: none;
       border-color: $oasis-cyan;
       box-shadow: 0 0 0 3px rgba($oasis-cyan, 0.1);
+    }
+  }
+
+  textarea {
+    resize: none;
+    font-family: inherit;
+  }
+}
+
+// Form Grid for Suburb and City
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+
+  @media (max-width: 640px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+// Label with Optional Tag
+.label-with-optional {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  label {
+    margin: 0;
+  }
+
+  .optional-tag {
+    font-size: 0.75rem;
+    color: #94A3B8;
+    font-weight: 500;
+  }
+}
+
+// Checkbox Field
+.checkbox-field {
+  padding-top: 0.5rem;
+
+  ::ng-deep .p-checkbox {
+    .p-checkbox-box {
+      width: 1.25rem;
+      height: 1.25rem;
+      border-radius: 4px;
+      border: 2px solid #CBD5E1;
+      background: white;
+      transition: all 0.2s ease;
+
+      &.p-highlight {
+        background: $oasis-cyan;
+        border-color: $oasis-cyan;
+
+        .p-checkbox-icon {
+          color: white;
+        }
+      }
+
+      &:hover {
+        border-color: $oasis-cyan;
+      }
+    }
+  }
+
+  ::ng-deep .p-checkbox-label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: $oasis-navy;
+    margin-left: 0.5rem;
+  }
+}
+
+// Modal Actions
+.modal-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1.5rem;
+  border-top: 1px solid #E2E8F0;
+
+  @media (min-width: 640px) {
+    flex-direction: row;
+  }
+
+  button {
+    flex: 1;
+    padding: 0.875rem 1.5rem;
+    font-weight: 700;
+    font-size: 0.9375rem;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+
+    &.cancel-btn {
+      background: #F1F5F9;
+      color: #475569;
+
+      &:hover {
+        background: #E2E8F0;
+      }
+    }
+
+    &.save-btn {
+      background: $oasis-cyan;
+      color: white;
+      box-shadow: 0 4px 14px rgba($oasis-cyan, 0.2);
+
+      &:hover:not(:disabled) {
+        background: darken($oasis-cyan, 5%);
+        box-shadow: 0 6px 20px rgba($oasis-cyan, 0.3);
+        transform: translateY(-1px);
+      }
+
+      &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
     }
   }
 }

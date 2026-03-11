@@ -54,7 +54,7 @@
         <a routerLink="/cart" routerLinkActive="active" class="nav-link cart-link" aria-label="Shopping Cart">
           <i class="pi pi-shopping-cart"></i>
           <span>Cart</span>
-          <span *ngIf="cartItemCount > 0" class="p-badge p-badge-danger cart-badge">{{ cartItemCount }}</span>
+          <span *ngIf="cartTotal > 0" class="p-badge p-badge-danger cart-badge">${{ cartTotal.toFixed(2) }}</span>
         </a>
         <a routerLink="/order-status" routerLinkActive="active" class="nav-link" aria-label="Order Status">
           <i class="pi pi-list"></i>
