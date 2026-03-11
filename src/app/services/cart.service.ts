@@ -118,4 +118,60 @@ export class CartService {
       }
     }
   }
+
+  /**
+   * Validates if the quantity meets the product's minimum order requirements
+   * @param product The product to validate
+   * @param quantity The quantity to validate
+   * @returns Object with isValid flag and error message if invalid
+   */
+  validateMinimumQuantity(product: Product, quantity: number): { isValid: boolean; message?: string } {
+    // If no MOQ configured, any positive quantity is valid
+    if (!product.minOrderQty) {
+      return { isValid: quantity > 0 };
+    }
+
+    // Check minimum quantity
+    if (quantity < product.minOrderQty) {
+      const unitLabel = product.unitType || 'units';
+      return {
+        isValid: false,
+        message: `Minimum order is ${product.minOrderQty} cases (${unitLabel})`
+      };
+    }
+
+    // Check increment requirement
+    if (product.qtyIncrement && quantity % product.qtyIncrement !== 0) {
+      const unitLabel = product.unitType || 'units';
+      const nextValid1 = Math.ceil(quantity / product.qtyIncrement) * product.qtyIncrement;
+      const nextValid2 = nextValid1 + product.qtyIncrement;
+      const nextValid3 = nextValid2 + product.qtyIncrement;
+      
+      return {
+        isValid: false,
+        message: `Must be in multiples of ${product.qtyIncrement} cases (${unitLabel}). Try ${nextValid1} cases, ${nextValid2} cases, ${nextValid3} cases`
+      };
+    }
+
+    return { isValid: true };
+  }
+
+  /**
+   * Gets the next valid quantity for a product based on MOQ rules
+   * @param product The product
+   * @param currentQuantity Current quantity
+   * @param direction 'up' or 'down'
+   * @returns Next valid quantity
+   */
+  getNextValidQuantity(product: Product, currentQuantity: number, direction: 'up' | 'down'): number {
+    const increment = product.qtyIncrement || 1;
+    const minQty = product.minOrderQty || 1;
+
+    if (direction === 'up') {
+      return currentQuantity + increment;
+    } else {
+      const nextQty = currentQuantity - increment;
+      return nextQty < minQty ? minQty : nextQty;
+    }
+  }
 }

@@ -9,4 +9,7 @@ export interface Product {
   description: string;
   stock?: number;
   featured?: boolean;
+  minOrderQty?: number;  // Minimum order quantity
+  qtyIncrement?: number;  // Quantity must be in increments of this value
+  unitType?: string;  // Descriptive unit type (e.g., "6-pack", "case", "unit")
 }

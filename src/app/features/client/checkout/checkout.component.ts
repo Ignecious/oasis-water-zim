@@ -283,6 +283,30 @@ export class CheckoutComponent implements OnInit {
       : 'Proceed to Secure Payment';
   }
 
+  /**
+   * Check if cart has any MOQ violations
+   */
+  hasCartMOQErrors(): boolean {
+    return this.cartItems.some(item => {
+      const validation = this.cartService.validateMinimumQuantity(item.product, item.quantity);
+      return !validation.isValid;
+    });
+  }
+
+  /**
+   * Get MOQ error messages for cart items
+   */
+  getCartMOQErrors(): string[] {
+    const errors: string[] = [];
+    this.cartItems.forEach(item => {
+      const validation = this.cartService.validateMinimumQuantity(item.product, item.quantity);
+      if (!validation.isValid && validation.message) {
+        errors.push(`${item.product.name}: ${validation.message}`);
+      }
+    });
+    return errors;
+  }
+
   isCheckoutValid(): boolean {
     return !!(
       this.selectedFulfillment &&
@@ -290,7 +314,8 @@ export class CheckoutComponent implements OnInit {
       this.selectedTimeSlot &&
       this.selectedPaymentMethod &&
       (this.selectedFulfillment === 'collection' || this.selectedAddress) &&
-      this.cartItems.length > 0
+      this.cartItems.length > 0 &&
+      !this.hasCartMOQErrors()  // Include MOQ validation
     );
   }
 

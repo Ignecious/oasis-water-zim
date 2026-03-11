@@ -68,6 +68,9 @@ export class CartComponent implements OnInit, OnDestroy {
   orderConfirmation: OrderConfirmation | null = null;
   isProcessingPayment: boolean = false;
   
+  // Minimum cart total to encourage bulk buying
+  readonly MINIMUM_CART_TOTAL = 50;
+  
   private destroy$ = new Subject<void>();
 
   timeSlots: TimeSlot[] = [
@@ -90,6 +93,8 @@ export class CartComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    // Scroll to top when cart page loads
+    window.scrollTo(0, 0);
     this.loadCart();
   }
 
@@ -230,5 +235,43 @@ export class CartComponent implements OnInit, OnDestroy {
 
   getTotalItemCount(): number {
     return this.cartItems.reduce((count, item) => count + item.quantity, 0);
+  }
+
+  /**
+   * Check if cart has any MOQ violations
+   */
+  hasCartMOQErrors(): boolean {
+    return this.cartItems.some(item => {
+      const validation = this.cartService.validateMinimumQuantity(item.product, item.quantity);
+      return !validation.isValid;
+    });
+  }
+
+  /**
+   * Get MOQ error messages for cart items
+   */
+  getCartMOQErrors(): string[] {
+    const errors: string[] = [];
+    this.cartItems.forEach(item => {
+      const validation = this.cartService.validateMinimumQuantity(item.product, item.quantity);
+      if (!validation.isValid && validation.message) {
+        errors.push(`${item.product.name}: ${validation.message}`);
+      }
+    });
+    return errors;
+  }
+
+  /**
+   * Check if cart meets minimum total requirement
+   */
+  meetsMinimumCartTotal(): boolean {
+    return this.subtotal >= this.MINIMUM_CART_TOTAL;
+  }
+
+  /**
+   * Check if checkout should be disabled
+   */
+  isCheckoutDisabled(): boolean {
+    return this.hasCartMOQErrors() || !this.meetsMinimumCartTotal();
   }
 }

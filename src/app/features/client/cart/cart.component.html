@@ -117,10 +117,29 @@
             </div>
           </div>
         </div>
+
+        <!-- MOQ Errors Section -->
+        <div *ngIf="hasCartMOQErrors()" class="moq-errors-section">
+          <div class="moq-error-card">
+            <div class="error-header">
+              <i class="pi pi-exclamation-triangle"></i>
+              <h4>Minimum Order Requirements Not Met</h4>
+            </div>
+            <div class="error-content">
+              <ul class="error-list">
+                <li *ngFor="let error of getCartMOQErrors()">
+                  {{ error }}
+                </li>
+              </ul>
+              <p class="error-hint">Please adjust quantities in your cart to meet the minimum requirements.</p>
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- Summary Sidebar -->
       <div class="cart-summary-section">
+
         <div class="summary-card">
           <h3>Order Summary</h3>
 
@@ -149,8 +168,19 @@
             icon="pi pi-arrow-right"
             iconPos="right"
             class="checkout-btn"
+            [disabled]="isCheckoutDisabled()"
             (click)="openCheckoutDialog()">
           </button>
+
+          <div *ngIf="hasCartMOQErrors()" class="moq-warning">
+            <i class="pi pi-info-circle"></i>
+            <p>Fix minimum order requirements to proceed</p>
+          </div>
+
+          <div *ngIf="!meetsMinimumCartTotal() && !hasCartMOQErrors()" class="minimum-total-warning">
+            <i class="pi pi-info-circle"></i>
+            <p>Minimum order total is ${{ MINIMUM_CART_TOTAL }}. Add ${{ (MINIMUM_CART_TOTAL - subtotal).toFixed(2) }} more to proceed.</p>
+          </div>
 
           <div class="secure-notice">
             <i class="pi pi-shield"></i>

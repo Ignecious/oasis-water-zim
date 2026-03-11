@@ -20,24 +20,30 @@ export class ProductService {
         name: 'Oasis Sport Water', 
         category: 'water', 
         target: 'b2c',
-        size: '750ml', 
-        price: 0.85, 
+        size: '6-pack (500ml)', 
+        price: 7.20, 
         image: 'assets/stitch-images/product-sport-500ml.jpg', 
-        description: 'Perfect for the gym and active lifestyles. Refreshing purified water on the go.',
+        description: '500ml - Perfect for the gym and active lifestyles. Refreshing purified water on the go.',
         stock: 100,
-        featured: true
+        featured: true,
+        minOrderQty: 4,
+        qtyIncrement: 4,
+        unitType: '6-pack'
       },
       { 
         id: 'p2', 
         name: 'Oasis Mineral Water', 
         category: 'water', 
         target: 'b2c',
-        size: '2L', 
-        price: 1.20, 
+        size: '6-pack (500ml)', 
+        price: 7.20, 
         image: 'assets/stitch-images/product-still-5l.jpg', 
-        description: 'Pure mineral water for everyday hydration. Available at major retailers.',
+        description: '500ml - Pure mineral water for everyday hydration. Available at major retailers.',
         stock: 150,
-        featured: true
+        featured: true,
+        minOrderQty: 4,
+        qtyIncrement: 4,
+        unitType: '6-pack'
       },
       { 
         id: 'p3', 
@@ -45,11 +51,14 @@ export class ProductService {
         category: 'water', 
         target: 'b2c',
         size: '5L', 
-        price: 2.50, 
+        price: 15, 
         image: 'assets/stitch-images/product-still-5l.jpg', 
-        description: 'Weekly family hydration essential. Great value for daily needs.',
+        description: '6-pack of 5L bottles. Weekly family hydration essential. Great value for daily needs.',
         stock: 80,
-        featured: true
+        featured: true,
+        unitType: '6-pack',
+        minOrderQty: 2,
+        qtyIncrement: 2
       },
       
       // Bulk Water - Office & Commercial (B2B)
@@ -63,7 +72,10 @@ export class ProductService {
         image: 'assets/stitch-images/product-still-5l.jpg', 
         description: 'Standard dispenser bottle for offices and commercial use. Fits all standard dispensers.',
         stock: 50,
-        featured: false
+        featured: false,
+        minOrderQty: 2,
+        qtyIncrement: 1,
+        unitType: 'unit'
       },
       { 
         id: 'p5', 
@@ -113,7 +125,10 @@ export class ProductService {
         image: 'assets/stitch-images/product-ice-2kg.jpg', 
         description: 'Bulk ice for parties and large gatherings. Premium quality.',
         stock: 70,
-        featured: false
+        featured: false,
+        minOrderQty: 5,
+        qtyIncrement: 5,
+        unitType: '5-pack'
       },
       { 
         id: 'p9', 

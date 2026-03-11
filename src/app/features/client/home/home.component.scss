@@ -264,6 +264,14 @@
     flex: 1;
   }
 
+  .moq-text {
+    font-size: 0.75rem;
+    color: $oasis-cyan;
+    margin: 0.25rem 0 1rem 0;
+    font-weight: 500;
+    font-style: italic;
+  }
+
   .add-cart-btn {
     background: $oasis-navy;
     border-color: $oasis-navy;
@@ -335,6 +343,40 @@
       color: $oasis-navy;
       min-width: 40px;
       text-align: center;
+    }
+
+    .quantity-input {
+      width: 3.5rem;
+      height: 2.5rem;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: $oasis-navy;
+      text-align: center;
+      border: 2px solid #e2e8f0;
+      border-radius: 0.5rem;
+      background: #ffffff;
+      transition: all 0.2s ease;
+      outline: none;
+
+      &:hover {
+        border-color: $oasis-cyan;
+      }
+
+      &:focus {
+        border-color: $oasis-cyan;
+        box-shadow: 0 0 0 3px rgba($oasis-cyan, 0.1);
+      }
+
+      // Remove number input spinners
+      &::-webkit-outer-spin-button,
+      &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+
+      &[type=number] {
+        -moz-appearance: textfield;
+      }
     }
   }
 }
