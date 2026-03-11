@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oasis Water Zimbabwe - Prototype Summary</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            line-height: 1.4;
+            font-size: 11pt;
+        }
+
+        .container {
+            max-width: 210mm;
+            margin: 0 auto;
+            padding: 15px;
+        }
+
+        /* Header */
+        .header {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .header h1 {
+            color: #0ea5e9;
+            font-size: 1.8em;
+            margin-bottom: 5px;
+        }
+
+        .header .subtitle {
+            color: #64748b;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+
+        .header .meta {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            font-size: 0.85em;
+            color: #475569;
+        }
+
+        .status-badge {
+            display: inline-block;
+            background: #10b981;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.8em;
+            margin-top: 8px;
+        }
+
+        /* Overview */
+        .overview {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .overview h2 {
+            color: #0ea5e9;
+            font-size: 1.3em;
+            margin-bottom: 8px;
+        }
+
+        .overview p {
+            color: #475569;
+            font-size: 0.95em;
+            line-height: 1.5;
+        }
+
+        /* Feature Grid */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .feature-card h3 {
+            color: #0ea5e9;
+            font-size: 1.1em;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .feature-card p {
+            color: #475569;
+            font-size: 0.9em;
+            line-height: 1.4;
+        }
+
+        /* Value Table */
+        .value-section {
+            background: white;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .value-section h2 {
+            color: #0ea5e9;
+            font-size: 1.3em;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .value-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            font-size: 0.85em;
+        }
+
+        .value-item {
+            padding: 8px;
+            background: #f8fafc;
+            border-radius: 4px;
+            border-left: 3px solid #0ea5e9;
+        }
+
+        .value-item strong {
+            color: #0ea5e9;
+            display: block;
+            margin-bottom: 3px;
+        }
+
+        /* Footer */
+        .footer {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .footer h2 {
+            color: #0ea5e9;
+            font-size: 1.3em;
+            margin-bottom: 5px;
+        }
+
+        .footer p {
+            color: #64748b;
+            font-size: 0.9em;
+        }
+
+        /* Print Optimization */
+        @media print {
+            body {
+                background: white;
+                font-size: 10pt;
+            }
+
+            .container {
+                padding: 10mm;
+                max-width: 100%;
+            }
+
+            .header, .overview, .value-section, .footer {
+                box-shadow: none;
+                page-break-inside: avoid;
+            }
+
+            .feature-card {
+                box-shadow: none;
+                border: 1px solid #e2e8f0;
+                page-break-inside: avoid;
+            }
+
+            .feature-grid {
+                gap: 10px;
+            }
+
+            @page {
+                size: A4;
+                margin: 15mm;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>🌊 Oasis Water Zimbabwe - Prototype Summary</h1>
+            <p class="subtitle">E-Commerce Platform Feature Overview</p>
+            <div class="meta">
+                <span><strong>Client:</strong> Oasis Water</span>
+                <span><strong>Date:</strong> March 11, 2026</span>
+                <span><strong>Status:</strong> Production-Ready</span>
+            </div>
+            <span class="status-badge">✓ Fully Functional</span>
+        </div>
+
+        <!-- Overview -->
+        <div class="overview">
+            <h2>🚀 Platform Overview</h2>
+            <p>Enterprise-grade e-commerce platform for B2C and B2B water delivery operations. Features intelligent order management, bulk ordering optimization, flexible fulfillment options, and comprehensive customer experience tools designed to maximize operational efficiency and revenue.</p>
+        </div>
+
+        <!-- Features -->
+        <div class="feature-grid">
+            <div class="feature-card">
+                <h3>🛒 Smart Cart Management</h3>
+                <p><strong>$50 minimum order</strong> with real-time validation, checkout blocking, and clear user alerts. Bulk ordering system with MOQ rules, increment-based quantities, and intelligent error messages suggesting valid alternatives (e.g., "Try 8, 12, or 16 cases").</p>
+            </div>
+
+            <div class="feature-card">
+                <h3>🚚 Flexible Fulfillment</h3>
+                <p><strong>Delivery & Collection modes</strong> with multiple saved addresses, default selection, time slot scheduling (3 options), date picker, and collection point mapping. Optimizes route planning and customer convenience.</p>
+            </div>
+
+            <div class="feature-card">
+                <h3>👤 Customer Experience</h3>
+                <p><strong>Profile management</strong> with saved addresses, order history, contact preferences, and secure data handling. Address management includes "Default" badges and in-checkout addition for streamlined repeat purchases.</p>
+            </div>
+
+            <div class="feature-card">
+                <h3>💳 Payment & Trust</h3>
+                <p><strong>Multiple payment options:</strong> Cash on Delivery, EcoCash Mobile Money, Card payments. Customer testimonials, business showcases, service guarantees, and quality assurance build credibility.</p>
+            </div>
+
+            <div class="feature-card">
+                <h3>📊 Order Management</h3>
+                <p><strong>Admin dashboard</strong> with real-time tracking, status filtering, order details view, collection schedules, and comprehensive management interface. Reduces errors and support queries.</p>
+            </div>
+
+            <div class="feature-card">
+                <h3>🏢 B2B & B2C Platform</h3>
+                <p><strong>Dual-market support</strong> with category filtering, separate pricing models, smart recommendations, featured products, and professional imagery. Serves both individual and business customers seamlessly.</p>
+            </div>
+        </div>
+
+        <!-- Business Value -->
+        <div class="value-section">
+            <h2>📈 Business Value Delivered</h2>
+            <div class="value-grid">
+                <div class="value-item">
+                    <strong>Revenue Growth</strong>
+                    Higher average order value through bulk ordering incentives and $50 minimum cart requirement.
+                </div>
+                <div class="value-item">
+                    <strong>Operational Efficiency</strong>
+                    Optimized delivery routes, time slot scheduling, and reduced order errors.
+                </div>
+                <div class="value-item">
+                    <strong>Customer Retention</strong>
+                    Streamlined repeat purchases with saved profiles, addresses, and payment methods.
+                </div>
+                <div class="value-item">
+                    <strong>Market Expansion</strong>
+                    Single platform serves both B2C and B2B markets with tailored experiences.
+                </div>
+                <div class="value-item">
+                    <strong>Reduced Support Costs</strong>
+                    Real-time order tracking, smart validation, and clear messaging minimize queries.
+                </div>
+                <div class="value-item">
+                    <strong>Payment Flexibility</strong>
+                    Cash, EcoCash, and card options reduce cart abandonment and maximize conversion.
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <h2>🌊 Oasis Water Zimbabwe</h2>
+            <p><strong>Pure Water. Trusted Service. Delivered.</strong></p>
+            <p>Empowering hydration across Zimbabwe with technology-driven excellence.</p>
+        </div>
+    </div>
+</body>
+</html>

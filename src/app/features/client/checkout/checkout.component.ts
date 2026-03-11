@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { DialogModule } from 'primeng/dialog';
 import { InputTextModule } from 'primeng/inputtext';
@@ -57,7 +57,6 @@ interface PaymentMethodOption {
   imports: [
     CommonModule,
     FormsModule,
-    RouterLink,
     SelectButtonModule,
     DialogModule,
     InputTextModule,
@@ -324,16 +323,58 @@ export class CheckoutComponent implements OnInit {
       return;
     }
 
-    // TODO: Implement actual checkout logic
-    // For COD: Create order immediately
-    // For online payment: Redirect to payment gateway
-    
-    if (this.selectedPaymentMethod === 'cash') {
-      console.log('Creating COD order...');
-      // this.orderService.createOrder(...)
-    } else {
-      console.log('Redirecting to payment gateway...');
-      // Redirect to payment gateway
+    if (!this.customer || !this.selectedDate || !this.selectedTimeSlot) {
+      console.error('Missing required checkout data');
+      return;
     }
+
+    // Prepare customer details - split name into firstName and lastName
+    const nameParts = this.customer.name.trim().split(' ');
+    const firstName = nameParts[0] || '';
+    const lastName = nameParts.slice(1).join(' ') || firstName;
+    
+    const customerDetails = {
+      firstName,
+      lastName,
+      email: this.customer.email || '',
+      phone: this.customer.phone
+    };
+
+    // Prepare collection/delivery details
+    const collectionDetails = {
+      date: this.selectedDate.date,
+      timeSlot: this.selectedTimeSlot.time,
+      location: this.selectedFulfillment === 'collection' 
+        ? '181 Selous Avenue, Harare, Zimbabwe'
+        : this.selectedAddress 
+          ? `${this.selectedAddress.street}, ${this.selectedAddress.suburb}, ${this.selectedAddress.city}`
+          : '181 Selous Avenue, Harare, Zimbabwe'
+    };
+
+    // Create the order
+    this.orderService.createOrder(
+      customerDetails,
+      this.cartItems,
+      this.selectedPaymentMethod!,
+      collectionDetails,
+      this.selectedFulfillment,
+      this.selectedFulfillment === 'delivery' ? this.selectedAddress! : undefined,
+      undefined // ecocashNumber - can be added later if needed
+    ).subscribe({
+      next: (order) => {
+        console.log('Order created successfully:', order);
+        
+        // Clear the cart
+        this.cartService.clearCart();
+        
+        // Navigate to order confirmation page
+        this.router.navigate(['/order-status', order.orderNumber]);
+      },
+      error: (error) => {
+        console.error('Error creating order:', error);
+        // TODO: Show error message to user
+        alert('There was an error creating your order. Please try again.');
+      }
+    });
   }
 }
